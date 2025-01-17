@@ -25,8 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
 
     Route::get('/users', function (Request $request) {
-        return app(SampleUserApi::class)->datatableList($request);
-    });
+        return [SampleUserApi::class, 'datatableList'];
+    })->name('users.list');
 
     Route::post('/users-list', function (Request $request) {
         return app(SampleUserApi::class)->datatableList($request);
