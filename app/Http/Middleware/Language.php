@@ -22,8 +22,16 @@ class Language {
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::get('locale')) {
+        $locale = Session::get('locale');
+        if (isset($locale)) {
+            if($locale == 'ar_SA') {
+                setDirection('rtl');
+            } else {
+                setDirection('ltr');
+            }
             App::setLocale(Session::get('locale'));
+
+
         }
         return $next($request);
     }

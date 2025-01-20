@@ -72,7 +72,7 @@
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="{{ image('flags/france.svg') }}" alt=""/>
                     </span>
-                    French {{__('messages.hello')}} {{session('testing')}}
+                    French
                 </a>
             </div>
             <!--end::Menu item-->
