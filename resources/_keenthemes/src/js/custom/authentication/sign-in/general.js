@@ -13,36 +13,52 @@ var KTSigninGeneral = function () {
         validator = FormValidation.formValidation(
             form,
             {
-                fields: {
-                    'email': {
-                        validators: {
-                            regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'The value is not a valid email address',
-                            },
-                            notEmpty: {
-                                message: 'Email address is required'
-                            }
-                        }
+            locale: window.chosenLocale,
+            localization: window.chosenLocale,
+            fields: {
+                'email': {
+                validators: {
+                    regexp: {
+                    regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: {
+                        en_US: 'The email address is not valid',
+                        fr_FR: "L'adresse e-mail n'est pas valide",
+                        ar_SA: 'عنوان البريد الإلكتروني غير صالح',
                     },
-                    'password': {
-                        validators: {
-                            notEmpty: {
-                                message: 'The password is required'
-                            }
-                        }
+                    },
+                    notEmpty: {
+                    message: {
+                        en_US: 'The email address is required',
+                        fr_FR: "L'adresse e-mail est requise",
+                        ar_SA: 'عنوان البريد الإلكتروني مطلوب',
                     }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',  // comment to enable invalid state icons
-                        eleValidClass: '' // comment to enable valid state icons
-                    })
+                    }
                 }
+                },
+                'password': {
+                validators: {
+                    notEmpty: {
+                    message: {
+                        en_US: 'The password is required',
+                        fr_FR: 'Le mot de passe est requis',
+                        ar_SA: 'كلمة المرور مطلوبة',
+                    },
+                    }
+                }
+                }
+            },
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                rowSelector: '.fv-row',
+                eleInvalidClass: '',  // comment to enable invalid state icons
+                eleValidClass: '' // comment to enable valid state icons
+                })
+            }
             }
         );
+
+        validator.setLocale(window.chosenLocale);
     }
 
     var handleSubmit = function (e) {

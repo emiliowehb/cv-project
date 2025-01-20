@@ -47,57 +47,43 @@
 	<!--end::Menu item-->
 	<!--begin::Menu item-->
 	<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-		<a href="#" class="menu-link px-5">
+        <a href="#" class="menu-link px-5">
             <span class="menu-title position-relative">Language
-                <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                    <img class="w-15px h-15px rounded-1 ms-2" src="{{ image('flags/united-states.svg') }}" alt="" /></span>
+            <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+                <span id="current-locale"></span>
+                <img class="w-15px h-15px rounded-1 ms-2" id="current-locale-flag" src="{{ image('flags/united-states.svg') }}" alt="" />
+            </span>
             </span>
         </a>
         <!--begin::Menu sub-->
         <div class="menu-sub menu-sub-dropdown w-175px py-4">
             <!--begin::Menu item-->
             <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5 active">
+                <a href="{{ route('locale', ['locale' => 'en_US']) }}" class="menu-link d-flex px-5 locale-selector {{ app()->getLocale() == 'en_US' ? 'active' : '' }}" data-chosen-locale="en_US">
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="{{ image('flags/united-states.svg') }}" alt=""/>
                     </span>
-                    English</a>
+                    English
+                </a>
             </div>
-            <!--end::Menu item-->
             <!--begin::Menu item-->
             <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
-                    <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ image('flags/spain.svg') }}" alt=""/>
-                    </span>
-                    Spanish</a>
-            </div>
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
-                    <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ image('flags/germany.svg') }}" alt=""/>
-                    </span>
-                    German</a>
-            </div>
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
-                    <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ image('flags/japan.svg') }}" alt=""/>
-                    </span>
-                    Japanese</a>
-            </div>
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
+                <a href="{{ route('locale', ['locale' => 'fr_FR']) }}" class="menu-link d-flex px-5 locale-selector {{ app()->getLocale() == 'fr_FR' ? 'active' : '' }}" data-chosen-locale="fr_FR">
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="{{ image('flags/france.svg') }}" alt=""/>
                     </span>
-                    French</a>
+                    French {{__('messages.hello')}} {{session('testing')}}
+                </a>
+            </div>
+            <!--end::Menu item-->
+            <!--begin::Menu item-->
+            <div class="menu-item px-3">
+                <a href="{{ route('locale', ['locale' => 'ar_SA']) }}" class="menu-link d-flex px-5 locale-selector {{ app()->getLocale() == 'ar_SA' ? 'active' : '' }}" data-chosen-locale="ar_SA">
+                    <span class="symbol symbol-20px me-4">
+                        <img class="rounded-1" src="{{ image('flags/saudi-arabia.svg') }}" alt=""/>
+                    </span>
+                    Arabic
+                </a>
             </div>
             <!--end::Menu item-->
         </div>

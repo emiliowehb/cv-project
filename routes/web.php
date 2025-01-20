@@ -5,7 +5,10 @@ use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +25,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
 
+    Route::get('/fr_locale', function() {
+        return dd(Session::get('fr_locale'));
+    });
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::name('user-management.')->group(function () {
@@ -37,5 +44,11 @@ Route::get('/error', function () {
 });
 
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
+
+
+Route::get('/locale/{locale}', function (Request $request) {
+    Session::put('locale', $request->locale);
+    return redirect()->back();
+})->name('locale');
 
 require __DIR__ . '/auth.php';

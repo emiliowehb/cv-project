@@ -50,6 +50,34 @@
 @yield('content')
 
 <!--begin::Javascript-->
+<script>
+window.chosenLocale = localStorage.getItem('chosenLocale') || '{{ app()->getLocale() }}';
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    var chosenLocale = localStorage.getItem('chosenLocale') || '{{ app()->getLocale() }}';
+    await axios.get(`/locale/${chosenLocale}`)
+        .then(response => {
+            console.log('Locale set in Laravel', chosenLocale);
+        })
+        .catch(error => {
+            console.error('Error setting locale in Laravel:', error);
+        });
+    var localeText = {
+        'en_US': 'English',
+        'fr_FR': 'French',
+        'ar_SA': 'Arabic'
+    };
+    var localeFlag = {
+        'en_US': '{{ image('flags/united-states.svg') }}',
+        'fr_FR': '{{ image('flags/france.svg') }}',
+        'ar_SA': '{{ image('flags/saudi-arabia.svg') }}'
+    };
+
+    document.getElementById('current-locale').innerText = localeText[chosenLocale];
+    document.getElementById('current-locale-flag').src = localeFlag[chosenLocale];
+});
+</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 @foreach(getGlobalAssets() as $path)
     {!! sprintf('<script src="%s"></script>', asset($path)) !!}
@@ -69,7 +97,17 @@
 <!--end::Custom Javascript-->
 @stack('scripts')
 <!--end::Javascript-->
+<script>
+    // when the hyperlink with locale-selector class is clicked, we will set the chosen locale to the data-chosen-locale attribute value
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('locale-selector')) {
+            e.preventDefault();
 
+            localStorage.setItem('chosenLocale', e.target.getAttribute('data-chosen-locale'));
+            window.location.href = e.target.href;
+        }
+    });
+</script>
 <script>
     document.addEventListener('livewire:init', () => {
         Livewire.on('success', (message) => {
