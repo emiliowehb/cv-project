@@ -39,7 +39,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
         <a href="#" class="menu-link px-5">
-			<span class="menu-title position-relative">Mode 
+			<span class="menu-title position-relative">{{__('messages.mode')}} 
 			<span class="ms-5 position-absolute translate-middle-y top-50 end-0">{!! getIcon('night-day', 'theme-light-show fs-2') !!} {!! getIcon('moon', 'theme-dark-show fs-2') !!}</span></span>
 		</a>
 		@include('partials/theme-mode/__menu')
@@ -48,7 +48,7 @@
 	<!--begin::Menu item-->
 	<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
         <a href="#" class="menu-link px-5">
-            <span class="menu-title position-relative">Language
+            <span class="menu-title position-relative">{{__('messages.language')}} 
             <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
                 <span id="current-locale"></span>
                 <img class="w-15px h-15px rounded-1 ms-2" id="current-locale-flag" src="{{ image('flags/united-states.svg') }}" alt="" />
@@ -63,7 +63,7 @@
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="{{ image('flags/united-states.svg') }}" alt=""/>
                     </span>
-                    English
+                     {{__('messages.english')}}
                 </a>
             </div>
             <!--begin::Menu item-->
@@ -72,7 +72,7 @@
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="{{ image('flags/france.svg') }}" alt=""/>
                     </span>
-                    French
+                     {{__('messages.french')}}
                 </a>
             </div>
             <!--end::Menu item-->
@@ -82,7 +82,7 @@
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="{{ image('flags/saudi-arabia.svg') }}" alt=""/>
                     </span>
-                    Arabic
+                     {{__('messages.arabic')}}
                 </a>
             </div>
             <!--end::Menu item-->

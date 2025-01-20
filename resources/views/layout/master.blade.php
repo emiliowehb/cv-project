@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     var localeText = {
         'en_US': 'English',
-        'fr_FR': 'French',
-        'ar_SA': 'Arabic'
+        'fr_FR': 'Français',
+        'ar_SA': 'العربية'
     };
     var localeFlag = {
         'en_US': '{{ image('flags/united-states.svg') }}',
