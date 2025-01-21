@@ -48,7 +48,12 @@ var KTSigninGeneral = function () {
                 }
             },
             plugins: {
-                trigger: new FormValidation.plugins.Trigger(),
+                trigger: new FormValidation.plugins.Trigger({
+                    event: {
+                        email: false,
+                        password: false
+                    }
+                }),
                 bootstrap: new FormValidation.plugins.Bootstrap5({
                 rowSelector: '.fv-row',
                 eleInvalidClass: '',  // comment to enable invalid state icons
@@ -67,7 +72,7 @@ var KTSigninGeneral = function () {
             // Prevent button default action
             e.preventDefault();
 
-            // Validate form
+            // Trigger validation manually
             validator.validate().then(function (status) {
                 if (status == 'Valid') {
                     // Show loading indication
