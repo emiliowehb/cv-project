@@ -1,7 +1,7 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('register') }}">
+    <form class="form w-100 " novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('register') }}">
         @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
@@ -18,6 +18,48 @@
             <!--end::Subtitle--->
         </div>
         <!--begin::Heading-->
+        <div class="row g-3 d-flex justify-content-center mb-9">
+            <!--begin::Col-->
+            <div class="col-md-6">
+                <!--begin::Google link--->
+                <a href="{{ url('auth/google') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
+                    <img alt="Logo" src="{{ image('svg/brand-logos/google-icon.svg') }}" class="h-15px me-3">
+                    Register with Google
+                </a>
+                <!--end::Google link--->
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-6">
+                <!--begin::Facebook link--->
+                <a href="{{ url('auth/facebook') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
+                    <img alt="Logo" src="{{ image('svg/brand-logos/facebook-4.svg') }}" class="theme-light-show h-15px me-3">
+                    <img alt="Logo" src="{{ image('svg/brand-logos/facebook-4.svg') }}" class="theme-dark-show h-15px me-3">
+                    Register with Facebook
+                </a>
+                <!--end::Facebook link--->
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-6">
+                <!--begin::LinkedIn link--->
+                <a href="{{ url('auth/linkedin') }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
+                    <img alt="Logo" src="{{ image('svg/brand-logos/linkedin-2.svg') }}" class="theme-light-show h-15px me-3">
+                    <img alt="Logo" src="{{ image('svg/brand-logos/linkedin-2.svg') }}" class="theme-dark-show h-15px me-3">
+                    Register with LinkedIn
+                </a>
+                <!--end::LinkedIn link--->
+            </div>
+            <!--end::Col-->
+
+
+        </div>
+
+        <div class="separator separator-content my-14">
+            <span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
+        </div>
 
         <!--begin::Input group--->
         <div class="fv-row mb-8">

@@ -11,33 +11,32 @@ class SocialiteController extends Controller
 {
     public function redirect($provider)
     {
-        // redirect from social site
-        if (request()->input('state')) {
-            // already logged in
-            // get user info from social site
-            $user = Socialite::driver($provider)->stateless()->user();
-
-            // check for existing user
-            $existingUser = User::where('email', $user->getEmail())->first();
-
-            if ($existingUser) {
-                auth()->login($existingUser, true);
-
-                return redirect()->to('/');
-            }
-
-            $newUser = $this->createUser($user);
-            auth()->login($newUser, true);
-        }
-
-        // request login from social site
         return Socialite::driver($provider)->redirect();
     }
 
-
-    function createUser($user)
+    public function callback($provider)
     {
-        $user = User::updateOrCreate([
+        try {
+            $user = Socialite::driver($provider)->stateless()->user();
+        } catch (\Exception $e) {
+            return redirect('/login')->withErrors(['msg' => 'Unable to login, please try again.']);
+        }
+
+        $existingUser = User::where('email', $user->getEmail())->first();
+        if ($existingUser) {
+            auth()->login($existingUser, true);
+        } else {
+            $newUser = $this->createUser($user);
+
+            auth()->login($newUser, true);
+        }
+
+        return redirect()->to('/');
+    }
+
+    protected function createUser($user)
+    {
+        $newUser = User::updateOrCreate([
             'email' => $user->getEmail(),
         ], [
             'name'     => $user->getName(),
@@ -45,10 +44,10 @@ class SocialiteController extends Controller
             'avatar'   => $user->getAvatar(),
         ]);
 
-        if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
+        if ($newUser->markEmailAsVerified()) {
+            event(new Verified($newUser));
         }
 
-        return $user;
+        return $newUser;
     }
 }
