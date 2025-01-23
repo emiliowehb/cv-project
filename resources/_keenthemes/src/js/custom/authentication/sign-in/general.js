@@ -125,6 +125,7 @@ var KTSigninGeneral = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             });
+                            toastr.error(error.message);
                         }).then(() => {
                             // Hide loading indication
                             submitButton.removeAttribute('data-kt-indicator');

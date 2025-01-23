@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('workspace_members', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('workspace_id')->constrained();
+            $table->unsignedBigInteger('user_id')->constrained();
+
+            $table->foreign('workspace_id')->references('id')->on('workspaces');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

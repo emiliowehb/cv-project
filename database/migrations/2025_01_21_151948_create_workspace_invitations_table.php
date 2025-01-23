@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\WorkspaceInviteStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,14 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('professors', function (Blueprint $table) {
+        Schema::create('workspace_invitations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('workspace_id');
-            $table->unsignedBigInteger('user_id');
+            $table->string('invited_email');
+            $table->enum('status', WorkspaceInviteStatusEnum::values());
+            $table->string('code');
+            $table->timestamps();
 
             $table->foreign('workspace_id')->references('id')->on('workspaces');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('professors');
+        Schema::dropIfExists('workspace_invitations');
     }
 };
