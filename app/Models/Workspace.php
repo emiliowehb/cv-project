@@ -10,4 +10,10 @@ class Workspace extends Model
     use SoftDeletes;
     
     protected $guarded = ['id'];
+
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }

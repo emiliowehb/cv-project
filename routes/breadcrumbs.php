@@ -31,7 +31,7 @@ Breadcrumbs::for('user-management.users.index', function (BreadcrumbTrail $trail
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('user-management.users.index');
-    $trail->push(ucwords($user->name), route('user-management.users.show', $user));
+    $trail->push(ucwords($user->first_name . ' ' . $user->last_name), route('user-management.users.show', $user));
 });
 
 // Home > Dashboard > User Management > Roles

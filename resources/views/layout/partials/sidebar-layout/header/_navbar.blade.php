@@ -7,8 +7,8 @@
             @if(Auth::user()->profile_photo_url)
                 <img src="{{ \Auth::user()->profile_photo_url }}" class="rounded-3" alt="user" />
             @else
-                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->name) }}">
-                    {{ substr(Auth::user()->name, 0, 1) }}
+                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->first_name . ' ' . Auth::user()->last_name) }}">
+                    {{ substr(Auth::user()->first_name, 0, 1) . substr(Auth::user()->last_name, 0, 1) }}
                 </div>
             @endif
         </div>

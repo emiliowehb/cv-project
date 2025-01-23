@@ -61,4 +61,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->addresses?->first();
     }
+
+    public function workspace()
+    {
+        return $this->belongsTo(Workspace::class);
+    }
+
+    public function fullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

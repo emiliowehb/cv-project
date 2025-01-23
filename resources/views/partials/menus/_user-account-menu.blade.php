@@ -16,8 +16,12 @@
             <!--end::Avatar-->
             <!--begin::Username-->
             <div class="d-flex flex-column">
-                <div class="fw-bold d-flex align-items-center fs-5">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name}}
-                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+                <div class="fw-bold d-flex align-items-center fs-5">
+                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{{ \App\Enums\WorkspaceTypeEnum::from(Auth::user()->workspace->type)->label() }}</span>
+                    @if(Auth::user()->workspace->owner_id == Auth::user()->id)
+                        <span class="ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Workspace Owner">{!! getIcon('crown', 'fs-3 text-warning') !!}</span>
+                    @endif
                 </div>
                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
             </div>

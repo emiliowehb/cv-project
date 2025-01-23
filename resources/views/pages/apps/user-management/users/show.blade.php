@@ -24,14 +24,14 @@
                             @if($user->profile_photo_url)
                                 <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="image"/>
                             @else
-                                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $user->name) }}">
-                                    {{ substr($user->name, 0, 1) }}
+                                <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $user->first_name . ' ' . $user->last_name) }}">
+                                    {{ substr($user->first_name . ' ' . $user->last_name, 0, 1) }}
                                 </div>
                             @endif
                         </div>
                         <!--end::Avatar-->
                         <!--begin::Name-->
-                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $user->name }}</a>
+                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $user->first_name . ' ' . $user->last_name }}</a>
                         <!--end::Name-->
                         <!--begin::Position-->
                         <div class="mb-9">
