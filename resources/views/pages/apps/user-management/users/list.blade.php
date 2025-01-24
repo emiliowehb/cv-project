@@ -1,4 +1,4 @@
-<x-default-layout>
+<x-default-admin-layout>
 
     @section('title')
         Users
@@ -72,4 +72,4 @@
         </script>
     @endpush
 
-</x-default-layout>
+</x-default-admin-layout>

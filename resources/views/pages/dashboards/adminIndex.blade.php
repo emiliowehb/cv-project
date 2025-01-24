@@ -1,11 +1,11 @@
-<x-default-layout>
+<x-default-admin-layout>
 
     @section('title')
         Workspace Admin Dashboard
     @endsection
 
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('dashboard') }}
+        {{ Breadcrumbs::render('admin.dashboard') }}
     @endsection
 
     <!--begin::Row-->
@@ -35,4 +35,4 @@
         <!--end::Col-->
     </div>
     <!--end::Row-->
-</x-default-layout>
+</x-default-admin-layout>
