@@ -7,6 +7,10 @@ use Spatie\Permission\Models\Role;
 
 // Home
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
+    if (request()->is('admin*')) {
+        $trail->push('Home', route('admin.dashboard'));
+        return;
+    }
     $trail->push('Home', route('dashboard'));
 });
 
@@ -16,9 +20,14 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard', route('dashboard'));
 });
 
+Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Admin Dashboard', route('admin.dashboard'));
+});
+
 // Home > Dashboard > User Management
 Breadcrumbs::for('user-management.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
+    $trail->parent('admin.dashboard');
     $trail->push('User Management', route('user-management.users.index'));
 });
 

@@ -31,16 +31,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+});
+
+Route::middleware(['auth', 'verified', 'isAdmin'])->prefix('/admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
+
     Route::name('user-management.')->group(function () {
         Route::resource('/user-management/users', UserManagementController::class);
         Route::resource('/user-management/roles', RoleManagementController::class);
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
-
-});
-
-Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
-    Route::get('/admin', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
 });
 
 Route::get('/error', function () {
