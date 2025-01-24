@@ -38,4 +38,5 @@ return [
     'enterprise_subscription' => 'Enterprise Subscription',
     'individual' => 'Individual',
     'already_have_invite' => 'Already have an invite?',
+    'admin_sign_in' => 'Workspace Admin Sign In',
 ];

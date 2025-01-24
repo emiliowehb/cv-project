@@ -36,6 +36,12 @@ Route::middleware('guest')->group(function () {
 
     Route::get('auth/{provider}', [SocialiteController::class, 'redirect']);
     Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback']);
+
+    Route::get('admin-login', [AuthenticatedSessionController::class, 'adminLogin'])
+        ->name('admin.login');
+
+    Route::post('admin-login', [AuthenticatedSessionController::class, 'adminStore'])
+        ->name('admin.login.post');
 });
 
 Route::middleware('auth')->group(function () {

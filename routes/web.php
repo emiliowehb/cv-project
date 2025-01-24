@@ -39,6 +39,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
+    Route::get('/admin', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
+});
+
 Route::get('/error', function () {
     abort(500);
 });

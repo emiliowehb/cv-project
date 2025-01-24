@@ -1,17 +1,13 @@
 <x-auth-layout>
-    @if (session('error'))
-    <div class="alert alert-danger text-center">
-        {{ session('error') }}
-    </div>
-    @endif
+
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
+    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('admin.dashboard') }}" action="{{ route('admin.login') }}">
         @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Title-->
             <h1 class="text-gray-900 fw-bolder mb-3">
-                {{ __('messages.sign_in') }}
+                {{ __('messages.admin_sign_in') }}
             </h1>
             <!--end::Title-->
 
@@ -100,16 +96,6 @@
             </button>
         </div>
         <!--end::Submit button-->
-
-        <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">
-            {{ __('messages.not_a_member_yet') }}
-
-            <a href="{{ route('register') }}" class="link-primary">
-                {{ __('messages.sign_up') }}
-            </a>
-        </div>
-        <!--end::Sign up-->
     </form>
     <!--end::Form-->
 </x-auth-layout>

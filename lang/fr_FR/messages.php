@@ -38,4 +38,5 @@ return [
     'individual_subscription' => 'Abonnement individuel',
     'enterprise_subscription' => 'Abonnement d\'entreprise',
     'already_have_invite' => 'Déjà une invitation ?',
+    'admin_sign_in' => 'Connexion administrateur de l\'espace de travail',
 ];

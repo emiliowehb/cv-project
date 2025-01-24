@@ -10,4 +10,11 @@ class DashboardController extends Controller
 
         return view('pages/dashboards.index');
     }
+
+    public function adminIndex()
+    {
+        addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
+
+        return view('pages/dashboards.adminIndex');
+    }
 }

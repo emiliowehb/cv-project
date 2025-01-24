@@ -61,4 +61,32 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+
+    public function adminLogin(Request $request)
+    {
+        addJavascriptFile('assets/js/custom/authentication/sign-in/general.js');
+
+        return view('pages/auth.adminLogin');
+    }
+
+    public function adminStore(LoginRequest $request)
+    {
+        $request->authenticate();
+
+        // Check if the authenticated user is the workspace owner
+        if (Auth::user()->id !== Auth::user()->workspace->owner->id) {
+            Auth::logout();
+            abort(403, 'You are not authorized to access this page.');
+        }
+
+        $request->session()->regenerate();
+
+        $request->user()->update([
+            'last_login_at' => Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp()
+        ]);
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
 }
