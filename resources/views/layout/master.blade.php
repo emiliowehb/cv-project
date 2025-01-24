@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 <!--end::Custom Javascript-->
 @stack('scripts')
 <!--end::Javascript-->
+<script src="resources/mix/vendors/formrepeater/formrepeater.bundle.js"></script>
 <script>
     // when the hyperlink with locale-selector class is clicked, we will set the chosen locale to the data-chosen-locale attribute value
     document.addEventListener('click', function (e) {
