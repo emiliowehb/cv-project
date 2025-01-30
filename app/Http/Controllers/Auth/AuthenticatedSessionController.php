@@ -73,7 +73,6 @@ class AuthenticatedSessionController extends Controller
     public function adminStore(LoginRequest $request)
     {
         $request->authenticate();
-
         // Check if the authenticated user is the workspace owner
         if (Auth::user()->id !== Auth::user()->workspace->owner->id) {
             Auth::logout();

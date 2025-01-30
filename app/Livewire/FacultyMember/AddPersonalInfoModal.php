@@ -18,26 +18,28 @@ class AddPersonalInfoModal extends Component
     use WithFileUploads;
 
     public $user_id;
-    public $name;
+    public $first_name;
+    public $middle_name;
+    public $last_name;
     public $email;
+    public $office_email;
+    public $website;
     public $role;
     public $avatar;
     public $saved_avatar;
 
-    public $edit_mode = false;
-
-    protected $rules = [
-        'name' => 'required|string',
-        'email' => 'required|email',
-        'role' => 'required|string',
-        'avatar' => 'nullable|sometimes|image|max:1024',
-    ];
-
-    protected $listeners = [
-        'delete_user' => 'deleteUser',
-        'update_user' => 'updateUser',
-        'new_user' => 'hydrate',
-    ];
+    public function mount()
+    {
+        $user = Auth::user();
+        $this->user_id = $user->id;
+        $this->first_name = $user->first_name;
+        $this->middle_name = $user->middle_name;
+        $this->last_name = $user->last_name;
+        $this->email = $user->email;
+        $this->office_email = $user->office_email;
+        $this->website = $user->website;
+        // Initialize other properties as needed
+    }
 
     public function render()
     {
@@ -56,89 +58,58 @@ class AddPersonalInfoModal extends Component
 
     public function submit()
     {
-        // Validate the form input data
-        $this->validate();
+        try {
 
-        DB::transaction(function () {
-            // Prepare the data for creating a new user
-            $data = [
-                'name' => $this->name,
-            ];
+            DB::transaction(function () {
+                // Prepare the data for creating a new user
+                $data = [
+                    'first_name' => $this->first_name,
+                    'middle_name' => $this->middle_name,
+                    'last_name' => $this->last_name,
+                    'email' => $this->email,
+                    'office_email' => $this->office_email,
+                    'website' => $this->website,
+                ];
+                return dd($data);
 
-            if ($this->avatar) {
-                $data['profile_photo_path'] = $this->avatar->store('avatars', 'public');
-            } else {
-                $data['profile_photo_path'] = null;
-            }
-
-            if (!$this->edit_mode) {
-                $data['password'] = Hash::make($this->email);
-            }
-
-            // Update or Create a new user record in the database
-            $data['email'] = $this->email;
-            $user = User::find($this->user_id) ?? User::create($data);
-
-            if ($this->edit_mode) {
-                foreach ($data as $k => $v) {
-                    $user->$k = $v;
+                if ($this->avatar) {
+                    $data['profile_photo_path'] = $this->avatar->store('avatars', 'public');
+                } else {
+                    $data['profile_photo_path'] = null;
                 }
-                $user->save();
-            }
 
-            if ($this->edit_mode) {
-                // Assign selected role for user
-                $user->syncRoles($this->role);
+                // Update or Create a new user record in the database
+                $user = User::find($this->user_id) ?? User::create($data);
 
-                // Emit a success event with a message
-                $this->dispatch('success', __('User updated'));
-            } else {
-                // Assign selected role for user
-                $user->assignRole($this->role);
+                if ($this->edit_mode) {
+                    foreach ($data as $k => $v) {
+                        $user->$k = $v;
+                    }
+                    $user->save();
+                }
 
-                // Send a password reset link to the user's email
-                // Password::sendResetLink($user->only('email'));
+                if ($this->edit_mode) {
+                    // Assign selected role for user
+                    $user->syncRoles($this->role);
 
-                // Emit a success event with a message
-                $this->dispatch('success', __('New user created'));
-            }
-        });
+                    // Emit a success event with a message
+                    $this->dispatch('success', __('User updated'));
+                } else {
+                    // Assign selected role for user
+                    $user->assignRole($this->role);
 
-        // Reset the form fields after successful submission
-        $this->reset();
-    }
+                    // Send a password reset link to the user's email
+                    // Password::sendResetLink($user->only('email'));
 
-    public function deleteUser($id)
-    {
-        // Prevent deletion of current user
-        if ($id == Auth::id()) {
-            $this->dispatch('error', 'User cannot be deleted');
-            return;
+                    // Emit a success event with a message
+                    $this->dispatch('success', __('New user created'));
+                }
+
+                // Reset the form fields after successful submission
+                $this->reset();
+            });
+        } catch (\Exception $e) {
+            dd($e);
         }
-
-        // Delete the user record with the specified ID
-        User::destroy($id);
-
-        // Emit a success event with a message
-        $this->dispatch('success', 'User successfully deleted');
-    }
-
-    public function updateUser($id)
-    {
-        $this->edit_mode = true;
-
-        $user = User::find($id);
-
-        $this->user_id = $user->id;
-        $this->saved_avatar = $user->profile_photo_url;
-        $this->name = $user->first_name . ' ' . $user->last_name;
-        $this->email = $user->email;
-        $this->role = $user->roles?->first()->name ?? '';
-    }
-
-    public function hydrate()
-    {
-        $this->resetErrorBag();
-        $this->resetValidation();
     }
 }

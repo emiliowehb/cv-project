@@ -144,11 +144,135 @@
                             <!--end::Line-->
                         </div>
                         <!--end::Step 4-->
+
+                        <!--begin::Step 5-->
+                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                            <!--begin::Wrapper-->
+                            <div class="stepper-wrapper d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <div class="stepper-icon w-40px h-40px">
+                                    <i class="stepper-check fas fa-check"></i>
+                                    <span class="stepper-number">5</span>
+                                </div>
+                                <!--begin::Icon-->
+
+                                <!--begin::Label-->
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title">
+                                        Step 5
+                                    </h3>
+
+                                    <div class="stepper-desc">
+                                        Education
+                                    </div>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Wrapper-->
+
+                            <!--begin::Line-->
+                            <div class="stepper-line h-40px"></div>
+                            <!--end::Line-->
+                        </div>
+                        <!--end::Step 5-->
+
+                        <!--begin::Step 6-->
+                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                            <!--begin::Wrapper-->
+                            <div class="stepper-wrapper d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <div class="stepper-icon w-40px h-40px">
+                                    <i class="stepper-check fas fa-check"></i>
+                                    <span class="stepper-number">6</span>
+                                </div>
+                                <!--begin::Icon-->
+
+                                <!--begin::Label-->
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title">
+                                        Step 6
+                                    </h3>
+
+                                    <div class="stepper-desc">
+                                        Publications
+                                    </div>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Wrapper-->
+
+                            <!--begin::Line-->
+                            <div class="stepper-line h-40px"></div>
+                            <!--end::Line-->
+                        </div>
+                        <!--end::Step 6-->
+
+                        <!--begin::Step 7-->
+                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                            <!--begin::Wrapper-->
+                            <div class="stepper-wrapper d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <div class="stepper-icon w-40px h-40px">
+                                    <i class="stepper-check fas fa-check"></i>
+                                    <span class="stepper-number">7</span>
+                                </div>
+                                <!--begin::Icon-->
+
+                                <!--begin::Label-->
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title">
+                                        Step 7
+                                    </h3>
+
+                                    <div class="stepper-desc">
+                                        Teaching Interests
+                                    </div>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Wrapper-->
+
+                            <!--begin::Line-->
+                            <div class="stepper-line h-40px"></div>
+                            <!--end::Line-->
+                        </div>
+                        <!--end::Step 7-->
+
+                        <!--begin::Step 8-->
+                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                            <!--begin::Wrapper-->
+                            <div class="stepper-wrapper d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <div class="stepper-icon w-40px h-40px">
+                                    <i class="stepper-check fas fa-check"></i>
+                                    <span class="stepper-number">8</span>
+                                </div>
+                                <!--begin::Icon-->
+
+                                <!--begin::Label-->
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title">
+                                        Step 8
+                                    </h3>
+
+                                    <div class="stepper-desc">
+                                        Expertise Areas
+                                    </div>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Wrapper-->
+
+                            <!--begin::Line-->
+                            <div class="stepper-line h-40px"></div>
+                            <!--end::Line-->
+                        </div>
+                        <!--end::Step 8-->
                     </div>
                     <!--end::Nav-->
 
                     <!--begin::Form-->
-                    <form class="form w-lg-500px mx-auto" novalidate="novalidate" id="kt_stepper_example_basic_form">
+                    <form class="form w-lg-500px mx-auto" novalidate="novalidate" id="kt_stepper_example_basic_form" wire:submit="submit">
                         <!--begin::Group-->
                         <div class="mb-3">
                             <!--begin::Step 1-->
@@ -159,8 +283,8 @@
                                         <!--begin::Input group--->
                                         <div class="fv-row mb-8">
                                             <!--begin::First Name-->
-                                            <label for="first_name" class="col-form-label">{{ __('messages.first_name') }}</label>
-                                            <input type="text" placeholder="{{ __('messages.first_name') }}" name="first_name" autocomplete="off" class="form-control bg-transparent" value="{{Auth::user()->first_name}}" />
+                                            <label for="first_name" class="col-form-label required">{{ __('messages.first_name') }}</label>
+                                            <input type="text" placeholder="{{ __('messages.first_name') }}" name="first_name" wire:model="first_name" autocomplete="off" class="form-control bg-transparent" />
                                             <!--end::First Name-->
                                         </div>
                                     </div>
@@ -177,8 +301,8 @@
                                         <!--begin::Input group--->
                                         <div class="fv-row mb-8">
                                             <!--begin::Last Name-->
-                                            <label for="last_name" class="col-form-label">{{ __('messages.last_name') }}</label>
-                                            <input type="text" placeholder="{{ __('messages.last_name') }}" name="last_name" autocomplete="off" class="form-control bg-transparent" value="{{Auth::user()->last_name}}" />
+                                            <label for="last_name" class="col-form-label  required">{{ __('messages.last_name') }}</label>
+                                            <input type="text" placeholder="{{ __('messages.last_name') }}" name="last_name" wire:model="last_name" autocomplete="off" class="form-control bg-transparent" />
                                             <!--end::Last Name-->
                                         </div>
                                     </div>
@@ -187,12 +311,12 @@
                                 <div class="row mb-5">
                                     <div class="col-6">
                                         <div class="">
-                                            <label class="col-form-label">{{ __('messages.dob') }}</label>
+                                            <label class="col-form-label  required">{{ __('messages.dob') }}</label>
                                             <input class="form-control form-control-solid" placeholder="Date of birth" id="date_of_birth" name="date_of_birth" />
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <label class="col-form-label">{{ __('messages.cob') }}</label>
+                                        <label class="col-form-label  required">{{ __('messages.cob') }}</label>
                                         <select class="form-select" data-control="select2" data-placeholder="Select a country" name="country_of_birth" data-dropdown-parent="#kt_modal_add_personal_info">
                                             @foreach($countries as $country)
                                             <option value="{{$country->id}}">{{$country->name}}</option>
@@ -206,8 +330,8 @@
                                         <!--begin::Input group--->
                                         <div class="fv-row mb-8">
                                             <!--begin::Email-->
-                                            <label for="email" class="col-form-label">{{ __('messages.email') }}</label>
-                                            <input type="text" placeholder="{{ __('messages.email') }}" name="email" autocomplete="off" class="form-control bg-transparent" value="{{Auth::user()->email}}" class="bg-primary" disabled />
+                                            <label for="email" class="col-form-label required">{{ __('messages.email') }}</label>
+                                            <input type="text" placeholder="{{ __('messages.email') }}" name="email" autocomplete="off" wire:model="email" class="form-control bg-transparent" class="bg-primary" disabled />
                                             <!--end::Email-->
                                         </div>
                                     </div>
@@ -215,8 +339,8 @@
                                         <!--begin::Input group--->
                                         <div class="fv-row mb-8">
                                             <!--begin::Email-->
-                                            <label for="email" class="col-form-label">{{ __('messages.office_email') }}</label>
-                                            <input type="text" placeholder="{{ __('messages.office_email') }}" name="email" autocomplete="off" class="form-control bg-transparent" class="bg-primary" />
+                                            <label for="office_email" class="col-form-label required">{{ __('messages.office_email') }}</label>
+                                            <input type="text" placeholder="{{ __('messages.office_email') }}" name="office_email" wire:model="office_email" autocomplete="off" class="form-control bg-transparent" />
                                             <!--end::Email-->
                                         </div>
                                     </div>
@@ -225,7 +349,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="col-form-label">{{ __('messages.website') }}</label>
-                                            <input type="text" class="form-control bg-transparent" name="website" placeholder="Website" />
+                                            <input type="text" wire:model="website" class="form-control bg-transparent" name="website" placeholder="Website" />
                                         </div>
                                     </div>
                                 </div>
@@ -398,7 +522,7 @@
 
                             <!--begin::Wrapper-->
                             <div>
-                                <button type="button" class="btn btn-primary" data-kt-stepper-action="submit">
+                                <button type="submit" class="btn btn-primary" data-kt-stepper-action="submit">
                                     <span class="indicator-label">
                                         Submit
                                     </span>
@@ -406,7 +530,6 @@
                                         Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                     </span>
                                 </button>
-
                                 <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
                                     Continue
                                 </button>
@@ -424,4 +547,7 @@
         <!--end::Modal content-->
     </div>
     <!--end::Modal dialog-->
+    <script>
+        var locale = @json(app()->getLocale());
+    </script>
 </div>
