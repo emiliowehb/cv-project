@@ -25,18 +25,24 @@ class AddPersonalInfoModal extends Component
     public $office_email;
     public $website;
     public $role;
+    public $country_of_birth;
     public $avatar;
     public $saved_avatar;
+    public $country_of_residence;
+
+    protected $listeners = ['updatedCountry'];
 
     public function mount()
     {
         $user = Auth::user();
         $this->user_id = $user->id;
         $this->first_name = $user->first_name;
-        $this->middle_name = $user->middle_name;
+        $this->middle_name = '';
         $this->last_name = $user->last_name;
         $this->email = $user->email;
         $this->office_email = $user->office_email;
+        $this->country_of_birth = '';
+        $this->country_of_residence = ''; // Initialize the new property
         $this->website = $user->website;
         // Initialize other properties as needed
     }
@@ -69,6 +75,8 @@ class AddPersonalInfoModal extends Component
                     'email' => $this->email,
                     'office_email' => $this->office_email,
                     'website' => $this->website,
+                    'country_of_birth' => $this->country_of_birth,
+                    'country_of_residence' => $this->country_of_residence, // Include the new property
                 ];
                 return dd($data);
 
@@ -111,5 +119,10 @@ class AddPersonalInfoModal extends Component
         } catch (\Exception $e) {
             dd($e);
         }
+    }
+
+    public function updatedCountry($selectedValue) {
+        $this->country_of_residence = $selectedValue;
+        return dd($selectedValue);
     }
 }

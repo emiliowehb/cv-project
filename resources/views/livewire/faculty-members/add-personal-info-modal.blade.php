@@ -315,9 +315,9 @@
                                             <input class="form-control form-control-solid" placeholder="Date of birth" id="date_of_birth" name="date_of_birth" />
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6" wire:ignore>
                                         <label class="col-form-label  required">{{ __('messages.cob') }}</label>
-                                        <select class="form-select" data-control="select2" data-placeholder="Select a country" name="country_of_birth" data-dropdown-parent="#kt_modal_add_personal_info">
+                                        <select class="form-select" wire:model="country_of_birth" data-placeholder="Select a country" name="country_of_birth" data-dropdown-parent="#kt_modal_add_personal_info">
                                             @foreach($countries as $country)
                                             <option value="{{$country->id}}">{{$country->name}}</option>
                                             @endforeach
@@ -361,7 +361,7 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <label class="col-form-label required">{{ __('messages.cor') }}</label>
-                                        <select class="form-select" data-control="select2" data-placeholder="Select a country" name="country_of_residence" data-dropdown-parent="#kt_modal_add_personal_info">
+                                        <select class="form-select country-selector"  wire:model="country_of_residence" data-placeholder="Select a country" name="country_of_residence" data-dropdown-parent="#kt_modal_add_personal_info">
                                             @foreach($countries as $country)
                                             <option value="{{$country->id}}">{{$country->name}}</option>
                                             @endforeach
@@ -414,7 +414,7 @@
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <label class="col-form-label required">{{ __('messages.language') }}</label>
-                                                        <select class="form-select" data-control="select2" data-placeholder="Select a language" name="language" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                        <select class="form-select"  data-placeholder="Select a language" name="language" data-dropdown-parent="#kt_modal_add_personal_info">
                                                             @foreach($languages as $language)
                                                             <option value="{{$language->id}}">{{$language->name}}</option>
                                                             @endforeach
@@ -422,7 +422,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <label class="col-form-label required">{{ __('messages.spoken_language') }}</label>
-                                                        <select class="form-select" data-control="select2" data-placeholder="Select a level" name="spoken_level" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                        <select class="form-select"  data-placeholder="Select a level" name="spoken_level" data-dropdown-parent="#kt_modal_add_personal_info">
                                                             @foreach($levels as $level)
                                                             <option value="{{$level['id']}}">{{$level['name']}}</option>
                                                             @endforeach
@@ -430,7 +430,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <label class="col-form-label required">{{ __('messages.written_language') }}</label>
-                                                        <select class="form-select" data-control="select2" data-placeholder="Select a level" name="written" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                        <select class="form-select"  data-placeholder="Select a level" name="written" data-dropdown-parent="#kt_modal_add_personal_info">
                                                             @foreach($levels as $level)
                                                             <option value="{{$level['id']}}">{{$level['name']}}</option>
                                                             @endforeach
