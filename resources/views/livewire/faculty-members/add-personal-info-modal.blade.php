@@ -272,12 +272,11 @@
                     <!--end::Nav-->
 
                     <!--begin::Form-->
-                    <form class="form w-lg-500px mx-auto" novalidate="novalidate" id="kt_stepper_example_basic_form" wire:submit="submit">
+                    <form class="form w-lg-500px mx-auto" novalidate="novalidate" id="kt_stepper_example_basic_form">
                         <!--begin::Group-->
                         <div class="mb-3">
                             <!--begin::Step 1-->
                             <div class="flex-column current" data-kt-stepper-element="content">
-
                                 <div class="row">
                                     <div class="col-4">
                                         <!--begin::Input group--->
@@ -293,7 +292,7 @@
                                         <div class="fv-row mb-8">
                                             <!--begin::Middle Name-->
                                             <label for="middle_name" class="col-form-label">{{ __('messages.middle_name') }}</label>
-                                            <input type="text" placeholder="{{ __('messages.middle_name') }}" name="middle_name" autocomplete="off" class="form-control bg-transparent" />
+                                            <input type="text" placeholder="{{ __('messages.middle_name') }}" name="middle_name" wire:model="middle_name" autocomplete="off" class="form-control bg-transparent" />
                                             <!--end::Middle Name-->
                                         </div>
                                     </div>
@@ -309,17 +308,25 @@
                                 </div>
 
                                 <div class="row mb-5">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="">
                                             <label class="col-form-label  required">{{ __('messages.dob') }}</label>
                                             <input class="form-control form-control-solid" placeholder="Date of birth" id="date_of_birth" name="date_of_birth" />
                                         </div>
                                     </div>
-                                    <div class="col-6" wire:ignore>
+                                    <div class="col-4" wire:ignore>
                                         <label class="col-form-label  required">{{ __('messages.cob') }}</label>
-                                        <select class="form-select" wire:model="country_of_birth" data-placeholder="Select a country" name="country_of_birth" data-dropdown-parent="#kt_modal_add_personal_info">
+                                        <select class="form-select"  data-control="select2" wire:model="country_id" data-placeholder="Select a country" name="country_id" data-dropdown-parent="#kt_modal_add_personal_info">
                                             @foreach($countries as $country)
                                             <option value="{{$country->id}}">{{$country->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-4" wire:ignore>
+                                        <label class="col-form-label  required">{{ __('messages.gender') }}</label>
+                                        <select class="form-select"  data-control="select2" wire:model="gender" data-placeholder="Select a gender" name="gender" data-dropdown-parent="#kt_modal_add_personal_info">
+                                            @foreach($genders as $gender)
+                                            <option value="{{$gender['id']}}">{{$gender['label']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -361,7 +368,7 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <label class="col-form-label required">{{ __('messages.cor') }}</label>
-                                        <select class="form-select country-selector"  wire:model="country_of_residence" data-placeholder="Select a country" name="country_of_residence" data-dropdown-parent="#kt_modal_add_personal_info">
+                                        <select class="form-select country-selector"  data-control="select2" data-placeholder="Select a country" wire:model="country_of_residence" name="country_of_residence" data-dropdown-parent="#kt_modal_add_personal_info">
                                             @foreach($countries as $country)
                                             <option value="{{$country->id}}">{{$country->name}}</option>
                                             @endforeach
@@ -370,33 +377,33 @@
                                     <div class="col-8">
                                         <div class="form-group">
                                             <label class="col-form-label required">{{ __('messages.addr_1') }}</label>
-                                            <input type="text" class="form-control bg-transparent" name="address_line_1" placeholder="Address Line 1" />
+                                            <input type="text" class="form-control bg-transparent" wire:model="address_line_1" name="address_line_1" placeholder="Address Line 1" />
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="col-form-label">{{ __('messages.addr_2') }}</label>
-                                            <input type="text" class="form-control bg-transparent" name="address_line_2" placeholder="Address Line 2" />
+                                            <input type="text" class="form-control bg-transparent" wire:model="address_line_2" name="address_line_2" placeholder="Address Line 2" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label class="col-form-label">{{ __('messages.town') }}</label>
-                                            <input type="text" class="form-control bg-transparent" name="town" placeholder="Town" />
+                                            <label class="col-form-label required">{{ __('messages.town') }}</label>
+                                            <input type="text" class="form-control bg-transparent" wire:model="city" name="city" placeholder="Town" />
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label class="col-form-label">{{ __('messages.stateprov') }}</label>
-                                            <input type="text" class="form-control bg-transparent" name="state" placeholder="State / Province" />
+                                            <label class="col-form-label required">{{ __('messages.stateprov') }}</label>
+                                            <input type="text" class="form-control bg-transparent" name="state" wire:model="state" placeholder="State / Province" />
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label class="col-form-label">{{ __('messages.postcode') }}</label>
-                                            <input type="text" class="form-control bg-transparent" name="postcode" placeholder="Postcode" />
+                                            <label class="col-form-label required">{{ __('messages.postcode') }}</label>
+                                            <input type="text" class="form-control bg-transparent" name="postcode" wire:model="postcode" placeholder="Postcode" />
                                         </div>
                                     </div>
                                 </div>
@@ -406,15 +413,15 @@
                             <!--begin::Step 3-->
                             <div class="flex-column" data-kt-stepper-element="content">
                                 <!--begin::Repeater-->
-                                <div id="kt_docs_repeater_basic">
+                                <div id="languages_repeater">
                                     <!--begin::Form group-->
                                     <div class="form-group">
-                                        <div data-repeater-list="kt_docs_repeater_basic">
+                                        <div data-repeater-list="languages_repeater">
                                             <div data-repeater-item>
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <label class="col-form-label required">{{ __('messages.language') }}</label>
-                                                        <select class="form-select"  data-placeholder="Select a language" name="language" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                        <select class="form-select language-input"  data-control="select2" data-placeholder="Select a language" name="language" data-dropdown-parent="#kt_modal_add_personal_info" required>
                                                             @foreach($languages as $language)
                                                             <option value="{{$language->id}}">{{$language->name}}</option>
                                                             @endforeach
@@ -422,7 +429,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <label class="col-form-label required">{{ __('messages.spoken_language') }}</label>
-                                                        <select class="form-select"  data-placeholder="Select a level" name="spoken_level" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                        <select class="form-select"  data-control="select2" data-placeholder="Select a level" name="spoken_level" data-dropdown-parent="#kt_modal_add_personal_info" required>
                                                             @foreach($levels as $level)
                                                             <option value="{{$level['id']}}">{{$level['name']}}</option>
                                                             @endforeach
@@ -430,7 +437,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <label class="col-form-label required">{{ __('messages.written_language') }}</label>
-                                                        <select class="form-select"  data-placeholder="Select a level" name="written" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                        <select class="form-select"  data-control="select2" data-placeholder="Select a level" name="written" data-dropdown-parent="#kt_modal_add_personal_info" required>
                                                             @foreach($levels as $level)
                                                             <option value="{{$level['id']}}">{{$level['name']}}</option>
                                                             @endforeach

@@ -27,6 +27,7 @@ return [
     'postcode' => 'Post Code',
     'spoken_language' => 'Spoken Skills',
     'written_language' => 'Written Skills',
+    'gender' => 'Gender',
     'website' => 'Website',
     'password' => 'Password',
     'forgot_password' => 'Forgot Password?',

@@ -52,4 +52,5 @@ return [
     'individual' => 'فرد',
     'already_have_invite' => 'لديك دعوة؟',
     'admin_sign_in' => 'تسجيل الدخول لمساحة العمل',
+    'gender' => 'الجنس',
 ];

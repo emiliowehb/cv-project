@@ -106,4 +106,7 @@ module.exports = [
     // Tempus Dominus is the successor to the very popular Eonasdan/bootstrap-datetimepicker. The plugin provide a robust date and time picker designed to integrate into your Bootstrap project.
     'node_modules/@eonasdan/tempus-dominus/dist/js/tempus-dominus.min.js',
     'node_modules/@eonasdan/tempus-dominus/dist/plugins/customDateFormat.js',
+
+    // Pikaday
+    'node_modules/pikaday/pikaday.js',
 ];

@@ -28,6 +28,7 @@ return [
     'postcode' => 'Code postal',
     'spoken_language' => 'Langue parlée',
     'written_language' => 'Langue écrite',
+    'gender' => 'Genre',
     'password' => 'Mot de passe',
     'forgot_password' => 'Mot de passe oublié ?',
     'not_a_member_yet' => 'Pas encore membre ?',

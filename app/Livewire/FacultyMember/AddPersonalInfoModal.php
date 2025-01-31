@@ -17,6 +17,8 @@ class AddPersonalInfoModal extends Component
 {
     use WithFileUploads;
 
+
+    // Professor personal info section (Step 1)
     public $user_id;
     public $first_name;
     public $middle_name;
@@ -24,13 +26,26 @@ class AddPersonalInfoModal extends Component
     public $email;
     public $office_email;
     public $website;
-    public $role;
-    public $country_of_birth;
-    public $avatar;
-    public $saved_avatar;
-    public $country_of_residence;
+    public $country_id;
+    public $birth_date;
+    public $gender;
 
-    protected $listeners = ['updatedCountry'];
+    // Professor address section (step 2)
+    public $country_of_residence;
+    public $address_line_1;
+    public $address_line_2;
+    public $city;
+    public $state;
+    public $postcode;
+
+    // Professor language section (step 3)
+    public $languageData = [
+        ['language' => '', 'spoken' => '', 'written' => '']
+    ];
+
+
+
+    protected $listeners = ['updatedCountry', 'updateBirthDate'];
 
     public function mount()
     {
@@ -41,10 +56,21 @@ class AddPersonalInfoModal extends Component
         $this->last_name = $user->last_name;
         $this->email = $user->email;
         $this->office_email = $user->office_email;
-        $this->country_of_birth = '';
-        $this->country_of_residence = ''; // Initialize the new property
+        $this->country_id = '';
+        $this->birth_date = '';
         $this->website = $user->website;
-        // Initialize other properties as needed
+        $this->gender = 1;
+
+        $this->country_of_residence = '';
+        $this->address_line_1 = '';
+        $this->address_line_2 = '';
+        $this->city = '';
+        $this->state = '';
+        $this->postcode = '';
+
+        $this->languageData = [
+            ['language' => '', 'spoken' => '', 'written' => '']
+        ];
     }
 
     public function render()
@@ -58,14 +84,17 @@ class AddPersonalInfoModal extends Component
             ['id' => '3', 'name' => 'Fluent'],
             ['id' => '5', 'name' => 'N/A'],
         ];
+        $genders = [
+            ['id' => '1', 'label' => 'Male'],
+            ['id' => '2', 'label' => 'Female'],
+        ];
 
-        return view('livewire.faculty-members.add-personal-info-modal', compact('countries', 'languages', 'levels'));
+        return view('livewire.faculty-members.add-personal-info-modal', compact('countries', 'languages', 'levels', 'genders'));
     }
 
     public function submit()
     {
         try {
-
             DB::transaction(function () {
                 // Prepare the data for creating a new user
                 $data = [
@@ -73,10 +102,21 @@ class AddPersonalInfoModal extends Component
                     'middle_name' => $this->middle_name,
                     'last_name' => $this->last_name,
                     'email' => $this->email,
+                    'birth_date' => $this->birth_date,
                     'office_email' => $this->office_email,
                     'website' => $this->website,
-                    'country_of_birth' => $this->country_of_birth,
-                    'country_of_residence' => $this->country_of_residence, // Include the new property
+                    'country_id' => $this->country_id,
+                    'gender' => $this->gender,
+
+                    'country_of_residence' => $this->country_of_residence,
+                    'address_line_1' => $this->address_line_1,
+                    'address_line_2' => $this->address_line_2,
+                    'city' => $this->city,
+                    'state' => $this->state,
+                    'postcode' => $this->postcode,
+
+                    'languages_spoken' => $this->languageData,
+
                 ];
                 return dd($data);
 
@@ -121,8 +161,19 @@ class AddPersonalInfoModal extends Component
         }
     }
 
-    public function updatedCountry($selectedValue) {
-        $this->country_of_residence = $selectedValue;
-        return dd($selectedValue);
+    public function updateBirthDate($date)
+    {
+        $this->birth_date = $date;
+    }
+
+    public function addLanguage()
+    {
+        $this->languageData[] = ['language' => '', 'spoken' => '', 'written' => ''];
+    }
+    
+    public function removeLanguage($index)
+    {
+        unset($this->languageData[$index]);
+        $this->languageData = array_values($this->languageData); // Reset array keys
     }
 }

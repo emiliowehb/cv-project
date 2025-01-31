@@ -12,6 +12,7 @@
     <meta property="og:locale" content="en_US"/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content=""/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <link rel="canonical" href="{{ url()->current() }}"/>
 
     {!! includeFavicon() !!}
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 <!--end::Custom Javascript-->
 @stack('scripts')
 <!--end::Javascript-->
-<script src="resources/mix/vendors/formrepeater/formrepeater.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 <script>
     // when the hyperlink with locale-selector class is clicked, we will set the chosen locale to the data-chosen-locale attribute value
     document.addEventListener('click', function (e) {

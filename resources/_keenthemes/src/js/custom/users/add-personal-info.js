@@ -4,6 +4,7 @@ var element = document.querySelector("#kt_stepper_example_basic");
 // Initialize Stepper
 var stepper = new KTStepper(element);
 
+
 const translations = {
     en_US: {
         firstNameRequired: 'First Name is required',
@@ -76,12 +77,12 @@ const validationRules = {
             maxLength: 255,
             message: translations[locale].lastNameRequired
         },
-        date_of_birth: {
+        birth_date: {
             required: true,
             type: 'date',
             message: translations[locale].dobRequired
         },
-        country_of_birth: {
+        country_id: {
             required: true,
             type: 'integer',
             message: translations[locale].cobRequired
@@ -104,7 +105,7 @@ const validationRules = {
             maxLength: 255,
             message: translations[locale].addressLine1Required
         },
-        town: {
+        city: {
             required: true,
             type: 'string',
             maxLength: 255,
@@ -198,38 +199,6 @@ function validateStep(step) {
             }
         }
     }
-
-    // Additional validation for dynamic fields like languages
-    if (step === 3) {
-        const languageSections = document.querySelectorAll('[name^="languages"]');
-        languageSections.forEach((section, index) => {
-            const language = section.querySelector(`[name="languages[${index}].language"]`);
-            const spokenLevel = section.querySelector(`[name="languages[${index}].spoken_level"]`);
-            const written = section.querySelector(`[name="languages[${index}].written"]`);
-
-            if (language.value.trim() === '') {
-                showError(language, 'Language selection is required.');
-                isStepValid = false;
-            } else {
-                clearError(language);
-            }
-
-            if (spokenLevel.value.trim() === '') {
-                showError(spokenLevel, 'Spoken Level is required.');
-                isStepValid = false;
-            } else {
-                clearError(spokenLevel);
-            }
-
-            if (written.value.trim() === '') {
-                showError(written, 'Written Level is required.');
-                isStepValid = false;
-            } else {
-                clearError(written);
-            }
-        });
-    }
-
     return isStepValid;
 }
 
@@ -252,7 +221,7 @@ function clearError(field) {
 
 // Handle next step
 stepper.on("kt.stepper.next", function (stepperObj) {
-    const currentStep = stepperObj.clickedStepIndex + 1;
+    const currentStep = stepperObj.currentStepIndex;
     const isValid = validateStep(currentStep);
     if (isValid) {
         stepperObj.goNext(); // Proceed to next step
@@ -264,6 +233,24 @@ stepper.on("kt.stepper.next", function (stepperObj) {
 // Handle previous step
 stepper.on("kt.stepper.previous", function (stepper) {
     stepper.goPrevious(); // go previous step
+});
+
+// Handle form submission with Axios
+document.getElementById('kt_stepper_example_basic_form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    
+    axios.post('/professors/complete-registration', formData)
+        .then(function(response) {
+            // Handle success
+            console.log(response);
+            // Possibly close modal or show success message
+        })
+        .catch(function(error) {
+            // Handle error
+            console.error(error);
+            // Possibly show error message
+        });
 });
 
 // Function to handle form submission
@@ -281,11 +268,13 @@ $("#date_of_birth").daterangepicker({
     maxYear: parseInt(moment().format("YYYY"),12)
 });
 
-$('#kt_docs_repeater_basic').repeater({
+$('#languages_repeater').repeater({
     initEmpty: false,
 
     defaultValues: {
-        'text-input': 'foo'
+        'language': 1,
+        'written': 0,
+        'spoken_level': 0,
     },
 
     show: function () {
