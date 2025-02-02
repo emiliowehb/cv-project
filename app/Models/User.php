@@ -52,6 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->profile_photo_path;
     }
 
+    public function professor()
+    {
+        return $this->hasOne(Professor::class);
+    }
+
     public function addresses()
     {
         return $this->hasMany(Address::class);

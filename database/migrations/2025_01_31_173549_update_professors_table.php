@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('gender')->after('birth_date');
             $table->string('email')->after('gender');
             $table->string('office_email')->after('email');
-            $table->string('website')->after('office_email');
+            $table->string('website')->after('office_email')->nullable();
         });
     }
 

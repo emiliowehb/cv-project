@@ -3,7 +3,13 @@
 namespace App\Livewire\FacultyMember;
 
 use App\Models\Country;
+use App\Models\Degree;
+use App\Models\Department;
+use App\Models\Discipline;
+use App\Models\ExpertiseArea;
 use App\Models\Language;
+use App\Models\Position;
+use App\Models\TeachingInterest;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -77,6 +83,12 @@ class AddPersonalInfoModal extends Component
     {
         $countries = Country::all();
         $languages = Language::all();
+        $positions = Position::all();
+        $degrees = Degree::all();
+        $disciplines = Discipline::all();
+        $departments = Department::all();
+        $teaching_interests = TeachingInterest::all();
+        $expertise_areas = ExpertiseArea::all();
         $levels = [
             ['id' => '0', 'name' => 'Beginner'],
             ['id' => '1', 'name' => 'Working Knowledge'],
@@ -89,7 +101,7 @@ class AddPersonalInfoModal extends Component
             ['id' => '2', 'label' => 'Female'],
         ];
 
-        return view('livewire.faculty-members.add-personal-info-modal', compact('countries', 'languages', 'levels', 'genders'));
+        return view('livewire.faculty-members.add-personal-info-modal', compact('countries', 'languages', 'positions', 'levels', 'genders', 'disciplines', 'degrees', 'departments', 'teaching_interests', 'expertise_areas'));
     }
 
     public function submit()

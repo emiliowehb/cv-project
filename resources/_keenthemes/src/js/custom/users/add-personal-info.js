@@ -22,7 +22,11 @@ const translations = {
         writtenLevelRequired: 'Written Level is required.',
         validEmail: 'Please enter a valid email address.',
         validDate: 'Please enter a valid date.',
-        validNumber: 'Please enter a valid number.'
+        validNumber: 'Please enter a valid number.',
+        employerNameRequired: 'Employer Name is required.',
+        countryRequired: 'Country is required.',
+        startYearRequired: 'Start Year is required.',
+        endYearRequired: 'End Year is required.'
     },
     fr_FR: {
         firstNameRequired: 'Le prénom est requis.',
@@ -40,7 +44,11 @@ const translations = {
         validEmail: 'Veuillez entrer une adresse e-mail valide.',
         writtenLevelRequired: 'Le niveau écrit est requis.',
         validDate: 'Veuillez entrer une date valide.',
-        validNumber: 'Veuillez entrer un nombre valide.'
+        validNumber: 'Veuillez entrer un nombre valide.',
+        employerNameRequired: 'Le nom de l\'employeur est requis.',
+        countryRequired: 'Le pays est requis.',
+        startYearRequired: 'L\'année de début est requise.',
+        endYearRequired: 'L\'année de fin est requise.'
     },
     ar_SA: {
         firstNameRequired: 'الاسم الأول مطلوب',
@@ -58,7 +66,11 @@ const translations = {
         writtenLevelRequired: 'مستوى اللغة المكتوبة مطلوب.',
         validDate: 'يرجى إدخال تاريخ صالح.',
         validEmail: 'يرجى إدخال عنوان بريد إلكتروني صالح.',
-        validNumber: 'يرجى إدخال رقم صالح.'
+        validNumber: 'يرجى إدخال رقم صالح.',
+        employerNameRequired: 'اسم صاحب العمل مطلوب.',
+        countryRequired: 'البلد مطلوب.',
+        startYearRequired: 'سنة البدء مطلوبة.',
+        endYearRequired: 'سنة الانتهاء مطلوبة.'
     }
 };
 
@@ -129,7 +141,27 @@ const validationRules = {
         // No static fields, handled separately
     },
     4: {
-        // Add rules for Step 4 if necessary
+        employer_name: {
+            required: true,
+            type: 'string',
+            maxLength: 255,
+            message: translations[locale].employerNameRequired
+        },
+        country_id: {
+            required: true,
+            type: 'integer',
+            message: translations[locale].countryRequired
+        },
+        start_year: {
+            required: true,
+            type: 'integer',
+            message: translations[locale].startYearRequired
+        },
+        end_year: {
+            required: true,
+            type: 'integer',
+            message: translations[locale].endYearRequired
+        }
     }
     // Add more steps and their rules as needed
 };
@@ -139,6 +171,16 @@ function validateField(field, rules) {
     let value = field.value.trim();
     let isValid = true;
     let errorMessage = '';
+
+    // Check if the field is end_year and if the corresponding is_current checkbox is checked
+    if (field.name.includes('end_year')) {
+        const isCurrentCheckbox = field.closest('[data-repeater-item]').querySelector('input[name*="is_current"]');
+        if (isCurrentCheckbox && isCurrentCheckbox.checked) {
+            rules.required = false; // Make end_year not required if is current is checked
+        } else {
+            rules.required = true; // Make end_year required if is current is not checked
+        }
+    }
 
     if (rules.required && !value) {
         isValid = false;
@@ -191,13 +233,15 @@ function validateStep(step) {
 
     // Iterate over each rule in the current step
     for (let fieldName in rules) {
-        const field = document.querySelector(`[name="${fieldName}"]`);
-        if (field) {
-            const fieldIsValid = validateField(field, rules[fieldName]);
-            if (!fieldIsValid) {
-                isStepValid = false;
+        const fields = document.querySelectorAll(`[name*="[${fieldName}]"]`);
+        fields.forEach(field => {
+            if (field) {
+                const fieldIsValid = validateField(field, rules[fieldName]);
+                if (!fieldIsValid) {
+                    isStepValid = false;
+                }
             }
-        }
+        });
     }
     return isStepValid;
 }
@@ -244,7 +288,8 @@ document.getElementById('kt_stepper_example_basic_form').addEventListener('submi
         .then(function(response) {
             // Handle success
             console.log(response);
-            // Possibly close modal or show success message
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
         })
         .catch(function(error) {
             // Handle error
@@ -276,6 +321,80 @@ $('#languages_repeater').repeater({
         'written': 0,
         'spoken_level': 0,
     },
+
+    show: function () {
+        $(this).slideDown();
+    },
+
+    hide: function (deleteElement) {
+        $(this).slideUp(deleteElement);
+    }
+});
+
+$('#employments_repeater').repeater({
+    initEmpty: false,
+
+    defaultValues: {
+        'employer_name': '',
+        'country_id': '',
+        'is_current': 0,
+        'is_full_time': 0,
+    },
+
+    show: function () {
+        $(this).slideDown();
+        // Add validation logic for new repeater item
+        const fields = $(this).find('input, select');
+        fields.each(function() {
+            var fieldName = $(this).attr('name');
+            const matches = fieldName.match(/\[.*?\]\[(.*?)\]/);
+            fieldName = matches ? matches[1] : fieldName;
+            if (validationRules[4][fieldName]) {
+                $(this).on('input change', function() {
+                    validateField(this, validationRules[4][fieldName]);
+                });
+            }
+        });
+
+        // Add change event listener to is_current checkbox to re-validate end_year
+        const isCurrentCheckbox = $(this).find('input[name*="is_current"]');
+        isCurrentCheckbox.on('change', function() {
+            const endYearField = $(this).closest('[data-repeater-item]').find('input[name*="end_year"]');
+            validateField(endYearField[0], validationRules[4]['end_year']);
+        });
+    },
+
+    hide: function (deleteElement) {
+        $(this).slideUp(deleteElement);
+    }
+});
+
+$('#educations_repeater').repeater({
+    initEmpty: false,
+
+    show: function () {
+        $(this).slideDown();
+    },
+
+    hide: function (deleteElement) {
+        $(this).slideUp(deleteElement);
+    }
+});
+
+$('#teaching_interests_repeater').repeater({
+    initEmpty: false,
+
+    show: function () {
+        $(this).slideDown();
+    },
+
+    hide: function (deleteElement) {
+        $(this).slideUp(deleteElement);
+    }
+});
+
+$('#expertise_areas_repeater').repeater({
+    initEmpty: false,
 
     show: function () {
         $(this).slideDown();

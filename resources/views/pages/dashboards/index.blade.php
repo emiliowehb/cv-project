@@ -13,6 +13,7 @@
         <!--begin::Col-->
         <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-md-5 mb-xl-10">
             <div class="card">
+                @if(!isset(Auth::user()->professor))
                 <div class="card-body text-center">
                     <h3 class="card-title">Add Personal Information</h3>
                     <p class="card-text">Welcome <strong>{{Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, it seems like you still have not uploaded any of your personal information. Please add your credentials and expertise to complete your profile.</p>
@@ -22,8 +23,12 @@
                         Add Information
                     </button>
                     <!--end::Add user-->
-                    
                 </div>
+                @else
+                <div class="card-body">
+                    <h3>You have successfully created your profile!</h3>
+                </div>
+                @endif
                 <!--begin::Modal-->
                 <livewire:facultymember.add-personal-info-modal></livewire:facultymember.add-personal-info-modal>
                 <!--end::Modal-->
