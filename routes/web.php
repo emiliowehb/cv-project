@@ -6,6 +6,7 @@ use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\WorkspaceInvitationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'isAdmin'])->prefix('/admin')->group(function () {
     Route::get('/', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
+
+    Route::name('workspace-management.')->group(function () {
+        Route::resource('/workspace-management/invitations', WorkspaceInvitationController::class);
+    });
 
     Route::name('user-management.')->group(function () {
         Route::resource('/user-management/users', UserManagementController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\WorkspaceInvitationsDataTable;
 use App\Models\WorkspaceInvitation;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,11 @@ class WorkspaceInvitationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(WorkspaceInvitationsDataTable $dataTable)
     {
-        //
+        return $dataTable->render('pages/apps.workspace-management.invitations.list');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

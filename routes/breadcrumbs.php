@@ -26,6 +26,18 @@ Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
 });
 
 // Home > Dashboard > User Management
+Breadcrumbs::for('workspace-management.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Workspace Management', route('workspace-management.invitations.index'));
+});
+
+// Home > Dashboard > User Management > Users
+Breadcrumbs::for('workspace-management.invitations.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('workspace-management.index');
+    $trail->push('Workspace Invitations', route('workspace-management.invitations.index'));
+});
+
+// Home > Dashboard > User Management
 Breadcrumbs::for('user-management.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
     $trail->push('User Management', route('user-management.users.index'));
