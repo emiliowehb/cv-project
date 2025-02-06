@@ -1,0 +1,4 @@
+[build]
+  [build.args]
+    PHP_VERSION = "8.2.27"
+    NODE_VERSION = "20.17"
