@@ -22,23 +22,6 @@
             </div>
             <!--begin::Card title-->
 
-            <!--begin::Card toolbar-->
-            <div class="card-toolbar">
-                <!--begin::Toolbar-->
-                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                    <!--begin::Add user-->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                        {!! getIcon('plus', 'fs-2', '', 'i') !!}
-                        Add User
-                    </button>
-                    <!--end::Add user-->
-                </div>
-                <!--end::Toolbar-->
-
-                <!--begin::Modal-->
-                <livewire:user.add-user-modal></livewire:user.add-user-modal>
-                <!--end::Modal-->
-            </div>
             <!--end::Card toolbar-->
         </div>
         <!--end::Card header-->

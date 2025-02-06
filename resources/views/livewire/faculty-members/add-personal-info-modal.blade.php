@@ -495,7 +495,7 @@
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <label class="col-form-label required">{{ __('messages.country') }}</label>
-                                                                <select class="form-select country-selector" data-control="select2" data-placeholder="Select a country" name="country_id" data-dropdown-parent="#kt_modal_add_personal_info">
+                                                                <select class="form-select country-selector" data-control="select2" data-placeholder="Select a country" name="emp_country_id" data-dropdown-parent="#kt_modal_add_personal_info">
                                                                     @foreach($countries as $country)
                                                                     <option value="{{$country->id}}">{{$country->name}}</option>
                                                                     @endforeach

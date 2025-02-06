@@ -27,6 +27,10 @@
                 @else
                 <div class="card-body">
                     <h3>You have successfully created your profile!</h3>
+                    <div>
+                        <p>Thank you for providing your personal information. You can now view your profile by clicking the button below.</p>
+                        <a href="{{route('professors.my-profile')}}" class="btn btn-primary">View Profile</a>
+                    </div>
                 </div>
                 @endif
                 <!--begin::Modal-->

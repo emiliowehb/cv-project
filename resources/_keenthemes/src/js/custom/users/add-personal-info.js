@@ -233,7 +233,7 @@ function validateStep(step) {
 
     // Iterate over each rule in the current step
     for (let fieldName in rules) {
-        const fields = document.querySelectorAll(`[name*="[${fieldName}]"]`);
+        const fields = document.querySelectorAll(`[name*="${fieldName}"]`);
         fields.forEach(field => {
             if (field) {
                 const fieldIsValid = validateField(field, rules[fieldName]);

@@ -49,6 +49,12 @@ Breadcrumbs::for('user-management.users.index', function (BreadcrumbTrail $trail
     $trail->push('Users', route('user-management.users.index'));
 });
 
+// Home > Dashboard > User Management > Users
+Breadcrumbs::for('dashboard.professors.my-profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('My Profile', route('professors.my-profile'));
+});
+
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('user-management.users.index');

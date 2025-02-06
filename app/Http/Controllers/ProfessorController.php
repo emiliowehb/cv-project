@@ -49,9 +49,10 @@ class ProfessorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Professor $professor)
+    public function show()
     {
-        //
+        $professor = Auth::user()->professor;
+        return view('pages/professors.my-profile', compact('professor'));
     }
 
     /**
@@ -125,7 +126,7 @@ class ProfessorController extends Controller
         foreach ($data['employments_repeater'] as $employmentData) {
             $professor->employments()->create([
                 'employer' => $employmentData['employer_name'],
-                'country_id' => $employmentData['country_id'],
+                'country_id' => $employmentData['emp_country_id'],
                 'start_year' => $employmentData['start_year'],
                 'position_id' => $employmentData['position_id'],
                 'end_year' => $employmentData['end_year'],

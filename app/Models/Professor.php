@@ -9,6 +9,16 @@ class Professor extends Model
 {
     protected $guarded = ['id'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function workspace()
+    {
+        return $this->belongsTo(Workspace::class);
+    }
+
     public function languages() {
         return $this->belongsToMany(Language::class, 'professor_languages', 'professor_id', 'language_id')
             ->withPivot('spoken_language_level_id', 'written_language_level_id');
