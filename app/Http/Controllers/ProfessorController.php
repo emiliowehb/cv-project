@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProfessorDegreesDataTable;
 use App\Models\Address;
 use App\Models\Professor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\DataTables\ProfessorEducationsDataTable;
 
 class ProfessorController extends Controller
 {
@@ -49,10 +51,24 @@ class ProfessorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function showOverview()
     {
         $professor = Auth::user()->professor;
-        return view('pages/professors.my-profile', compact('professor'));
+        return view('pages/professors.my-profile-overview', compact('professor'));
+    }
+
+    public function showEducations(ProfessorDegreesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.educations.my-profile-educations', compact('professor', 'user_id'));
+    }
+
+    public function showLanguages()
+    {
+        $professor = Auth::user()->professor;
+        return view('pages/professors.my-profile-languages', compact('professor'));
     }
 
     /**

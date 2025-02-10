@@ -33,9 +33,11 @@
     <div class="separator my-2"></div>
     <!--end::Menu separator-->
     <!--begin::Menu item-->
+    @if(auth()->user()->professor)
     <div class="menu-item px-5">
-        <a href="#" class="menu-link px-5">My Profile</a>
+        <a href="{{ route('professors.my-profile.overview') }}" class="menu-link px-5">My Profile</a>
     </div>
+    @endif
     <!--end::Menu item-->
     <!--begin::Menu separator-->
     <div class="separator my-2"></div>

@@ -25,9 +25,6 @@ class AddUserModal extends Component
     public $edit_mode = false;
 
     protected $rules = [
-        'name' => 'required|string',
-        'email' => 'required|email',
-        'role' => 'required|string',
         'avatar' => 'nullable|sometimes|image|max:1024',
     ];
 
@@ -39,21 +36,12 @@ class AddUserModal extends Component
 
     public function render()
     {
-        $roles = Role::all();
+        return view('livewire.user.add-user-modal');
+    }
 
-        $roles_description = [
-            'administrator' => 'Best for business owners and company administrators',
-            'developer' => 'Best for developers or people primarily using the API',
-            'analyst' => 'Best for people who need full access to analytics data, but don\'t need to update business settings',
-            'support' => 'Best for employees who regularly refund payments and respond to disputes',
-            'trial' => 'Best for people who need to preview content data, but don\'t need to make any updates',
-        ];
-
-        foreach ($roles as $i => $role) {
-            $roles[$i]->description = $roles_description[$role->name] ?? '';
-        }
-
-        return view('livewire.user.add-user-modal', compact('roles'));
+    public function mount()
+    {
+        $this->user_id = Auth::user()->id;
     }
 
     public function submit()
@@ -62,48 +50,15 @@ class AddUserModal extends Component
         $this->validate();
 
         DB::transaction(function () {
-            // Prepare the data for creating a new user
-            $data = [
-                'name' => $this->name,
-            ];
-
             if ($this->avatar) {
                 $data['profile_photo_path'] = $this->avatar->store('avatars', 'public');
             } else {
                 $data['profile_photo_path'] = null;
             }
+            $user = User::find($this->user_id);
 
-            if (!$this->edit_mode) {
-                $data['password'] = Hash::make($this->email);
-            }
-
-            // Update or Create a new user record in the database
-            $data['email'] = $this->email;
-            $user = User::find($this->user_id) ?? User::create($data);
-
-            if ($this->edit_mode) {
-                foreach ($data as $k => $v) {
-                    $user->$k = $v;
-                }
-                $user->save();
-            }
-
-            if ($this->edit_mode) {
-                // Assign selected role for user
-                $user->syncRoles($this->role);
-
-                // Emit a success event with a message
-                $this->dispatch('success', __('User updated'));
-            } else {
-                // Assign selected role for user
-                $user->assignRole($this->role);
-
-                // Send a password reset link to the user's email
-                // Password::sendResetLink($user->only('email'));
-
-                // Emit a success event with a message
-                $this->dispatch('success', __('New user created'));
-            }
+            $user->update(['profile_photo_path' => $data['profile_photo_path']]);
+            $this->dispatch('success', __('New user created'));
         });
 
         // Reset the form fields after successful submission

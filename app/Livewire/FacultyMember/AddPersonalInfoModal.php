@@ -130,7 +130,6 @@ class AddPersonalInfoModal extends Component
                     'languages_spoken' => $this->languageData,
 
                 ];
-                return dd($data);
 
                 if ($this->avatar) {
                     $data['profile_photo_path'] = $this->avatar->store('avatars', 'public');

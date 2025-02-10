@@ -99,11 +99,6 @@ const validationRules = {
             type: 'integer',
             message: translations[locale].cobRequired
         },
-        office_email: {
-            required: true,
-            type: 'email',
-            message: translations[locale].officeEmailRequired
-        }
     },
     2: {
         country_of_residence: {

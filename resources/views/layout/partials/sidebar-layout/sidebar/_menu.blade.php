@@ -13,16 +13,58 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
-			@if(isset(Auth::user()->professor))
+			@if(auth()->user()->professor)
 			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu {{ request()->routeIs('professors.my-profile') ? 'here show' : '' }}">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('professors.my-profile.*') ? 'here show' : '' }}">
 				<!--begin:Menu link-->
-				<a class="menu-link" href="{{route('professors.my-profile')}}">
+				<span class="menu-link">
 					<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
 					<span class="menu-title">My Profile</span>
-				</a>
+					<span class="menu-arrow"></span>
+				</span>
 				<!--end:Menu link-->
+				<!--begin:Menu sub-->
+				<div class="menu-sub menu-sub-accordion">
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.overview') ? 'active' : '' }}" href="{{ route('professors.my-profile.overview') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Overview</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.educations') ? 'active' : '' }}" href="{{ route('professors.my-profile.educations') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Education / Degrees</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.languages') ? 'active' : '' }}" href="{{ route('professors.my-profile.languages') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Languages</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+				</div>
+				<!--end:Menu sub-->
 			</div>
+			<!--end:Menu item-->
 			@endif
 		</div>
 		<!--end::Menu-->

@@ -315,7 +315,7 @@
                                         <!--begin::Input group--->
                                         <div class="fv-row mb-8">
                                             <!--begin::Email-->
-                                            <label for="office_email" class="col-form-label required">{{ __('messages.office_email') }}</label>
+                                            <label for="office_email" class="col-form-label">{{ __('messages.office_email') }}</label>
                                             <input type="text" placeholder="{{ __('messages.office_email') }}" name="office_email" wire:model="office_email" autocomplete="off" class="form-control bg-transparent" />
                                             <!--end::Email-->
                                         </div>

@@ -35,7 +35,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('/professors')->group(function () {
         Route::post('/complete-registration', [ProfessorController::class, 'store'])->name('professors.create');
-        Route::get('/my-profile', [ProfessorController::class, 'show'])->name('professors.my-profile');
+        Route::get('/my-profile', [ProfessorController::class, 'showOverview'])->name('professors.my-profile.overview');
+        Route::get('/my-profile/educations', [ProfessorController::class, 'showEducations'])->name('professors.my-profile.educations');
+        Route::get('/my-profile/languages', [ProfessorController::class, 'showLanguages'])->name('professors.my-profile.languages');
     });
 
 });

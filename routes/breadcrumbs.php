@@ -49,11 +49,24 @@ Breadcrumbs::for('user-management.users.index', function (BreadcrumbTrail $trail
     $trail->push('Users', route('user-management.users.index'));
 });
 
-// Home > Dashboard > User Management > Users
-Breadcrumbs::for('dashboard.professors.my-profile', function (BreadcrumbTrail $trail) {
+// Home > Dashboard > Profile > Overview
+Breadcrumbs::for('dashboard.professors.my-profile.overview', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('My Profile', route('professors.my-profile'));
+    $trail->push('Overview', route('professors.my-profile.overview'));
 });
+
+// Home > Dashboard > Profile > Educations
+Breadcrumbs::for('dashboard.professors.my-profile.educations', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Educations', route('professors.my-profile.educations'));
+});
+
+// Home > Dashboard > Profile > Languages
+Breadcrumbs::for('dashboard.professors.my-profile.languages', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Languages', route('professors.my-profile.languages'));
+});
+
 
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {
