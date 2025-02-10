@@ -66,6 +66,7 @@ return [
     'discipline' => 'التخصص',
     'department' => 'القسم',
     'teaching_interest' => 'اهتمام بالتدريس',
+    'teaching_interest_already_added' => 'تمت إضافة الاهتمام التدريسي المحدد بالفعل.',
     'expertise_area' => 'مجال الخبرة',
     'position' => 'المنصب',
 ];

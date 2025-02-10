@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProfessorDegreesDataTable;
+use App\DataTables\ProfessorLanguagesDataTable;
+use App\DataTables\ProfessorTeachingInterestsDataTable;
 use App\Models\Address;
 use App\Models\Professor;
 use Carbon\Carbon;
@@ -65,10 +67,20 @@ class ProfessorController extends Controller
         return $dataTable->render('pages/professors.educations.my-profile-educations', compact('professor', 'user_id'));
     }
 
-    public function showLanguages()
+    public function showLanguages(ProfessorLanguagesDataTable $dataTable)
     {
         $professor = Auth::user()->professor;
-        return view('pages/professors.my-profile-languages', compact('professor'));
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.languages.my-profile-languages', compact('professor', 'user_id'));
+    }
+
+    public function showTeachingInterests(ProfessorTeachingInterestsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.teaching-interests.my-profile-teaching-interests', compact('professor', 'user_id'));
     }
 
     /**

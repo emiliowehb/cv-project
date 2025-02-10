@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\ProfessorDegree;
+use App\Models\ProfessorLanguage;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 
-class ProfessorDegreesDataTable extends DataTable
+class ProfessorLanguagesDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -21,23 +21,20 @@ class ProfessorDegreesDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->rawColumns(['action'])
-            ->editColumn('year', function (ProfessorDegree $degree) {
-                return $degree->year;
+            ->editColumn('language_id', function (ProfessorLanguage $language) {
+                return $language->language->name;
             })
-            ->editColumn('degree', function (ProfessorDegree $degree) {
-                return $degree->degree->name;
+            ->editColumn('spoken_level', function (ProfessorLanguage $language) {
+                return $language->spokenLevel->name;
             })
-            ->editColumn('discipline', function (ProfessorDegree $degree) {
-                return $degree->discipline->name;
+            ->editColumn('written_level', function (ProfessorLanguage $language) {
+                return $language->writtenLevel->name;
             })
-            ->editColumn('department', function (ProfessorDegree $degree) {
-                return $degree->department->name;
+            ->editColumn('created_at', function (ProfessorLanguage $language) {
+                return $language->created_at->format('d/m/Y');
             })
-            ->editColumn('created_at', function (ProfessorDegree $degree) {
-                return $degree->created_at->format('d/m/Y');
-            })
-            ->addColumn('action', function (ProfessorDegree $degree) {
-                return view('pages/professors.educations.columns._actions', compact('degree'));
+            ->addColumn('action', function (ProfessorLanguage $language) {
+                return view('pages/professors.languages.columns._actions', compact('language'));
             })
             ->setRowId('id');
     }
@@ -45,11 +42,14 @@ class ProfessorDegreesDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(ProfessorDegree $model): QueryBuilder
+    public function query(ProfessorLanguage $model): QueryBuilder
     {
         return $model->newQuery()
-                     ->with(['degree', 'discipline', 'department'])
-                     ->where('professor_id', Auth::user()->professor->id);
+                     ->select('professor_languages.*')
+                     ->join('languages', 'languages.id', '=', 'professor_languages.language_id')
+                     ->with(['language', 'spokenLevel', 'writtenLevel'])
+                     ->where('professor_id', Auth::user()->professor->id)
+                     ->orderBy('languages.name');
     }
 
     /**
@@ -58,14 +58,14 @@ class ProfessorDegreesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('professor-degree-table')
+            ->setTableId('professor-language-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('rt' . "<'row'<'col-sm-12'tr>><'d-flex justify-content-between'<'col-sm-12 col-md-5'i><'d-flex justify-content-between'p>>",)
             ->addTableClass('table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer text-gray-600 fw-semibold')
             ->setTableHeadClass('text-start text-muted fw-bold fs-7 text-uppercase gs-0')
             ->orderBy(0)
-            ->drawCallback("function() {" . file_get_contents(resource_path('views/pages/professors/educations/columns/_draw-scripts.js')) . "}");
+            ->drawCallback("function() {" . file_get_contents(resource_path('views/pages/professors/languages/columns/_draw-scripts.js')) . "}");
     }
 
     /**
@@ -74,10 +74,9 @@ class ProfessorDegreesDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('year')->title('Year')->addClass('text-start'),
-            Column::make('degree')->title('Degree'),
-            Column::make('discipline')->title('Discipline'),
-            Column::make('department')->title('Department'),
+            Column::make('language_id')->title('Language'),
+            Column::make('spoken_level')->title('Spoken Level'),
+            Column::make('written_level')->title('Written Level'),
             Column::make('created_at')->title('Date Added')->addClass('text-start'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
@@ -92,6 +91,6 @@ class ProfessorDegreesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ProfessorDegrees_' . date('YmdHis');
+        return 'ProfessorLanguages_' . date('YmdHis');
     }
 }

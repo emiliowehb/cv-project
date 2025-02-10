@@ -67,6 +67,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.languages', function (Breadcru
     $trail->push('Languages', route('professors.my-profile.languages'));
 });
 
+// Home > Dashboard > Profile > Teaching Interests
+Breadcrumbs::for('dashboard.professors.my-profile.teaching-interests', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Teaching Interests', route('professors.my-profile.teaching-interests'));
+});
+
 
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {

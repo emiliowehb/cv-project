@@ -66,6 +66,7 @@ return [
     'discipline' => 'Discipline',
     'department' => 'Département',
     'teaching_interest' => 'Intérêt d\'enseignement',
+    'teaching_interest_already_added' => 'L\'intérêt d\'enseignement sélectionné a déjà été ajouté.',
     'expertise_area' => 'Domaine d\'expertise',
     'position' => 'Position',
 ];

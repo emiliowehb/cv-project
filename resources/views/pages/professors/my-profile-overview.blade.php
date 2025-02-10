@@ -12,39 +12,8 @@
         <!--begin::Sidebar-->
         <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
             <!--begin::Card-->
-            <div class="card mb-5 mb-xl-8">
-                <!--begin::Card body-->
-                <div class="card-body">
-                    <!--begin::Summary-->
-                    <!--begin::User Info-->
-                    <div class="d-flex flex-center flex-column py-5">
-                        <!--begin::Avatar-->
-                        <div class="symbol symbol-100px symbol-circle mb-7">
-                            @if($professor->profile_photo_url)
-                            <img src="{{ asset('storage/' . $professor->profile_photo_path) }}" alt="image" />
-                            @else
-                            <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $professor->first_name . ' ' . $professor->last_name) }}">
-                                {{ $professor->first_name[0] . $professor->last_name[0] }}
-                            </div>
-                            @endif
-                        </div>
-                        <!--end::Avatar-->
-                        <!--begin::Name-->
-                        <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $professor->first_name . ' ' . $professor->last_name }}</a>
-                        <!--end::Name-->
-                        <!--begin::Position-->
-                        <div class="mb-9">
-                            <!--begin::Badge-->
-                            <div class="badge badge-lg badge-light-primary d-inline">{{ ucfirst($professor->user->role) }}</div>
-                            <!--begin::Badge-->
-                        </div>
-                        <!--end::Position-->
-                    </div>
-                    <!--end::User Info-->
-                    <!--end::Summary-->
-                </div>
-                <!--end::Card body-->
-            </div>
+            <x-professor-profile-card :professor="$professor"></x-professor-profile-card>
+
             <!--end::Card-->
         </div>
         <!--end::Sidebar-->

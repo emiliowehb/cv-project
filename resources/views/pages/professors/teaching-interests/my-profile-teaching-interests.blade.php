@@ -1,24 +1,22 @@
 <x-default-layout>
-
     @section('title')
-    Educations
+    Teaching Interests
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('dashboard.professors.my-profile.educations', $professor) }}
+    {{ Breadcrumbs::render('dashboard.professors.my-profile.teaching-interests', $professor) }}
     @endsection
 
-    <!--begin::Content-->
+    <!--begin::Layout-->
     <div class="d-flex flex-column flex-lg-row">
         <!--begin::Sidebar-->
         <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
             <!--begin::Card-->
             <x-professor-profile-card :professor="$professor"></x-professor-profile-card>
-            <!-- end::Card -->
+            <!--end::Card-->
         </div>
         <!--end::Sidebar-->
-
-        <!--begin::Main Content-->
+        <!--begin::Content-->
         <div class="flex-lg-row-fluid ms-lg-10">
             <!--begin::Card-->
             <div class="card">
@@ -37,18 +35,17 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <!--begin::Add degree-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_degree">
+                            <!--begin::Add teaching interest-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_teaching_interest">
                                 {!! getIcon('plus', 'fs-2', '', 'i') !!}
-                                Add degree
+                                Add Teaching Interest
                             </button>
-                            <!--end::Add degree-->
+                            <!--end::Add teaching interest-->
                         </div>
                         <!--end::Toolbar-->
 
                         <!--begin::Modal-->
-                        <livewire:professor.add-education-modal></livewire:professor.add-education-modal>
-                        <livewire:user.add-user-modal></livewire:user.add-user-modal>
+                        <livewire:professor.add-teaching-interest-modal></livewire:professor.add-teaching-interest-modal>
                         <!--end::Modal-->
                     </div>
                     <!--end::Card toolbar-->
@@ -66,26 +63,26 @@
             </div>
             <!--end::Card-->
         </div>
-        <!--end::Main Content-->
+        <!--end::Content-->
     </div>
-    <!--end::Content-->
+    <!--end::Layout-->
 
     @push('scripts')
     {{ $dataTable->scripts() }}
     <script>
         document.addEventListener('livewire:init', function() {
             Livewire.on('success', function() {
-                $('#kt_modal_add_degree').modal('hide');
-                window.LaravelDataTables['professor-degree-table'].ajax.reload();
+                $('#kt_modal_add_teaching_interest').modal('hide');
+                window.LaravelDataTables['professor-teaching-interest-table'].ajax.reload();
             });
 
-            Livewire.on('update_degree', function() {
-                $('#kt_modal_add_degree').modal('show');
+            Livewire.on('update_te', function() {
+                $('#kt_modal_add_teaching_interest').modal('show');
             });
         });
 
-        $('#kt_modal_add_degree').on('hidden.bs.modal', function() {
-            Livewire.dispatch('add_degree');
+        $('#kt_modal_add_teaching_interest').on('hidden.bs.modal', function() {
+            Livewire.dispatch('add_teaching_interest');
         });
     </script>
     @endpush
