@@ -79,6 +79,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbT
     $trail->push('Grants', route('professors.my-profile.grants'));
 });
 
+// Home > Dashboard > Profile > Journal Articles
+Breadcrumbs::for('dashboard.professors.my-profile.journal-articles', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Journal Articles', route('professors.my-profile.journal-articles'));
+});
+
 // Home > Dashboard > Profile > Other Articles
 Breadcrumbs::for('dashboard.professors.my-profile.other-articles', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('publication_primary_fields', function (Blueprint $table) {
             $table->id();
+            $table->text('name');
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

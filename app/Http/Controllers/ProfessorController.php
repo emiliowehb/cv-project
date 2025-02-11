@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEducationsDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
+use App\DataTables\ProfessorJournalArticlesDataTable;
 
 class ProfessorController extends Controller
 {
@@ -99,6 +100,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.articles.my-profile-articles', compact('professor', 'user_id'));
+    }
+
+    public function showJournalArticles(ProfessorJournalArticlesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.journal-articles.my-profile-journal-articles', compact('professor', 'user_id'));
     }
 
     /**
