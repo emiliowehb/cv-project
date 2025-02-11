@@ -79,6 +79,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbT
     $trail->push('Grants', route('professors.my-profile.grants'));
 });
 
+// Home > Dashboard > Profile > Other Articles
+Breadcrumbs::for('dashboard.professors.my-profile.other-articles', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Other Articles', route('professors.my-profile.other-articles'));
+});
+
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('user-management.users.index');

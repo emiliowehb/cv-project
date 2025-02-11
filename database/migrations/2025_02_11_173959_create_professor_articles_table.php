@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ArticleStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('publisher_name');
             $table->integer('year');
             $table->string('nb_pages')->nullable();
+            $table->enum('status', ArticleStatusEnum::values())->default(ArticleStatusEnum::WAITING_FOR_VALIDATION);
             $table->text('url')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
