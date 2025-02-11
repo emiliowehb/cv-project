@@ -39,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile/educations', [ProfessorController::class, 'showEducations'])->name('professors.my-profile.educations');
         Route::get('/my-profile/languages', [ProfessorController::class, 'showLanguages'])->name('professors.my-profile.languages');
         Route::get('/my-profile/teaching-interests', [ProfessorController::class, 'showTeachingInterests'])->name('professors.my-profile.teaching-interests');
+        Route::get('/my-profile/grants', [ProfessorController::class, 'showGrants'])->name('professors.my-profile.grants');
     });
 
 });
@@ -62,6 +63,7 @@ Route::get('/error', function () {
 });
 
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
+
 
 
 Route::get('/locale/{locale}', function (Request $request) {

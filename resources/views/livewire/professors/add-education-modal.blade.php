@@ -84,3 +84,11 @@
     </div>
     <!--end::Modal dialog-->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#kt_modal_add_degree').on('hidden.bs.modal', function () {
+            @this.call('resetForm');
+        });
+    });
+</script>

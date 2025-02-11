@@ -46,6 +46,7 @@ class AddTeachingInterestModal extends Component
     protected $listeners = [
         'update_te' => 'updateTeachingInterest',
         'delete_te' => 'deleteTeachingInterest',
+        'modal_closed' => 'resetForm',
     ];
 
     public function render()
@@ -107,5 +108,11 @@ class AddTeachingInterestModal extends Component
     {
         $this->resetErrorBag();
         $this->resetValidation();
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['teaching_interest_id', 'is_current', 'edit_mode', 'teaching_interest_to_edit']);
+        $this->mount();
     }
 }

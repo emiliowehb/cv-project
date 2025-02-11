@@ -73,6 +73,11 @@ Breadcrumbs::for('dashboard.professors.my-profile.teaching-interests', function 
     $trail->push('Teaching Interests', route('professors.my-profile.teaching-interests'));
 });
 
+// Home > Dashboard > Profile > Grants
+Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Grants', route('professors.my-profile.grants'));
+});
 
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {

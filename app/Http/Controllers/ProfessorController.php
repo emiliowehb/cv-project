@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEducationsDataTable;
+use App\DataTables\ProfessorGrantsDataTable;
 
 class ProfessorController extends Controller
 {
@@ -81,6 +82,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.teaching-interests.my-profile-teaching-interests', compact('professor', 'user_id'));
+    }
+
+    public function showGrants(ProfessorGrantsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.grants.my-profile-grants', compact('professor', 'user_id'));
     }
 
     /**

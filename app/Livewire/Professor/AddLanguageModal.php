@@ -40,6 +40,7 @@ class AddLanguageModal extends Component
     protected $listeners = [
         'update_language' => 'updateLanguage',
         'delete_language' => 'deleteLanguage',
+        'modal_closed' => 'resetForm',
     ];
 
     public function render()
@@ -105,5 +106,11 @@ class AddLanguageModal extends Component
     {
         $this->resetErrorBag();
         $this->resetValidation();
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['language_id', 'spoken_language_level_id', 'written_language_level_id', 'edit_mode', 'language_to_edit']);
+        $this->mount();
     }
 }

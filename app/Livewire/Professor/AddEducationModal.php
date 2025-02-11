@@ -50,6 +50,7 @@ class AddEducationModal extends Component
     protected $listeners = [
         'update_degree' => 'updateDegree',
         'delete_degree' => 'deleteDegree',
+        'modal_closed' => 'resetForm',
     ];
 
     public function render()
@@ -119,5 +120,11 @@ class AddEducationModal extends Component
     {
         $this->resetErrorBag();
         $this->resetValidation();
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['year', 'degree_id', 'discipline_id', 'department_id', 'edit_mode', 'degree_to_edit']);
+        $this->mount();
     }
 }

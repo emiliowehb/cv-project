@@ -56,3 +56,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#kt_modal_add_language').on('hidden.bs.modal', function () {
+            @this.call('resetForm');
+        });
+    });
+</script>
