@@ -102,4 +102,5 @@ return [
     'pages' => 'Pages',
     'primary_field' => 'Primary Field',
     'secondary_field' => 'Secondary Field',
+    'add_book' => 'Add Book',
 ];

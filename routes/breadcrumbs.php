@@ -91,6 +91,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.other-articles', function (Bre
     $trail->push('Other Articles', route('professors.my-profile.other-articles'));
 });
 
+// Home > Dashboard > Profile > Books
+Breadcrumbs::for('dashboard.professors.my-profile.books', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Books', route('professors.my-profile.books'));
+});
+
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('user-management.users.index');

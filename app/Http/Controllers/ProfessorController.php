@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProfessorArticlesDataTable;
+use App\DataTables\ProfessorBooksDataTable;
 use App\DataTables\ProfessorDegreesDataTable;
 use App\DataTables\ProfessorLanguagesDataTable;
 use App\DataTables\ProfessorTeachingInterestsDataTable;
@@ -108,6 +109,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.journal-articles.my-profile-journal-articles', compact('professor', 'user_id'));
+    }
+
+    public function showBooks(ProfessorBooksDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.books.my-profile-books', compact('professor', 'user_id'));
     }
 
     /**
