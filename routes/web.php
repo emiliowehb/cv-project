@@ -43,6 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile/other-articles', [ProfessorController::class, 'showOtherArticles'])->name('professors.my-profile.other-articles');
         Route::get('/my-profile/journal-articles', [ProfessorController::class, 'showJournalArticles'])->name('professors.my-profile.journal-articles');
         Route::get('/my-profile/books', [ProfessorController::class, 'showBooks'])->name('professors.my-profile.books');
+        Route::get('/my-profile/book-chapters', [ProfessorController::class, 'showBookChapters'])->name('professors.my-profile.book-chapters');
+
     });
 
 });

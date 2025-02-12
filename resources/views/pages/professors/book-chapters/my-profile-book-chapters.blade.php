@@ -1,11 +1,11 @@
 <x-default-layout>
 
     @section('title')
-    {{ __('messages.books') }}
+    {{ __('messages.chapters_in_books') }}
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('dashboard.professors.my-profile.books', $professor) }}
+    {{ Breadcrumbs::render('dashboard.professors.my-profile.book-chapters', $professor) }}
     @endsection
 
     <!--begin::Content-->
@@ -29,17 +29,17 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <!--begin::Add book-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_book">
+                            <!--begin::Add book chapter-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_book_chapter">
                                 {!! getIcon('plus', 'fs-2', '', 'i') !!}
-                                {{ __('messages.add_book') }}
+                                {{ __('messages.add_book_chapter') }}
                             </button>
-                            <!--end::Add book-->
+                            <!--end::Add book chapter-->
                         </div>
                         <!--end::Toolbar-->
 
                         <!--begin::Modal-->
-                        <livewire:professor.add-book-modal></livewire:professor.add-book-modal>
+                        <livewire:professor.add-book-chapter-modal></livewire:professor.add-book-chapter-modal>
                         <!--end::Modal-->
                     </div>
                     <!--end::Card toolbar-->
@@ -66,17 +66,17 @@
     <script>
         document.addEventListener('livewire:init', function() {
             Livewire.on('success', function() {
-                $('#kt_modal_add_book').modal('hide');
-                window.LaravelDataTables['professor-books-table'].ajax.reload();
+                $('#kt_modal_add_book_chapter').modal('hide');
+                window.LaravelDataTables['professor-book-chapters-table'].ajax.reload();
             });
 
-            Livewire.on('update_book', function() {
-                $('#kt_modal_add_book').modal('show');
+            Livewire.on('update_chapter', function() {
+                $('#kt_modal_add_book_chapter').modal('show');
             });
         });
 
-        $('#kt_modal_add_book').on('hidden.bs.modal', function() {
-            Livewire.dispatch('add_book');
+        $('#kt_modal_add_book_chapter').on('hidden.bs.modal', function() {
+            Livewire.dispatch('add_book_chapter');
         });
     </script>
     @endpush
