@@ -124,7 +124,11 @@ class AddGrantModal extends Component
 
     public function deleteGrant($id)
     {
-        $grant = ProfessorGrant::findOrFail($id);
+        $grant = Grant::findOrFail($id);
+
+        $professorGrant = ProfessorGrant::where('grant_id', $id)->where('professor_id', Auth::user()->professor->id)->first();
+
+        $professorGrant->delete();
 
         $grant->delete();
 

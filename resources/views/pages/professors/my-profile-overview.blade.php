@@ -162,6 +162,7 @@
             </div>
             <!--end:::Tab content-->
         </div>
+        <livewire:user.add-user-modal></livewire:user.add-user-modal>
         <!--end::Content-->
     </div>
 </x-default-layout>
