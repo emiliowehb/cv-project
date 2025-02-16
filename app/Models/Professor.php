@@ -36,6 +36,10 @@ class Professor extends Model
         return $this->hasMany(ProfessorTeachingInterest::class);
     }
 
+    public function researchInterests() {
+        return $this->hasMany(ProfessorResearchInterest::class);
+    }
+
     public function expertiseAreas() {
         return $this->hasMany(ProfessorExpertiseArea::class);
     }

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEducationsDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
+use App\DataTables\ProfessorResearchInterestsDataTable;
 
 class ProfessorController extends Controller
 {
@@ -127,6 +128,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.book-chapters.my-profile-book-chapters', compact('professor', 'user_id'));
+    }
+
+    public function showRInterests(ProfessorResearchInterestsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.research-interests.my-profile-research-interests', compact('professor', 'user_id'));
     }
 
     /**

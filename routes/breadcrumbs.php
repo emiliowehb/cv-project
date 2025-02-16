@@ -103,6 +103,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.book-chapters', function (Brea
     $trail->push('Chapters in Books', route('professors.my-profile.book-chapters'));
 });
 
+// Home > Dashboard > Profile > Research Interests
+Breadcrumbs::for('dashboard.professors.my-profile.research-interests', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Research Interests', route('professors.my-profile.research-interests'));
+});
+
 // Home > Dashboard > User Management > Users > [User]
 Breadcrumbs::for('user-management.users.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('user-management.users.index');
