@@ -127,7 +127,19 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Journal Articles</span>
+									<span class="menu-title">Articles In Journals</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.magazine-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.magazine-articles') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Articles In Magazines</span>
 								</a>
 								<!--end:Menu link-->
 							</div>
@@ -163,7 +175,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Book Chapters</span>
+									<span class="menu-title">Chapters In Books</span>
 								</a>
 								<!--end:Menu link-->
 							</div>

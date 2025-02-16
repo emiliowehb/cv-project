@@ -86,10 +86,10 @@ Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbT
     $trail->push('Grants', route('professors.my-profile.grants'));
 });
 
-// Home > Dashboard > Profile > Journal Articles
+// Home > Dashboard > Profile > Articles In Journals
 Breadcrumbs::for('dashboard.professors.my-profile.journal-articles', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Journal Articles', route('professors.my-profile.journal-articles'));
+    $trail->push('Articles In Journals', route('professors.my-profile.journal-articles'));
 });
 
 // Home > Dashboard > Profile > Other Articles
@@ -98,13 +98,19 @@ Breadcrumbs::for('dashboard.professors.my-profile.other-articles', function (Bre
     $trail->push('Other Articles', route('professors.my-profile.other-articles'));
 });
 
+// Home > Dashboard > Profile > Articles In Magazines
+Breadcrumbs::for('dashboard.professors.my-profile.magazine-articles', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Articles In Magazines', route('professors.my-profile.magazine-articles'));
+});
+
 // Home > Dashboard > Profile > Books
 Breadcrumbs::for('dashboard.professors.my-profile.books', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Books', route('professors.my-profile.books'));
 });
 
-// Home > Dashboard > Profile > Book Chapters
+// Home > Dashboard > Profile > Chapters In Books
 Breadcrumbs::for('dashboard.professors.my-profile.book-chapters', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Chapters in Books', route('professors.my-profile.book-chapters'));

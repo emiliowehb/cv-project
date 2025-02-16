@@ -1,11 +1,11 @@
 <x-default-layout>
 
     @section('title')
-    Articles In Journals
+    Articles In Magazines
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('dashboard.professors.my-profile.journal-articles', $professor) }}
+    {{ Breadcrumbs::render('dashboard.professors.my-profile.magazine-articles', $professor) }}
     @endsection
 
     <!--begin::Content-->
@@ -30,16 +30,16 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Add article-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_journal_article">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_article">
                                 {!! getIcon('plus', 'fs-2', '', 'i') !!}
-                                {{ __('messages.add_journal_article') }}
+                                {{ __('messages.add_article') }}
                             </button>
                             <!--end::Add article-->
                         </div>
                         <!--end::Toolbar-->
 
                         <!--begin::Modal-->
-                        <livewire:professor.add-journal-article-modal></livewire:professor.add-journal-article-modal>
+                        <livewire:professor.add-magazine-article-modal></livewire:professor.add-magazine-article-modal>
                         <!--end::Modal-->
                     </div>
                     <!--end::Card toolbar-->
@@ -66,17 +66,17 @@
     <script>
         document.addEventListener('livewire:init', function() {
             Livewire.on('success', function() {
-                $('#kt_modal_add_journal_article').modal('hide');
-                window.LaravelDataTables['professor-journal-articles-table'].ajax.reload();
+                $('#kt_modal_add_article').modal('hide');
+                window.LaravelDataTables['professor-magazine-articles-table'].ajax.reload();
             });
 
-            Livewire.on('update_jarticle', function() {
-                $('#kt_modal_add_journal_article').modal('show');
+            Livewire.on('update_article', function() {
+                $('#kt_modal_add_article').modal('show');
             });
         });
 
-        $('#kt_modal_add_journal_article').on('hidden.bs.modal', function() {
-            Livewire.dispatch('add_jarticle');
+        $('#kt_modal_add_article').on('hidden.bs.modal', function() {
+            Livewire.dispatch('add_article');
         });
     </script>
     @endpush
