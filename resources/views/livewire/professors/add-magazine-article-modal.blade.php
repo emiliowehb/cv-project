@@ -26,15 +26,6 @@
                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                         <div class="row">
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('messages.article_type') }}</label>
-                                <select class="form-select" wire:model="article_type_id" data-placeholder="{{ __('messages.article_type') }}" data-dropdown-parent="#kt_modal_add_article" disabled>
-                                    @foreach($articleTypes as $articleType)
-                                    <option value="{{$articleType->id}}">{{$articleType->name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('article_type_id') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-6">
                                 <div class="form-group">
                                     <label class="col-form-label required">{{ __('messages.article_title') }}</label>
                                     <input type="text" class="form-control bg-transparent" wire:model="title" placeholder="Title" />
