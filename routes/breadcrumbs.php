@@ -73,6 +73,13 @@ Breadcrumbs::for('dashboard.professors.my-profile.teaching-interests', function 
     $trail->push('Teaching Interests', route('professors.my-profile.teaching-interests'));
 });
 
+
+// Home > Dashboard > Profile > Employment History
+Breadcrumbs::for('dashboard.professors.my-profile.employment-history', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Employment History', route('professors.my-profile.employment-history'));
+});
+
 // Home > Dashboard > Profile > Grants
 Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

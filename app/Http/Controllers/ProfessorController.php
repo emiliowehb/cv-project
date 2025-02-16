@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEducationsDataTable;
+use App\DataTables\ProfessorEmploymentHistoryDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
@@ -136,6 +137,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.research-interests.my-profile-research-interests', compact('professor', 'user_id'));
+    }
+
+    public function showEmploymentHistory(ProfessorEmploymentHistoryDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.employment-history.my-profile-employment-history', compact('professor', 'user_id'));
     }
 
     /**
