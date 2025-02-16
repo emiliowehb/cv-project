@@ -52,11 +52,6 @@
                                 @error('publication_status_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('messages.title') }}</label>
-                                <input type="text" class="form-control bg-transparent" wire:model="title" placeholder="Title" />
-                                @error('title') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-6">
                                 <label class="col-form-label">{{ __('messages.volume') }}</label>
                                 <input type="text" class="form-control bg-transparent" wire:model="volume" placeholder="Volume" />
                                 @error('volume') <span class="text-danger">{{ $message }}</span> @enderror

@@ -33,9 +33,9 @@ class ProfessorBooksDataTable extends DataTable
                 return $book->nb_pages;
             })
             ->editColumn('admin_status', function (ProfessorBook $book) {
-                $statusLabel = ArticleStatusEnum::from($book->admin_status)->label();
-                $badgeClass = $book->admin_status === ArticleStatusEnum::VALIDATED->value ? 'badge-success' : 'badge-warning';
-                return '<span class="badge ' . $badgeClass . '">' . $statusLabel . '</span>';
+                $status = ArticleStatusEnum::from($book->admin_status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorBook $book) {
                 return view('pages/professors.books.columns._actions', compact('book'));

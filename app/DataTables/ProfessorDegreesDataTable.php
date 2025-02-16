@@ -27,6 +27,9 @@ class ProfessorDegreesDataTable extends DataTable
             ->editColumn('degree', function (ProfessorDegree $degree) {
                 return $degree->degree->name;
             })
+            ->editColumn('institution_name', function (ProfessorDegree $degree) {
+                return $degree->institution_name;
+            })
             ->editColumn('discipline', function (ProfessorDegree $degree) {
                 return $degree->discipline->name;
             })
@@ -76,6 +79,7 @@ class ProfessorDegreesDataTable extends DataTable
         return [
             Column::make('year')->title('Year')->addClass('text-start'),
             Column::make('degree')->title('Degree'),
+            Column::make('institution_name')->title('Institution Name'),
             Column::make('discipline')->title('Discipline'),
             Column::make('department')->title('Department'),
             Column::make('created_at')->title('Date Added')->addClass('text-start'),

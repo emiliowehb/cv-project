@@ -97,6 +97,7 @@ return [
     'month' => 'Mois',
     'title' => 'Titre',
     'publication_status' => 'Statut de publication',
+    'institution_name' => 'Nom de l\'institution',
     'volume' => 'Volume',
     'issue' => 'Numéro',
     'pages' => 'Pages',

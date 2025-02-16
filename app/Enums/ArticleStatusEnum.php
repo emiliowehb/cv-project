@@ -20,4 +20,18 @@ enum ArticleStatusEnum: string
             ArticleStatusEnum::REJECTED => 'Rejected',
         };
     }
+
+    public function badgeClass(): string
+    {
+        return match ($this) {
+            ArticleStatusEnum::WAITING_FOR_VALIDATION => 'badge-warning',
+            ArticleStatusEnum::VALIDATED => 'badge-success',
+            ArticleStatusEnum::REJECTED => 'badge-danger',
+        };
+    }
+
+    public function rejectionReason(): string
+    {
+        return 'Display rejection reason by admin here';
+    }
 }

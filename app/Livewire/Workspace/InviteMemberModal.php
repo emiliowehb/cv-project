@@ -18,11 +18,13 @@ class InviteMemberModal extends Component
 {
     use WithFileUploads;
 
-    public $name;
+    public $first_name;
+    public $last_name;
     public $email;
 
     protected $rules = [
-        'name' => 'required|string',
+        'first_name' => 'required|string',
+        'last_name' => 'required|string',
         'email' => 'required|email|unique:workspace_invitations,invited_email|unique:users,email',
     ];
 
@@ -50,7 +52,7 @@ class InviteMemberModal extends Component
 
             // Prepare the data for creating a new workspace invitation
             $data = [
-                'full_name' => $this->name,
+                'full_name' => $this->first_name . ' ' . $this->last_name,
                 'invited_email' => $this->email,
                 'workspace_id' => Auth::user()->workspace->id,
                 'status' => WorkspaceInviteStatusEnum::PENDING->value,

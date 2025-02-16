@@ -46,9 +46,9 @@ class ProfessorJournalArticlesDataTable extends DataTable
                 return $article->secondaryField->name;
             })
             ->editColumn('admin_status', function (ProfessorJournalArticle $article) {
-                $statusLabel = ArticleStatusEnum::from($article->admin_status)->label();
-                $badgeClass = $article->admin_status === ArticleStatusEnum::VALIDATED->value ? 'badge-success' : 'badge-warning';
-                return '<span class="badge ' . $badgeClass . '">' . $statusLabel . '</span>';
+                $status = ArticleStatusEnum::from($article->admin_status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorJournalArticle $article) {
                 return view('pages/professors.journal-articles.columns._actions', compact('article'));

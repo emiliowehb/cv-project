@@ -120,7 +120,7 @@
             singleDatePicker: true,
             showDropdowns: true,
             minYear: 1901,
-            drops: "up",
+            drops: "down",
             maxYear: parseInt(moment().format("YYYY"), 12)
         }, function(start) {
             @this.call('updateStartDate', start.format('DD/MM/YYYY'));
@@ -130,7 +130,7 @@
             singleDatePicker: true,
             showDropdowns: true,
             minYear: 1901,
-            drops: "up",
+            drops: "down",
             maxYear: parseInt(moment().format("YYYY"), 12)
         }, function(end) {
             @this.call('updateEndDate', end.format('DD/MM/YYYY'));

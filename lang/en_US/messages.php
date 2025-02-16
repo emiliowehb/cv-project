@@ -115,4 +115,6 @@ return [
     'published_year' => 'Published Year',
     'published_month' => 'Published Month',
     'intellectual_contribution' => 'Intellectual Contribution',
+    'institution_name' => 'Institution Name',
+    'amount' => 'Amount',
 ];

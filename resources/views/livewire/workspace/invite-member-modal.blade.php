@@ -28,11 +28,22 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">Full Name</label>
+                            <label class="required fw-semibold fs-6 mb-2">First Name</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" wire:model.live="name" name="name"
-                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" />
+                            <input type="text" wire:model.live="first_name" name="first_name"
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="First name" />
+                            <!--end::Input-->
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Last Name</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" wire:model.live="last_name" name="last_name"
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Last name" />
                             <!--end::Input-->
                             @error('name')
                             <span class="text-danger">{{ $message }}</span> @enderror

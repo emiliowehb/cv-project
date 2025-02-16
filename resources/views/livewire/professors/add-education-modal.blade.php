@@ -25,6 +25,13 @@
                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label required">{{ __('messages.institution_name') }}</label>
+                                    <input type="text" class="form-control bg-transparent" wire:model="institution_name" placeholder="{{ __('messages.institution_name') }}" />
+                                    @error('institution_name') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label class="col-form-label required">{{ __('messages.degree_obtained_year') }}</label>
@@ -34,7 +41,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="col-form-label required">{{ __('messages.degree_type') }}</label>
-                                <select class="form-select country-selector" wire:model="degree_id"  data-placeholder="Select a degree" data-dropdown-parent="#kt_modal_add_degree">
+                                <select class="form-select country-selector" wire:model="degree_id" data-placeholder="Select a degree" data-dropdown-parent="#kt_modal_add_degree">
                                     @foreach($degrees as $degree)
                                     <option value="{{$degree->id}}">{{$degree->name}}</option>
                                     @endforeach
@@ -43,7 +50,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="col-form-label required">{{ __('messages.discipline') }}</label>
-                                <select class="form-select country-selector" wire:model="discipline_id"  data-placeholder="Select a degree discipline" data-dropdown-parent="#kt_modal_add_degree">
+                                <select class="form-select country-selector" wire:model="discipline_id" data-placeholder="Select a degree discipline" data-dropdown-parent="#kt_modal_add_degree">
                                     @foreach($disciplines as $discipline)
                                     <option value="{{$discipline->id}}">{{$discipline->name}}</option>
                                     @endforeach
@@ -52,7 +59,7 @@
                             </div>
                             <div class="col-6">
                                 <label class="col-form-label required">{{ __('messages.department') }}</label>
-                                <select class="form-select country-selector" wire:model="department_id"  data-placeholder="Select a department" data-dropdown-parent="#kt_modal_add_degree">
+                                <select class="form-select country-selector" wire:model="department_id" data-placeholder="Select a department" data-dropdown-parent="#kt_modal_add_degree">
                                     @foreach($departments as $department)
                                     <option value="{{$department->id}}">{{$department->name}}</option>
                                     @endforeach
@@ -86,8 +93,8 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $('#kt_modal_add_degree').on('hidden.bs.modal', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#kt_modal_add_degree').on('hidden.bs.modal', function() {
             @this.call('resetForm');
         });
     });

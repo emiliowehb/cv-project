@@ -18,6 +18,7 @@ class AddEducationModal extends Component
     public $degree_id;
     public $discipline_id;
     public $department_id;
+    public $institution_name;
     public $edit_mode = false;
     public $degree_to_edit;
 
@@ -28,6 +29,7 @@ class AddEducationModal extends Component
         $this->rules = [
             'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
             'degree_id' => 'required',
+            'institution_name' => 'required',
             'discipline_id' => 'required',
             'department_id' => 'required',
         ];
@@ -39,6 +41,7 @@ class AddEducationModal extends Component
         $this->professor_id = Auth::user()->professor->id;
         $this->year = date('Y');
         $this->degree_id = Degree::first()->id;
+        $this->institution_name = '';
         $this->discipline_id = Discipline::first()->id;
         $this->department_id = Department::first()->id;
     }
@@ -73,6 +76,7 @@ class AddEducationModal extends Component
                 $degree->update([
                     'degree_id' => $this->degree_id,
                     'discipline_id' => $this->discipline_id,
+                    'institution_name' => $this->institution_name,
                     'department_id' => $this->department_id,
                     'year' => $this->year,
                 ]);
@@ -81,6 +85,7 @@ class AddEducationModal extends Component
                 ProfessorDegree::create([
                     'professor_id' => $this->professor_id,
                     'degree_id' => $this->degree_id,
+                    'institution_name' => $this->institution_name,
                     'discipline_id' => $this->discipline_id,
                     'department_id' => $this->department_id,
                     'year' => $this->year,
@@ -111,6 +116,7 @@ class AddEducationModal extends Component
         $degree = ProfessorDegree::findOrFail($id);
 
         $this->degree_id = $degree->degree_id;
+        $this->institution_name = $degree->institution_name;
         $this->discipline_id = $degree->discipline_id;
         $this->department_id = $degree->department_id;
         $this->year = $degree->year;
@@ -124,7 +130,7 @@ class AddEducationModal extends Component
 
     public function resetForm()
     {
-        $this->reset(['year', 'degree_id', 'discipline_id', 'department_id', 'edit_mode', 'degree_to_edit']);
+        $this->reset(['year', 'degree_id', 'discipline_id', 'department_id', 'edit_mode', 'degree_to_edit', 'institution_name']);
         $this->mount();
     }
 }

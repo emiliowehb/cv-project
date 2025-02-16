@@ -36,9 +36,9 @@ class ProfessorBookChaptersDataTable extends DataTable
                 return $chapter->nb_pages;
             })
             ->editColumn('admin_status', function (ProfessorBookChapter $chapter) {
-                $statusLabel = ArticleStatusEnum::from($chapter->admin_status)->label();
-                $badgeClass = $chapter->admin_status === ArticleStatusEnum::VALIDATED->value ? 'badge-success' : 'badge-warning';
-                return '<span class="badge ' . $badgeClass . '">' . $statusLabel . '</span>';
+                $status = ArticleStatusEnum::from($chapter->admin_status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorBookChapter $chapter) {
                 return view('pages/professors.book-chapters.columns._actions', compact('chapter'));

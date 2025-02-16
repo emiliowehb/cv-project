@@ -102,6 +102,7 @@ return [
     'primary_field' => 'المجال الرئيسي',
     'secondary_field' => 'المجال الثانوي',
     'add_journal_article' => 'إضافة مقال في المجلة',
+    'institution_name' => 'اسم المؤسسة',
     'books' => 'كتب',
     'chapters_in_books' => 'فصول في الكتب',
     'add_book_chapter' => 'إضافة فصل في كتاب',

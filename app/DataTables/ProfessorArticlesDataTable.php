@@ -39,9 +39,9 @@ class ProfessorArticlesDataTable extends DataTable
                 return $article->notes;
             })
             ->editColumn('status', function (ProfessorArticle $article) {
-                $statusLabel = ArticleStatusEnum::from($article->status)->label();
-                $badgeClass = $article->status === ArticleStatusEnum::VALIDATED->value ? 'badge-success' : 'badge-warning';
-                return '<span class="badge ' . $badgeClass . '">' . $statusLabel . '</span>';
+                $status = ArticleStatusEnum::from($article->status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorArticle $article) {
                 return view('pages/professors.articles.columns._actions', compact('article'));
