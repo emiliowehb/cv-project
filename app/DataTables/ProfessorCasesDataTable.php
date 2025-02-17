@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 
-class ProfessorMagazineArticlesDataTable extends DataTable
+class ProfessorCasesDataTable extends DataTable
 {
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -42,7 +42,7 @@ class ProfessorMagazineArticlesDataTable extends DataTable
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorArticle $article) {
-                return view('pages/professors.magazine-articles.columns._actions', compact('article'));
+                return view('pages/professors.case-articles.columns._actions', compact('article'));
             })
             ->setRowId('id');
     }
@@ -50,7 +50,7 @@ class ProfessorMagazineArticlesDataTable extends DataTable
     public function query(ProfessorArticle $model): QueryBuilder
     {
         return $model->newQuery()
-                    ->where('article_type_id', ArticleType::where('name', 'Magazine')->first()->id)
+                    ->where('article_type_id', ArticleType::where('name', 'Case')->first()->id)
                      ->where('professor_id', Auth::user()->professor->id)
                      ->with('type');
     }
@@ -58,14 +58,14 @@ class ProfessorMagazineArticlesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('professor-magazine-articles-table')
+            ->setTableId('professor-case-articles-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('rt' . "<'row'<'col-sm-12'tr>><'d-flex justify-content-between'<'col-sm-12 col-md-5'i><'d-flex justify-content-between'p>>",)
             ->addTableClass('table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer text-gray-600 fw-semibold')
             ->setTableHeadClass('text-start text-muted fw-bold fs-7 text-uppercase gs-0')
             ->orderBy(0)
-            ->drawCallback("function() {" . file_get_contents(resource_path('views/pages/professors/magazine-articles/columns/_draw-scripts.js')) . "}");
+            ->drawCallback("function() {" . file_get_contents(resource_path('views/pages/professors/case-articles/columns/_draw-scripts.js')) . "}");
     }
 
     public function getColumns(): array

@@ -104,6 +104,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.magazine-articles', function (
     $trail->push('Articles In Magazines', route('professors.my-profile.magazine-articles'));
 });
 
+// Home > Dashboard > Profile > Articles In Magazines
+Breadcrumbs::for('dashboard.professors.my-profile.cases', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Cases', route('professors.my-profile.cases'));
+});
+
 // Home > Dashboard > Profile > Books
 Breadcrumbs::for('dashboard.professors.my-profile.books', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

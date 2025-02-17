@@ -147,6 +147,18 @@
 							<!--begin:Menu item-->
 							<div class="menu-item">
 								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.cases') ? 'active' : '' }}" href="{{ route('professors.my-profile.cases') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Cases</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
 								<a class="menu-link {{ request()->routeIs('professors.my-profile.other-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.other-articles') }}">
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>

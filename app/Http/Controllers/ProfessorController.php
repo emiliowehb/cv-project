@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\ProfessorArticlesDataTable;
 use App\DataTables\ProfessorBookChaptersDataTable;
 use App\DataTables\ProfessorBooksDataTable;
+use App\DataTables\ProfessorCasesDataTable;
 use App\DataTables\ProfessorDegreesDataTable;
 use App\DataTables\ProfessorLanguagesDataTable;
 use App\DataTables\ProfessorTeachingInterestsDataTable;
@@ -13,7 +14,6 @@ use App\Models\Professor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\DataTables\ProfessorEducationsDataTable;
 use App\DataTables\ProfessorEmploymentHistoryDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
@@ -105,6 +105,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.magazine-articles.my-profile-magazine-articles', compact('professor', 'user_id'));
+    }
+
+    public function showCaseArticles(ProfessorCasesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.case-articles.my-profile-cases', compact('professor', 'user_id'));
     }
 
     public function showOtherArticles(ProfessorArticlesDataTable $dataTable)
