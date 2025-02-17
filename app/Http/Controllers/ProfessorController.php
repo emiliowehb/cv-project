@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEmploymentHistoryDataTable;
 use App\DataTables\ProfessorGraduateSupervisionsDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
+use App\DataTables\ProfessorInterviewsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorMagazineArticlesDataTable;
 use App\DataTables\ProfessorNewsletterArticlesDataTable;
@@ -156,6 +157,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.books.my-profile-books', compact('professor', 'user_id'));
+    }
+
+    public function showInterviews(ProfessorInterviewsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.interviews.my-profile-interviews', compact('professor', 'user_id'));
     }
 
     public function showElectronicMedia(ProfessorElectronicMediaDataTable $dataTable)

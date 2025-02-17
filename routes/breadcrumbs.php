@@ -98,6 +98,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.electronic-media', function (B
     $trail->push('Electronic Media', route('professors.my-profile.electronic-media'));
 });
 
+// Home > Dashboard > Profile > Interviews
+Breadcrumbs::for('dashboard.professors.my-profile.interviews', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Interviews', route('professors.my-profile.interviews'));
+});
+
 // Home > Dashboard > Profile > Articles In Journals
 Breadcrumbs::for('dashboard.professors.my-profile.journal-articles', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

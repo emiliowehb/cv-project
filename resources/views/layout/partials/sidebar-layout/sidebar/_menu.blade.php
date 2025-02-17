@@ -100,6 +100,18 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.interviews') ? 'active' : '' }}" href="{{ route('professors.my-profile.interviews') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Interviews</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
 						<a class="menu-link {{ request()->routeIs('professors.my-profile.supervisions') ? 'active' : '' }}" href="{{ route('professors.my-profile.supervisions') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
