@@ -7,6 +7,7 @@ use App\DataTables\ProfessorBookChaptersDataTable;
 use App\DataTables\ProfessorBooksDataTable;
 use App\DataTables\ProfessorCasesDataTable;
 use App\DataTables\ProfessorDegreesDataTable;
+use App\DataTables\ProfessorElectronicMediaDataTable;
 use App\DataTables\ProfessorLanguagesDataTable;
 use App\DataTables\ProfessorTeachingInterestsDataTable;
 use App\Models\Address;
@@ -155,6 +156,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.books.my-profile-books', compact('professor', 'user_id'));
+    }
+
+    public function showElectronicMedia(ProfessorElectronicMediaDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.electronic-media.my-profile-electronic-media', compact('professor', 'user_id'));
     }
 
 

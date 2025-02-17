@@ -112,6 +112,18 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.electronic-media') ? 'active' : '' }}" href="{{ route('professors.my-profile.electronic-media') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Electronic Media</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
 						<a class="menu-link {{ request()->routeIs('professors.my-profile.grants') ? 'active' : '' }}" href="{{ route('professors.my-profile.grants') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>

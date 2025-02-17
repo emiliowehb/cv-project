@@ -92,6 +92,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbT
     $trail->push('Grants', route('professors.my-profile.grants'));
 });
 
+// Home > Dashboard > Profile > Electronic Media
+Breadcrumbs::for('dashboard.professors.my-profile.electronic-media', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Electronic Media', route('professors.my-profile.electronic-media'));
+});
+
 // Home > Dashboard > Profile > Articles In Journals
 Breadcrumbs::for('dashboard.professors.my-profile.journal-articles', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

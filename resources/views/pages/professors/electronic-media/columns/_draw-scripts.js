@@ -1,10 +1,10 @@
 // Initialize KTMenu
 KTMenu.init();
 
-document.querySelectorAll('[data-kt-action="delete_degree"]').forEach(function (element) {
+document.querySelectorAll('[data-kt-action="delete_media"]').forEach(function (element) {
     element.addEventListener('click', function () {
         Swal.fire({
-            text: 'Are you sure you want to delete this degree?',
+            text: 'Are you sure you want to delete this medium?',
             icon: 'warning',
             buttonsStyling: false,
             showCancelButton: true,
@@ -16,21 +16,21 @@ document.querySelectorAll('[data-kt-action="delete_degree"]').forEach(function (
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                Livewire.dispatch('delete_degree', [this.getAttribute('data-kt-degree-id')]);
+                Livewire.dispatch('delete_media', [this.getAttribute('data-kt-media-id')]);
             }
         });
     });
 });
 
 // Add click event listener to update buttons
-document.querySelectorAll('[data-kt-action="update_degree"]').forEach(function (element) {
+document.querySelectorAll('[data-kt-action="update_media"]').forEach(function (element) {
     element.addEventListener('click', function () {
-        Livewire.dispatch('update_degree', [this.getAttribute('data-kt-degree-id')]);
+        Livewire.dispatch('update_media', [this.getAttribute('data-kt-media-id')]);
     });
 });
 
 // Listen for 'success' event emitted by Livewire
 Livewire.on('success', (message) => {
     // Reload the users-table datatable
-    LaravelDataTables['professor-degrees-table'].ajax.reload();
+    LaravelDataTables['professor-electronic-media-table'].ajax.reload();
 });
