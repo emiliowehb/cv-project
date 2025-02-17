@@ -22,16 +22,16 @@ class ProfessorLanguagesDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->rawColumns(['action'])
             ->editColumn('language_id', function (ProfessorLanguage $language) {
-                return $language->language->name;
+                return $language?->language?->name;
             })
             ->editColumn('spoken_level', function (ProfessorLanguage $language) {
-                return $language->spokenLevel->name;
+                return $language?->spokenLevel?->name;
             })
             ->editColumn('written_level', function (ProfessorLanguage $language) {
-                return $language->writtenLevel->name;
+                return $language?->writtenLevel?->name;
             })
             ->editColumn('created_at', function (ProfessorLanguage $language) {
-                return $language->created_at->format('d/m/Y');
+                return $language?->created_at?->format('d/m/Y');
             })
             ->addColumn('action', function (ProfessorLanguage $language) {
                 return view('pages/professors.languages.columns._actions', compact('language'));

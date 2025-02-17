@@ -52,7 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile/graduate-supervisions', [ProfessorController::class, 'showSupervisions'])->name('professors.my-profile.supervisions');
         Route::get('/my-profile/electronic-media', [ProfessorController::class, 'showElectronicMedia'])->name('professors.my-profile.electronic-media');
         Route::get('/my-profile/interviews', [ProfessorController::class, 'showInterviews'])->name('professors.my-profile.interviews');
-
+        Route::get('/my-profile/activities', [ProfessorController::class, 'showActivities'])->name('professors.my-profile.activities');
     });
 
 });

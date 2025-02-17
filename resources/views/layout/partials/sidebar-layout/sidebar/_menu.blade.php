@@ -96,6 +96,18 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.activities') ? 'active' : '' }}" href="{{ route('professors.my-profile.activities') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Activities</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item">

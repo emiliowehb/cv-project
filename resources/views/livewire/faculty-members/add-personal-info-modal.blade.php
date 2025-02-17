@@ -18,11 +18,11 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Stepper-->
-                <div class="stepper stepper-pills" id="kt_stepper_example_basic">
+                <div class="stepper stepper-pills stepper-column d-flex flex-column flex-lg-row" id="kt_stepper_example_basic">
                     <!--begin::Nav-->
                     <div class="stepper-nav flex-center flex-wrap mb-5">
                         <!--begin::Step 1-->
-                        <div class="stepper-item mx-8 my-4 current" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8  current" data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -53,7 +53,7 @@
                         <!--end::Step 1-->
 
                         <!--begin::Step 2-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8 " data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -84,7 +84,7 @@
                         <!--end::Step 2-->
 
                         <!--begin::Step 3-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8 " data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -115,7 +115,7 @@
                         <!--end::Step 3-->
 
                         <!--begin::Step 4-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8 " data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -146,7 +146,7 @@
                         <!--end::Step 4-->
 
                         <!--begin::Step 5-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8 " data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -177,7 +177,7 @@
                         <!--end::Step 5-->
 
                         <!--begin::Step 6-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8 " data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -208,7 +208,7 @@
                         <!--end::Step 6-->
 
                         <!--begin::Step 7-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+                        <div class="stepper-item mx-8 " data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -231,10 +231,6 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Wrapper-->
-
-                            <!--begin::Line-->
-                            <div class="stepper-line h-40px"></div>
-                            <!--end::Line-->
                         </div>
                         <!--end::Step 7-->
                     </div>
@@ -470,7 +466,7 @@
                                                         </div>
                                                         <div class="col-3">
                                                             <div class="form-group">
-                                                                <label class="col-form-label required">{{ __('messages.end_year') }}</label>
+                                                                <label class="col-form-label">{{ __('messages.end_year') }}</label>
                                                                 <input type="number" class="form-control bg-transparent" name="end_year" placeholder="End Year" />
                                                             </div>
                                                         </div>

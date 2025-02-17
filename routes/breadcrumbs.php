@@ -104,6 +104,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.interviews', function (Breadcr
     $trail->push('Interviews', route('professors.my-profile.interviews'));
 });
 
+// Home > Dashboard > Profile > Interviews
+Breadcrumbs::for('dashboard.professors.my-profile.activities', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Activities', route('professors.my-profile.activities'));
+});
+
 // Home > Dashboard > Profile > Articles In Journals
 Breadcrumbs::for('dashboard.professors.my-profile.journal-articles', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

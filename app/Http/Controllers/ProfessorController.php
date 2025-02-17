@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProfessorActivitiesDataTable;
 use App\DataTables\ProfessorArticlesDataTable;
 use App\DataTables\ProfessorBookChaptersDataTable;
 use App\DataTables\ProfessorBooksDataTable;
@@ -182,6 +183,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.book-chapters.my-profile-book-chapters', compact('professor', 'user_id'));
+    }
+
+    public function showActivities(ProfessorActivitiesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.activities.my-profile-activities', compact('professor', 'user_id'));
     }
 
     public function showRInterests(ProfessorResearchInterestsDataTable $dataTable)

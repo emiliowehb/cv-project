@@ -23,14 +23,6 @@ class AddTeachingInterestModal extends Component
         return [
             'teaching_interest_id' => [
                 'required',
-                function ($attribute, $value, $fail) {
-                    $exists = ProfessorTeachingInterest::where('professor_id', $this->professor_id)
-                        ->where('teaching_interest_id', $value)
-                        ->exists();
-                    if ($exists) {
-                        $fail(__('messages.teaching_interest_already_added'));
-                    }
-                },
             ],
             'is_current' => 'required|boolean',
         ];
@@ -66,14 +58,14 @@ class AddTeachingInterestModal extends Component
                 $teachingInterest = ProfessorTeachingInterest::findOrFail($this->teaching_interest_to_edit);
                 $teachingInterest->update([
                     'teaching_interest_id' => $this->teaching_interest_id,
-                    'is_current' => $this->is_current,
+                    'is_current' => $this->is_current ? 1 : 0,
                 ]);
             } else {
                 // Create a new professor teaching interest
                 ProfessorTeachingInterest::create([
                     'professor_id' => $this->professor_id,
                     'teaching_interest_id' => $this->teaching_interest_id,
-                    'is_current' => $this->is_current,
+                    'is_current' => $this->is_current ? 1 : 0,
                 ]);
             }
         });
@@ -101,7 +93,7 @@ class AddTeachingInterestModal extends Component
         $teachingInterest = ProfessorTeachingInterest::findOrFail($id);
 
         $this->teaching_interest_id = $teachingInterest->teaching_interest_id;
-        $this->is_current = $teachingInterest->is_current;
+        $this->is_current = $teachingInterest->is_current ? true : false;
     }
 
     public function hydrate()
