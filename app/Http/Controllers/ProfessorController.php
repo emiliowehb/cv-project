@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEmploymentHistoryDataTable;
+use App\DataTables\ProfessorGraduateSupervisionsDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorMagazineArticlesDataTable;
@@ -122,6 +123,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.newsletter-articles.my-profile-newsletter-articles', compact('professor', 'user_id'));
+    }
+
+    public function showSupervisions(ProfessorGraduateSupervisionsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.supervisions.my-profile-graduate-supervisions', compact('professor', 'user_id'));
     }
 
     public function showOtherArticles(ProfessorArticlesDataTable $dataTable)

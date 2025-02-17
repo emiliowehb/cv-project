@@ -80,6 +80,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.employment-history', function 
     $trail->push('Employment History', route('professors.my-profile.employment-history'));
 });
 
+// Home > Dashboard > Profile > Supervisions
+Breadcrumbs::for('dashboard.professors.my-profile.graduate-supervisions', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Graduate Supervisions', route('professors.my-profile.supervisions'));
+});
+
 // Home > Dashboard > Profile > Grants
 Breadcrumbs::for('dashboard.professors.my-profile.grants', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
