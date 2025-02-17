@@ -117,4 +117,9 @@ return [
     'intellectual_contribution' => 'Intellectual Contribution',
     'institution_name' => 'Institution Name',
     'amount' => 'Amount',
+    'media_name' => 'Media Name',
+    'media_year' => 'Year',
+    'media_type' => 'Media Type',
+    'publisher' => 'Publisher',
+    'notes' => 'Notes',
 ];

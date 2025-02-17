@@ -115,4 +115,7 @@ return [
     'published_year' => 'Année de publication',
     'published_month' => 'Mois de publication',
     'intellectual_contribution' => 'Contribution intellectuelle',
+    'media_name' => 'Nom du média',
+    'media_year' => 'Année',
+    'media_type' => 'Type de média',
 ];
