@@ -18,6 +18,7 @@ use App\DataTables\ProfessorEmploymentHistoryDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorMagazineArticlesDataTable;
+use App\DataTables\ProfessorNewsletterArticlesDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
 
 class ProfessorController extends Controller
@@ -113,6 +114,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.case-articles.my-profile-cases', compact('professor', 'user_id'));
+    }
+
+    public function showNewsletters(ProfessorNewsletterArticlesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.newsletter-articles.my-profile-newsletter-articles', compact('professor', 'user_id'));
     }
 
     public function showOtherArticles(ProfessorArticlesDataTable $dataTable)

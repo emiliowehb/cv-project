@@ -110,6 +110,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.cases', function (BreadcrumbTr
     $trail->push('Cases', route('professors.my-profile.cases'));
 });
 
+// Home > Dashboard > Profile > Newsletters
+Breadcrumbs::for('dashboard.professors.my-profile.newsletter-articles', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Newsletters', route('professors.my-profile.newsletter-articles'));
+});
+
 // Home > Dashboard > Profile > Books
 Breadcrumbs::for('dashboard.professors.my-profile.books', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
