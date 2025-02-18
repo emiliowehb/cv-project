@@ -1,7 +1,7 @@
 <x-default-layout>
 
     @section('title')
-    {{ __('messages.book-reviews') }}
+    {{ __('messages.book_reviews') }}
     @endsection
 
     @section('breadcrumbs')
@@ -34,7 +34,7 @@
                                 {!! getIcon('plus', 'fs-2', '', 'i') !!}
                                 {{ __('messages.add_book_review') }}
                             </button>
-                            <!--end::Add book_review-->
+                            <!--end::Add book review-->
                         </div>
                         <!--end::Toolbar-->
 

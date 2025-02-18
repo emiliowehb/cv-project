@@ -98,6 +98,7 @@ return [
     'title' => 'Titre',
     'publication_status' => 'Statut de publication',
     'institution_name' => 'Nom de l\'institution',
+    'name' => 'Nom',
     'volume' => 'Volume',
     'issue' => 'Numéro',
     'pages' => 'Pages',
@@ -118,4 +119,10 @@ return [
     'media_name' => 'Nom du média',
     'media_year' => 'Année',
     'media_type' => 'Type de média',
+    'add_book_review' => 'Ajouter une critique de livre',
+    'reviewed_medium' => 'Média révisé',
+    'periodical_title' => 'Titre du périodique',
+    'reviewed_work_authors' => 'Auteurs de l\'œuvre révisée',
+    'close' => 'Fermer',
+    'book_reviews' => 'Critiques de livres',
 ];

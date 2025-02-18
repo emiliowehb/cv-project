@@ -6,10 +6,10 @@
             <!--begin::Modal header-->
             <div class="modal-header" id="kt_modal_add_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">Add Book Review</h2>
+                <h2 class="fw-bold">{{ __('messages.add_book_review') }}</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="{{ __('messages.close') }}">
                     {!! getIcon('cross','fs-1') !!}
                 </div>
                 <!--end::Close-->
@@ -37,13 +37,13 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="col-form-label required">{{ __('messages.name') }}</label>
-                                    <input type="text" class="form-control bg-transparent" wire:model="name" placeholder="Name" />
+                                    <input type="text" class="form-control bg-transparent" wire:model="name" placeholder="{{ __('messages.name') }}" />
                                     @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label class="col-form-label required">{{ __('messages.year') }}</label>
-                                <input type="number" class="form-control bg-transparent" wire:model="year" placeholder="Year" />
+                                <input type="number" class="form-control bg-transparent" wire:model="year" placeholder="{{ __('messages.year') }}" />
                                 @error('year') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
@@ -57,12 +57,12 @@
                             </div>
                             <div class="col-6">
                                 <label class="col-form-label required">{{ __('messages.periodical_title') }}</label>
-                                <input type="text" class="form-control bg-transparent" wire:model="periodical_title" placeholder="Periodical Title" />
+                                <input type="text" class="form-control bg-transparent" wire:model="periodical_title" placeholder="{{ __('messages.periodical_title') }}" />
                                 @error('periodical_title') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
                                 <label class="col-form-label">{{ __('messages.reviewed_work_authors') }}</label>
-                                <input type="text" class="form-control bg-transparent" wire:model="reviewed_work_authors" placeholder="Reviewed Work Authors" />
+                                <input type="text" class="form-control bg-transparent" wire:model="reviewed_work_authors" placeholder="{{ __('messages.reviewed_work_authors') }}" />
                                 @error('reviewed_work_authors') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
@@ -76,19 +76,19 @@
                             </div>
                             <div class="col-12">
                                 <label class="col-form-label">{{ __('messages.notes') }}</label>
-                                <textarea class="form-control bg-transparent" wire:model="notes" placeholder="Notes"></textarea>
+                                <textarea class="form-control bg-transparent" wire:model="notes" placeholder="{{ __('messages.notes') }}"></textarea>
                                 @error('notes') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
                         <div class="text-center pt-15">
-                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
-                                wire:loading.attr="disabled">Discard</button>
+                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="{{ __('messages.close') }}"
+                                wire:loading.attr="disabled">{{ __('messages.discard') }}</button>
                             <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label" wire:loading.remove>Submit</span>
+                                <span class="indicator-label" wire:loading.remove>{{ __('messages.submit') }}</span>
                                 <span class="indicator-progress" wire:loading wire:target="submit">
-                                    Please wait...
+                                    {{ __('messages.please_wait') }}
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>

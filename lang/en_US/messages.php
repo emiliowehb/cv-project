@@ -108,6 +108,7 @@ return [
     'add_book_chapter' => 'Add Book Chapter',
     'book_type' => 'Book Type',
     'book_name' => 'Book Name',
+    'name' => 'Name',
     'publisher' => 'Publisher',
     'work_classification' => 'Work Classification',
     'research_area' => 'Research Area',
@@ -122,4 +123,10 @@ return [
     'media_type' => 'Media Type',
     'publisher' => 'Publisher',
     'notes' => 'Notes',
+    'add_book_review' => 'Add Book Review',
+    'reviewed_medium' => 'Reviewed Medium',
+    'periodical_title' => 'Periodical Title',
+    'reviewed_work_authors' => 'Reviewed Work Authors',
+    'close' => 'Close',
+    'book_reviews' => 'Book Reviews',
 ];

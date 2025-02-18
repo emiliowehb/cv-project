@@ -120,4 +120,11 @@ return [
     'published_year' => 'سنة النشر',
     'published_month' => 'شهر النشر',
     'intellectual_contribution' => 'المساهمة الفكرية',
+    'add_book_review' => 'إضافة مراجعة كتاب',
+    'reviewed_medium' => 'الوسيلة المراجعة',
+    'periodical_title' => 'عنوان الدورية',
+    'reviewed_work_authors' => 'مؤلفو العمل المراجع',
+    'book_reviews' => 'مراجعات الكتب',
+    'close' => 'إغلاق',
+    'name' => 'الاسم',
 ];
