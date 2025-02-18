@@ -264,6 +264,18 @@
 								<!--end:Menu link-->
 							</div>
 							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.working-papers') ? 'active' : '' }}" href="{{ route('professors.my-profile.working-papers') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Working Papers</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
 						</div>
 						<!--end:Menu sub-->
 					</div>

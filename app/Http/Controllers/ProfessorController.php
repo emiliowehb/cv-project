@@ -25,6 +25,7 @@ use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorMagazineArticlesDataTable;
 use App\DataTables\ProfessorNewsletterArticlesDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
+use App\DataTables\ProfessorWorkingPapersDataTable;
 
 class ProfessorController extends Controller
 {
@@ -192,6 +193,15 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.book-reviews.my-profile-book-reviews', compact('professor', 'user_id'));
+    }
+
+    public function showWorkingPapers(ProfessorWorkingPapersDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.working-papers.my-profile-working-papers', compact('professor', 'user_id'));
+
     }
 
     public function showActivities(ProfessorActivitiesDataTable $dataTable)
