@@ -125,4 +125,8 @@ return [
     'reviewed_work_authors' => 'Auteurs de l\'œuvre révisée',
     'close' => 'Fermer',
     'book_reviews' => 'Critiques de livres',
+    'working_papers' => 'Documents de travail',
+    'add_working_paper' => 'Ajouter un document de travail',
+    'identifying_number' => 'Numéro d\'identification',
+    'add_paper' => 'Ajouter un document',
 ];

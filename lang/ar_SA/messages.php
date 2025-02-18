@@ -127,4 +127,8 @@ return [
     'book_reviews' => 'مراجعات الكتب',
     'close' => 'إغلاق',
     'name' => 'الاسم',
+    'working_papers' => 'أوراق العمل',
+    'add_working_paper' => 'إضافة ورقة عمل',
+    'identifying_number' => 'رقم التعريف',
+    'add_paper' => 'إضافة ورقة',
 ];

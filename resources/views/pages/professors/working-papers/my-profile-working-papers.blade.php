@@ -1,7 +1,7 @@
 <x-default-layout>
 
     @section('title')
-    Working Papers
+    {{ __('messages.working_papers') }}
     @endsection
 
     @section('breadcrumbs')

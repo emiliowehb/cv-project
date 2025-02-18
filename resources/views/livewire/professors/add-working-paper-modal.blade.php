@@ -6,7 +6,7 @@
             <!--begin::Modal header-->
             <div class="modal-header" id="kt_modal_add_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">Add Working Paper</h2>
+                <h2 class="fw-bold">{{ __('messages.add_working_paper') }}</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
@@ -26,30 +26,30 @@
                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                         <div class="row">
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('Year') }}</label>
-                                <input type="number" class="form-control bg-transparent" wire:model="year" placeholder="Year" />
+                                <label class="col-form-label required">{{ __('messages.year') }}</label>
+                                <input type="number" class="form-control bg-transparent" wire:model="year" placeholder="{{ __('messages.year') }}" />
                                 @error('year') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('Identifying Number') }}</label>
-                                <input type="text" class="form-control bg-transparent" wire:model="identifying_number" placeholder="Identifying Number" />
+                                <label class="col-form-label required">{{ __('messages.identifying_number') }}</label>
+                                <input type="text" class="form-control bg-transparent" wire:model="identifying_number" placeholder="{{ __('messages.identifying_number') }}" />
                                 @error('identifying_number') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="col-form-label required">{{ __('Name') }}</label>
-                                    <input type="text" class="form-control bg-transparent" wire:model="name" placeholder="Name" />
+                                    <label class="col-form-label required">{{ __('messages.name') }}</label>
+                                    <input type="text" class="form-control bg-transparent" wire:model="name" placeholder="{{ __('messages.name') }}" />
                                     @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label class="col-form-label">{{ __('Notes') }}</label>
-                                <textarea class="form-control bg-transparent" wire:model="notes" placeholder="Notes"></textarea>
+                                <label class="col-form-label">{{ __('messages.notes') }}</label>
+                                <textarea class="form-control bg-transparent" wire:model="notes" placeholder="{{ __('messages.notes') }}"></textarea>
                                 @error('notes') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('Department') }}</label>
-                                <select class="form-select" wire:model="department_id" data-placeholder="{{ __('Department') }}" data-dropdown-parent="#kt_modal_add_working_paper">
+                                <label class="col-form-label required">{{ __('messages.department') }}</label>
+                                <select class="form-select" wire:model="department_id" data-placeholder="{{ __('messages.department') }}" data-dropdown-parent="#kt_modal_add_working_paper">
                                     @foreach($departments as $department)
                                     <option value="{{$department->id}}">{{$department->name}}</option>
                                     @endforeach
@@ -57,8 +57,8 @@
                                 @error('department_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('Intellectual Contribution') }}</label>
-                                <select class="form-select" wire:model="intellectual_contribution_id" data-placeholder="{{ __('Intellectual Contribution') }}" data-dropdown-parent="#kt_modal_add_working_paper">
+                                <label class="col-form-label required">{{ __('messages.intellectual_contribution') }}</label>
+                                <select class="form-select" wire:model="intellectual_contribution_id" data-placeholder="{{ __('messages.intellectual_contribution') }}" data-dropdown-parent="#kt_modal_add_working_paper">
                                     @foreach($intellectualContributions as $contribution)
                                     <option value="{{$contribution->id}}">{{$contribution->name}}</option>
                                     @endforeach
@@ -70,11 +70,11 @@
                         <!--begin::Actions-->
                         <div class="text-center pt-15">
                             <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
-                                wire:loading.attr="disabled">Discard</button>
+                                wire:loading.attr="disabled">{{ __('messages.discard') }}</button>
                             <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                <span class="indicator-label" wire:loading.remove>Submit</span>
+                                <span class="indicator-label" wire:loading.remove>{{ __('messages.submit') }}</span>
                                 <span class="indicator-progress" wire:loading wire:target="submit">
-                                    Please wait...
+                                    {{ __('messages.please_wait') }}
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>

@@ -129,4 +129,8 @@ return [
     'reviewed_work_authors' => 'Reviewed Work Authors',
     'close' => 'Close',
     'book_reviews' => 'Book Reviews',
+    'working_papers' => 'Working Papers',
+    'add_working_paper' => 'Add Working Paper',
+    'identifying_number' => 'Identifying Number',
+    'add_paper' => 'Add Working Paper',
 ];
