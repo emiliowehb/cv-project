@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\ProfessorActivitiesDataTable;
 use App\DataTables\ProfessorArticlesDataTable;
 use App\DataTables\ProfessorBookChaptersDataTable;
+use App\DataTables\ProfessorBookReviewsDataTable;
 use App\DataTables\ProfessorBooksDataTable;
 use App\DataTables\ProfessorCasesDataTable;
 use App\DataTables\ProfessorDegreesDataTable;
@@ -183,6 +184,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.book-chapters.my-profile-book-chapters', compact('professor', 'user_id'));
+    }
+
+    public function showBookReviews(ProfessorBookReviewsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.book-reviews.my-profile-book-reviews', compact('professor', 'user_id'));
     }
 
     public function showActivities(ProfessorActivitiesDataTable $dataTable)

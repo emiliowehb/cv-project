@@ -146,6 +146,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.books', function (BreadcrumbTr
     $trail->push('Books', route('professors.my-profile.books'));
 });
 
+// Home > Dashboard > Profile > Book Reviews
+Breadcrumbs::for('dashboard.professors.my-profile.book-reviews', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Books', route('professors.my-profile.book-reviews'));
+});
+
 // Home > Dashboard > Profile > Chapters In Books
 Breadcrumbs::for('dashboard.professors.my-profile.book-chapters', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

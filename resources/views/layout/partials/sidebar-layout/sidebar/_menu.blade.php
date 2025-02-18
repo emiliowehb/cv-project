@@ -252,6 +252,18 @@
 								<!--end:Menu link-->
 							</div>
 							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.book-reviews') ? 'active' : '' }}" href="{{ route('professors.my-profile.book-reviews') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Book Reviews</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
 						</div>
 						<!--end:Menu sub-->
 					</div>
