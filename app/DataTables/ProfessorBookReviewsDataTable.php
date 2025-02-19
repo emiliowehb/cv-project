@@ -16,7 +16,7 @@ class ProfessorBookReviewsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->rawColumns(['action', 'admin_status'])
+            ->rawColumns(['action'])
             ->editColumn('reviewed_medium_id', function (ProfessorBookReview $review) {
                 return $review->reviewedMedium->name;
             })

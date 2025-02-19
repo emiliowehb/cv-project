@@ -88,7 +88,7 @@ class ProfessorJournalArticlesDataTable extends DataTable
             Column::make('notes')->title('Notes'),
             Column::make('primary_field_id')->title('Primary Field'),
             Column::make('secondary_field_id')->title('Secondary Field'),
-            Column::make('admin_status')->title('Admin Status')->addClass('text-center'),
+            Column::make('admin_status')->title('Approval Status')->addClass('text-center'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
                 ->exportable(false)

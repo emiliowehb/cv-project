@@ -108,19 +108,6 @@
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link {{ request()->routeIs('professors.my-profile.interviews') ? 'active' : '' }}" href="{{ route('professors.my-profile.interviews') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Interviews</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
@@ -132,31 +119,6 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link {{ request()->routeIs('professors.my-profile.supervisions') ? 'active' : '' }}" href="{{ route('professors.my-profile.supervisions') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Graduate Supervisions</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div class="menu-item">
-						<!--begin:Menu link-->
-						<a class="menu-link {{ request()->routeIs('professors.my-profile.electronic-media') ? 'active' : '' }}" href="{{ route('professors.my-profile.electronic-media') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Electronic Media</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
@@ -168,7 +130,6 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
-					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
@@ -180,8 +141,17 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
-					<!--end:Menu item-->
 					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.supervisions') ? 'active' : '' }}" href="{{ route('professors.my-profile.supervisions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Graduate Supervisions</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
 					<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('professors.my-profile.*') ? 'here show' : '' }}">
 						<!--begin:Menu link-->
 						<span class="menu-link">
@@ -192,90 +162,6 @@
 						<!--end:Menu link-->
 						<!--begin:Menu sub-->
 						<div class="menu-sub menu-sub-accordion">
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.journal-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.journal-articles') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Articles In Journals</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.magazine-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.magazine-articles') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Articles In Magazines</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.presentations') ? 'active' : '' }}" href="{{ route('professors.my-profile.presentations') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Articles in Proceedings</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.cases') ? 'active' : '' }}" href="{{ route('professors.my-profile.cases') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Cases</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.technical-reports') ? 'active' : '' }}" href="{{ route('professors.my-profile.technical-reports') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Technical Reports</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.newsletter-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.newsletter-articles') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Newsletters</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.other-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.other-articles') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Other Articles</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
 							<!--begin:Menu item-->
 							<div class="menu-item">
 								<!--begin:Menu link-->
@@ -303,11 +189,119 @@
 							<!--begin:Menu item-->
 							<div class="menu-item">
 								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.journal-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.journal-articles') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Articles In Journals</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.magazine-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.magazine-articles') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Articles In Magazines</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.cases') ? 'active' : '' }}" href="{{ route('professors.my-profile.cases') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Cases</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.newsletter-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.newsletter-articles') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Newsletters</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.electronic-media') ? 'active' : '' }}" href="{{ route('professors.my-profile.electronic-media') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Electronic Media</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.presentations') ? 'active' : '' }}" href="{{ route('professors.my-profile.presentations') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Articles in Proceedings</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.technical-reports') ? 'active' : '' }}" href="{{ route('professors.my-profile.technical-reports') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Technical Reports</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.interviews') ? 'active' : '' }}" href="{{ route('professors.my-profile.interviews') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Interviews</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--begin:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
+								<a class="menu-link {{ request()->routeIs('professors.my-profile.lte-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.lte-articles') }}">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Letters to Editors</span>
+								</a>
+								<!--end:Menu link-->
+							</div>
+							<!--end:Menu item-->
+							<!--begin:Menu item-->
+							<div class="menu-item">
+								<!--begin:Menu link-->
 								<a class="menu-link {{ request()->routeIs('professors.my-profile.book-reviews') ? 'active' : '' }}" href="{{ route('professors.my-profile.book-reviews') }}">
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Book Reviews</span>
+									<span class="menu-title">Reviews</span>
 								</a>
 								<!--end:Menu link-->
 							</div>
@@ -320,18 +314,6 @@
 										<span class="bullet bullet-dot"></span>
 									</span>
 									<span class="menu-title">Working Papers</span>
-								</a>
-								<!--end:Menu link-->
-							</div>
-							<!--end:Menu item-->
-							<!--begin:Menu item-->
-							<div class="menu-item">
-								<!--begin:Menu link-->
-								<a class="menu-link {{ request()->routeIs('professors.my-profile.lte-articles') ? 'active' : '' }}" href="{{ route('professors.my-profile.lte-articles') }}">
-									<span class="menu-bullet">
-										<span class="bullet bullet-dot"></span>
-									</span>
-									<span class="menu-title">Letters to Editors</span>
 								</a>
 								<!--end:Menu link-->
 							</div>

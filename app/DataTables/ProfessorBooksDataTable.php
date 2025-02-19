@@ -71,7 +71,7 @@ class ProfessorBooksDataTable extends DataTable
             Column::make('publisher_id')->title('Publisher'),
             Column::make('year')->title('Year'),
             Column::make('nb_pages')->title('Number of Pages'),
-            Column::make('admin_status')->title('Status')->addClass('text-start'),
+            Column::make('admin_status')->title('Approval Status')->addClass('text-start'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
                 ->exportable(false)
