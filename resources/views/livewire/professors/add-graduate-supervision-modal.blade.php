@@ -33,7 +33,7 @@
                                 <label class="col-form-label required">Start Month</label>
                                 <select class="form-select" wire:model="start_month" data-placeholder="Start Month" data-dropdown-parent="#kt_modal_add_graduate_supervision">
                                     @foreach($months as $month)
-                                    <option value="{{ $month }}">{{ $month }}</option>
+                                    <option value="{{$month['key']}}">{{$month['value']}}</option>
                                     @endforeach
                                 </select>
                                 @error('start_month') <span class="text-danger">{{ $message }}</span> @enderror
@@ -47,7 +47,7 @@
                                 <label class="col-form-label">End Month</label>
                                 <select class="form-select" wire:model="end_month" data-placeholder="End Month" data-dropdown-parent="#kt_modal_add_graduate_supervision">
                                     @foreach($months as $month)
-                                    <option value="{{ $month }}">{{ $month }}</option>
+                                    <option value="{{$month['key']}}">{{$month['value']}}</option>
                                     @endforeach
                                 </select>
                                 @error('end_month') <span class="text-danger">{{ $message }}</span> @enderror

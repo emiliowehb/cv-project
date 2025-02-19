@@ -22,8 +22,8 @@
                             <div class="col-6">
                                 <label class="col-form-label required">{{ __('messages.month') }}</label>
                                 <select class="form-select" wire:model="month" data-placeholder="{{ __('messages.month') }}" data-dropdown-parent="#kt_modal_add_journal_article">
-                                    @foreach($months as $id => $month)
-                                    <option value="{{$month}}">{{$month}}</option>
+                                    @foreach($months as $month)
+                                    <option value="{{$month['key']}}">{{$month['value']}}</option>
                                     @endforeach
                                 </select>
                                 @error('month') <span class="text-danger">{{ $message }}</span> @enderror

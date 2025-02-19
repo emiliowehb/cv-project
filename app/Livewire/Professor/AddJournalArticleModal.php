@@ -70,7 +70,7 @@ class AddJournalArticleModal extends Component
         $articleTypes = JournalArticleType::all();
         $publicationStatuses = PublicationStatus::all();
         $primaryFields = PublicationPrimaryField::all();
-        $months = MonthEnum::values();
+        $months = MonthEnum::hash();
 
         $secondaryFields = PublicationSecondaryField::all();
         return view('livewire.professors.add-journal-article-modal', compact('articleTypes','months', 'publicationStatuses', 'primaryFields', 'secondaryFields'));

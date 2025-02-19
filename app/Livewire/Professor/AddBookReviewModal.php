@@ -58,7 +58,7 @@ class AddBookReviewModal extends Component
     public function render()
     {
         $reviewedMedia = ReviewedMedium::all();
-        $months = MonthEnum::values();
+        $months = MonthEnum::hash();
         $intellectualContributions = IntellectualContribution::all();
         return view('livewire.professors.add-book-review-modal', compact('reviewedMedia', 'months', 'intellectualContributions'));
     }

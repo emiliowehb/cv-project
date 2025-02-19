@@ -82,7 +82,7 @@ class AddBookModal extends Component
         $publicationStatuses = PublicationStatus::all();
         $primaryFields = PublicationPrimaryField::all();
         $secondaryFields = PublicationSecondaryField::all();
-        $months = MonthEnum::values();
+        $months = MonthEnum::hash();
         return view('livewire.professors.add-book-modal', compact('bookTypes', 'publishers', 'workClassifications', 'researchAreas', 'publicationStatuses', 'primaryFields', 'secondaryFields', 'months'));
     }
 

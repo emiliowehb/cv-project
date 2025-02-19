@@ -71,7 +71,7 @@ class AddGraduateSupervisionModal extends Component
         $studyPrograms = StudyProgram::all();
         $supervisionStatuses = SupervisionStatus::all();
         $supervisionRoles = SupervisionRole::all();
-        $months = MonthEnum::values();
+        $months = MonthEnum::hash();
 
         return view('livewire.professors.add-graduate-supervision-modal', compact('studyPrograms', 'supervisionStatuses', 'supervisionRoles', 'months'));
     }
