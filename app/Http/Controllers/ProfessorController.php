@@ -26,6 +26,7 @@ use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorLettersToEditorsDataTable;
 use App\DataTables\ProfessorMagazineArticlesDataTable;
 use App\DataTables\ProfessorNewsletterArticlesDataTable;
+use App\DataTables\ProfessorPresentationsDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
 use App\DataTables\ProfessorWorkingPapersDataTable;
 
@@ -162,6 +163,15 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.courses.my-profile-courses', compact('professor', 'user_id'));
+    }
+
+    public function showPresentations(ProfessorPresentationsDataTable $dataTable) 
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.presentations.my-profile-presentations', compact('professor', 'user_id'));
+
     }
 
     public function showLTEArticles(ProfessorLettersToEditorsDataTable $dataTable)

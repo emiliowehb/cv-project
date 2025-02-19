@@ -150,4 +150,13 @@ return [
     'course_topic' => 'موضوع المساق',
     'select_course_topic' => 'اختر موضوع المساق',
     'is_graduate_course' => 'مساق دراسات عليا',
+    'edit_presentation' => 'تعديل العرض التقديمي',
+    'add_presentation' => 'إضافة عرض تقديمي',
+    'presentation_name' => 'اسم العرض التقديمي',
+    'select_month' => 'اختر الشهر',
+    'days' => 'الأيام',
+    'event_name' => 'اسم الحدث',
+    'select_country' => 'اختر البلد',
+    'select_intellectual_contribution' => 'اختر المساهمة الفكرية',
+    'published_in_proceedings' => 'منشور في الإجراءات',
 ];

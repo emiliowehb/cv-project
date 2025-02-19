@@ -104,10 +104,16 @@ Breadcrumbs::for('dashboard.professors.my-profile.interviews', function (Breadcr
     $trail->push('Interviews', route('professors.my-profile.interviews'));
 });
 
-// Home > Dashboard > Profile > Interviews
+// Home > Dashboard > Profile > Activities
 Breadcrumbs::for('dashboard.professors.my-profile.activities', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Activities', route('professors.my-profile.activities'));
+});
+
+// Home > Dashboard > Profile > Presentations
+Breadcrumbs::for('dashboard.professors.my-profile.presentations', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Articles in Proceedings', route('professors.my-profile.presentations'));
 });
 
 // Home > Dashboard > Profile > Articles In Journals

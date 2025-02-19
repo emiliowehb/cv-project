@@ -57,6 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile/working-papers', [ProfessorController::class, 'showWorkingPapers'])->name('professors.my-profile.working-papers');
         Route::get('/my-profile/letters-to-editors', [ProfessorController::class, 'showLTEArticles'])->name('professors.my-profile.lte-articles');
         Route::get('/my-profile/courses', [ProfessorController::class, 'showCourses'])->name('professors.my-profile.courses');
+        Route::get('/my-profile/presentations', [ProfessorController::class, 'showPresentations'])->name('professors.my-profile.presentations');
 
     });
 

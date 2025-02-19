@@ -152,4 +152,13 @@ return [
     'course_topic' => 'Course Topic',
     'select_course_topic' => 'Select Course Topic',
     'is_graduate_course' => 'Graduate Course',
+    'edit_presentation' => 'Edit Presentation',
+    'add_presentation' => 'Add Presentation',
+    'presentation_name' => 'Presentation Name',
+    'select_month' => 'Select Month',
+    'days' => 'Days',
+    'event_name' => 'Event Name',
+    'select_country' => 'Select Country',
+    'select_intellectual_contribution' => 'Select Intellectual Contribution',
+    'published_in_proceedings' => 'Published in Proceedings',
 ];

@@ -148,4 +148,13 @@ return [
     'course_topic' => 'Sujet du cours',
     'select_course_topic' => 'Sélectionner le sujet du cours',
     'is_graduate_course' => 'Cours de cycle supérieur',
+    'edit_presentation' => 'Modifier la présentation',
+    'add_presentation' => 'Ajouter une présentation',
+    'presentation_name' => 'Nom de la présentation',
+    'select_month' => 'Sélectionner un mois',
+    'days' => 'Jours',
+    'event_name' => 'Nom de l\'événement',
+    'select_country' => 'Sélectionner un pays',
+    'select_intellectual_contribution' => 'Sélectionner une contribution intellectuelle',
+    'published_in_proceedings' => 'Publié dans les actes',
 ];

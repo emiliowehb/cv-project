@@ -52,6 +52,7 @@ class AddCourseModal extends Component
     {
         $this->professor_id = Auth::user()->professor->id;
         $this->is_graduate = 0;
+        $this->language_id = Language::first()->id;
         $this->course_level_id = CourseLevel::first()->id;
         $this->course_type_id = CourseType::first()->id;
         $this->course_credit_id = CourseCredit::first()->id;
