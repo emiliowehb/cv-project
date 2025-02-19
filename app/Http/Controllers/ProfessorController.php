@@ -8,6 +8,7 @@ use App\DataTables\ProfessorBookChaptersDataTable;
 use App\DataTables\ProfessorBookReviewsDataTable;
 use App\DataTables\ProfessorBooksDataTable;
 use App\DataTables\ProfessorCasesDataTable;
+use App\DataTables\ProfessorCoursesDataTable;
 use App\DataTables\ProfessorDegreesDataTable;
 use App\DataTables\ProfessorElectronicMediaDataTable;
 use App\DataTables\ProfessorLanguagesDataTable;
@@ -153,6 +154,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.journal-articles.my-profile-journal-articles', compact('professor', 'user_id'));
+    }
+
+    public function showCourses(ProfessorCoursesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.courses.my-profile-courses', compact('professor', 'user_id'));
     }
 
     public function showLTEArticles(ProfessorLettersToEditorsDataTable $dataTable)

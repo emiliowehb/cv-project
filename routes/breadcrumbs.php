@@ -134,6 +134,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.lte-articles', function (Bread
     $trail->push('Letters to Editors', route('professors.my-profile.lte-articles'));
 });
 
+// Home > Dashboard > Profile > Courses
+Breadcrumbs::for('dashboard.professors.my-profile.courses', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Courses', route('professors.my-profile.courses'));
+});
+
 // Home > Dashboard > Profile > Articles In Magazines
 Breadcrumbs::for('dashboard.professors.my-profile.cases', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
