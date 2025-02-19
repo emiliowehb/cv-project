@@ -1,7 +1,7 @@
 <x-default-layout>
 
     @section('title')
-    Courses
+    {{ __('messages.courses') }}
     @endsection
 
     @section('breadcrumbs')
@@ -32,7 +32,7 @@
                             <!--begin::Add course-->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_course">
                                 {!! getIcon('plus', 'fs-2', '', 'i') !!}
-                                Add course
+                                {{ __('messages.add_course') }}
                             </button>
                             <!--end::Add course-->
                         </div>
