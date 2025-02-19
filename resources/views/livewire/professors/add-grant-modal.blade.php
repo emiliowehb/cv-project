@@ -56,6 +56,19 @@
                                 @error('grant_type_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
+                                <label class="col-form-label required">{{ __('messages.grant_origin') }}</label>
+                                <div>
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" wire:model="grant_origin" name="grant_origin" id="grantExternal" value="external" checked>
+                                        <label class="form-check-label" for="grantExternal">{{ __('messages.external') }}</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" wire:model="grant_origin" name="grant_origin" id="grantInternal" value="internal">
+                                        <label class="form-check-label" for="grantInternal">{{ __('messages.internal') }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
                                 <label class="col-form-label required">{{ __('messages.currency') }}</label>
                                 <select class="form-select" wire:model="currency_id" data-placeholder="{{ __('messages.select_currency') }}" data-dropdown-parent="#kt_modal_add_grant">
                                     @foreach($currencies as $currency)
@@ -65,8 +78,8 @@
                                 @error('currency_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-6">
-                                <label class="col-form-label required">{{ __('messages.funding_source') }}</label>
-                                <select class="form-select" wire:model="funding_source_id" data-placeholder="{{ __('messages.select_funding_source') }}" data-dropdown-parent="#kt_modal_add_grant">
+                                <label class="col-form-label fundingSourceSelectLabel required">{{ __('messages.funding_source') }}</label>
+                                <select id="fundingSourceSelect" class="form-select" wire:model="funding_source_id" data-placeholder="{{ __('messages.select_funding_source') }}" data-dropdown-parent="#kt_modal_add_grant">
                                     @foreach($fundingSources as $fundingSource)
                                     <option value="{{$fundingSource->id}}">{{$fundingSource->name}}</option>
                                     @endforeach
@@ -87,23 +100,23 @@
                                     <label class="col-form-label">{{ __('messages.notes') }}</label>
                                     <textarea class="form-control bg-transparent" wire:model="notes" placeholder="{{ __('messages.notes') }}"></textarea>
                                     @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--end::Scroll-->
-                    <!--begin::Actions-->
-                    <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
-                            wire:loading.attr="disabled">{{ __('messages.discard') }}</button>
-                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                            <span class="indicator-label" wire:loading.remove>{{ __('messages.submit') }}</span>
-                            <span class="indicator-progress" wire:loading wire:target="submit">
-                                {{ __('messages.please_wait') }}
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
+                        <!--end::Scroll-->
+                        <!--begin::Actions-->
+                        <div class="text-center pt-15">
+                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
+                                wire:loading.attr="disabled">{{ __('messages.discard') }}</button>
+                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                <span class="indicator-label" wire:loading.remove>{{ __('messages.submit') }}</span>
+                                <span class="indicator-progress" wire:loading wire:target="submit">
+                                    {{ __('messages.please_wait') }}
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <!--end::Actions-->
                 </form>
                 <!--end::Form-->
             </div>
@@ -115,7 +128,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         $("#start_date").daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
@@ -136,8 +149,32 @@
             @this.call('updateEndDate', end.format('DD/MM/YYYY'));
         });
 
-        $('#kt_modal_add_grant').on('hidden.bs.modal', function () {
+        $('#kt_modal_add_grant').on('hidden.bs.modal', function() {
             @this.call('resetForm');
+        });
+
+        // Handle grant origin radio buttons and trigger initial state
+        function handleGrantOrigin() {
+            const fundingSourceSelect = $('#fundingSourceSelect');
+            const fundingSourceSelectLabel = $('.fundingSourceSelectLabel');
+            const grantOrigin = $('input[name="grant_origin"]:checked').val();
+            
+            if (grantOrigin === 'internal') {
+                fundingSourceSelect.prop('disabled', true);
+                fundingSourceSelect.removeAttr('required');
+                fundingSourceSelectLabel.removeClass('required');
+            } else {
+                fundingSourceSelect.prop('disabled', false);
+                fundingSourceSelect.prop('required', true);
+                fundingSourceSelectLabel.addClass('required');
+            }
+        }
+
+        $('input[name="grant_origin"]').change(handleGrantOrigin);
+
+        // Trigger on modal show
+        $('#kt_modal_add_grant').on('shown.bs.modal', function () {
+            handleGrantOrigin();
         });
     });
 </script>

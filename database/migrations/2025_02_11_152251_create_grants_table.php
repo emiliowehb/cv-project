@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('grant_type_id');
             $table->float('amount');
             $table->unsignedBigInteger('currency_id');
-            $table->unsignedBigInteger('funding_source_id');
+            $table->unsignedBigInteger('funding_source_id')->nullable();
             $table->longText('notes')->nullable();
 
             $table->foreign('grant_type_id')->references('id')->on('grant_types')->onDelete('cascade');

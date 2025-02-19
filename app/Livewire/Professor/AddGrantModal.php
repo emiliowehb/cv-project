@@ -26,6 +26,7 @@ class AddGrantModal extends Component
     public $grant_to_edit;
     public $start_date;
     public $end_date;
+    public $grant_origin;
     public $notes;
 
     protected $rules;
@@ -37,7 +38,6 @@ class AddGrantModal extends Component
             'amount' => 'required|numeric|min:0',
             'grant_type_id' => 'required',
             'currency_id' => 'required',
-            'funding_source_id' => 'required',
             'start_date' => 'required',
             'end_date' => 'nullable|after:start_date',
             'role' => 'required|in:' . implode(',', GrantRoleEnum::values()),
@@ -48,6 +48,7 @@ class AddGrantModal extends Component
     {
         $this->professor_id = Auth::user()->professor->id;
         $this->grant_type_id = GrantType::first()->id;
+        $this->grant_origin = 'external';
         $this->currency_id = Currency::first()->id;
         $this->funding_source_id = FundingSource::first()->id;
         $this->role = GrantRoleEnum::values()[0];
@@ -77,11 +78,16 @@ class AddGrantModal extends Component
     {
         // Validate the form input data
         DB::transaction(function () {
+            if($this->grant_origin == 'internal') {
+                $this->funding_source_id = null;
+            } else {
+                $this->funding_source_id = $this->funding_source_id;
+            }
+
             if ($this->edit_mode) {
                 // Update the existing professor grant
                 $grant = Grant::findOrFail($this->grant_to_edit);
                 $professorGrant = ProfessorGrant::where('grant_id', $this->grant_to_edit)->where('professor_id', Auth::user()->professor->id)->first();
-
                 $grant->update([
                     'name' => $this->name,
                     'amount' => $this->amount,
@@ -148,6 +154,7 @@ class AddGrantModal extends Component
         $this->name = $grant->name;
         $this->amount = $grant->amount;
         $this->grant_type_id = $grant->grant_type_id;
+        $this->grant_origin = $grant->funding_source_id ? 'external' : 'internal';
         $this->currency_id = $grant->currency_id;
         $this->funding_source_id = $grant->funding_source_id;
         $this->role = $professorGrant->role;

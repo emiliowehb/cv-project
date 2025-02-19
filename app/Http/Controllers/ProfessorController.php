@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEmploymentHistoryDataTable;
 use App\DataTables\ProfessorGraduateSupervisionsDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
+use App\DataTables\ProfessorHonorsDataTable;
 use App\DataTables\ProfessorInterviewsDataTable;
 use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorLettersToEditorsDataTable;
@@ -28,6 +29,7 @@ use App\DataTables\ProfessorMagazineArticlesDataTable;
 use App\DataTables\ProfessorNewsletterArticlesDataTable;
 use App\DataTables\ProfessorPresentationsDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
+use App\DataTables\ProfessorTechnicalReportsDataTable;
 use App\DataTables\ProfessorWorkingPapersDataTable;
 
 class ProfessorController extends Controller
@@ -101,6 +103,14 @@ class ProfessorController extends Controller
         return $dataTable->render('pages/professors.teaching-interests.my-profile-teaching-interests', compact('professor', 'user_id'));
     }
 
+    public function showTechnicalReports(ProfessorTechnicalReportsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.technical-reports.my-profile-technical-reports', compact('professor', 'user_id'));
+    }
+
     public function showGrants(ProfessorGrantsDataTable $dataTable)
     {
         $professor = Auth::user()->professor;
@@ -139,6 +149,14 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.supervisions.my-profile-graduate-supervisions', compact('professor', 'user_id'));
+    }
+
+    public function showHonors(ProfessorHonorsDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.honors.my-profile-honors', compact('professor', 'user_id'));
     }
 
     public function showOtherArticles(ProfessorArticlesDataTable $dataTable)

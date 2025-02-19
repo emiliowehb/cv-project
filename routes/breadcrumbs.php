@@ -104,6 +104,18 @@ Breadcrumbs::for('dashboard.professors.my-profile.interviews', function (Breadcr
     $trail->push('Interviews', route('professors.my-profile.interviews'));
 });
 
+// Home > Dashboard > Profile > Honors
+Breadcrumbs::for('dashboard.professors.my-profile.honors', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Honors and Awards', route('professors.my-profile.honors'));
+});
+
+// Home > Dashboard > Profile > Technical Reports
+Breadcrumbs::for('dashboard.professors.my-profile.technical-reports', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Technical Reports', route('professors.my-profile.technical-reports'));
+});
+
 // Home > Dashboard > Profile > Activities
 Breadcrumbs::for('dashboard.professors.my-profile.activities', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

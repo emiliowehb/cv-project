@@ -35,7 +35,7 @@ class ProfessorGrantsDataTable extends DataTable
                 return $professorGrant->grant->currency->code;
             })
             ->editColumn('grant.fundingSource', function (ProfessorGrant $professorGrant) {
-                return $professorGrant->grant->fundingSource->name;
+                return $professorGrant->grant->fundingSource?->name;
             })
             ->editColumn('role', function (ProfessorGrant $professorGrant) {
                 return $professorGrant->role;

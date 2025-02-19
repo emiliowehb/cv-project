@@ -38,7 +38,7 @@ class AddActivityModal extends Component
         $this->professor_id = Auth::user()->professor->id;
         $this->start_year = date('Y');
         $this->activity_service_id = ProfessionalActivityService::first()->id;
-        $this->is_current = 0;
+        $this->is_current = false;
     }
 
     protected $listeners = [
@@ -101,7 +101,7 @@ class AddActivityModal extends Component
         $this->name = $activity->name;
         $this->start_year = $activity->start_year;
         $this->end_year = $activity->end_year;
-        $this->is_current = $activity->is_current;
+        $this->is_current = $activity->is_current ? true : false;
         $this->activity_service_id = $activity->activity_service_id;
         $this->notes = $activity->notes;
     }
