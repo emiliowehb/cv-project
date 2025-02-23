@@ -73,6 +73,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.teaching-interests', function 
     $trail->push('Teaching Interests', route('professors.my-profile.teaching-interests'));
 });
 
+// Home > Dashboard > Profile > Expertise Areas
+Breadcrumbs::for('dashboard.professors.my-profile.expertise-areas', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Expertise Areas', route('professors.my-profile.expertise-areas'));
+});
+
 
 // Home > Dashboard > Profile > Employment History
 Breadcrumbs::for('dashboard.professors.my-profile.employment-history', function (BreadcrumbTrail $trail) {
@@ -155,7 +161,13 @@ Breadcrumbs::for('dashboard.professors.my-profile.lte-articles', function (Bread
 // Home > Dashboard > Profile > Courses
 Breadcrumbs::for('dashboard.professors.my-profile.courses', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Courses', route('professors.my-profile.courses'));
+    $trail->push('Courses Taught', route('professors.my-profile.courses'));
+});
+
+// Home > Dashboard > Profile > Outside Courses
+Breadcrumbs::for('dashboard.professors.my-profile.outside-courses', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Outside Courses Taught', route('professors.my-profile.outside-courses'));
 });
 
 // Home > Dashboard > Profile > Articles In Magazines

@@ -88,6 +88,18 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.expertise-areas') ? 'active' : '' }}" href="{{ route('professors.my-profile.expertise-areas') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Expertise Areas</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
 						<a class="menu-link {{ request()->routeIs('professors.my-profile.employment-history') ? 'active' : '' }}" href="{{ route('professors.my-profile.employment-history') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -115,7 +127,19 @@
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
-							<span class="menu-title">Courses</span>
+							<span class="menu-title">Courses Taught</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--begin:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('professors.my-profile.outside-courses') ? 'active' : '' }}" href="{{ route('professors.my-profile.outside-courses') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Outside Courses Taught</span>
 						</a>
 						<!--end:Menu link-->
 					</div>

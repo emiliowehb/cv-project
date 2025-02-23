@@ -137,6 +137,7 @@ return [
     'edit_course' => 'Modifier le cours',
     'course_code' => 'Code du cours',
     'course_title' => 'Titre du cours',
+    'course_name' => 'Nom du cours',
     'select_language' => 'Sélectionner la langue',
     'course_level' => 'Niveau du cours',
     'select_course_level' => 'Sélectionner le niveau du cours',
@@ -176,4 +177,9 @@ return [
     'honor_type' => 'Type d\'honneur',
     'honor_organization' => 'Organisation d\'honneur',
     'is_ongoing' => 'En cours',
+    'add_expertise_area' => 'Ajouter un domaine d\'expertise',
+    'edit_expertise_area' => 'Modifier le domaine d\'expertise',
+    'update' => 'Mettre à jour',
+    'outside_courses' => 'Cours externes',
+    'session' => 'Session',
 ];

@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\DataTables\ProfessorEmploymentHistoryDataTable;
+use App\DataTables\ProfessorExpertiseAreasDataTable;
 use App\DataTables\ProfessorGraduateSupervisionsDataTable;
 use App\DataTables\ProfessorGrantsDataTable;
 use App\DataTables\ProfessorHonorsDataTable;
@@ -27,6 +28,7 @@ use App\DataTables\ProfessorJournalArticlesDataTable;
 use App\DataTables\ProfessorLettersToEditorsDataTable;
 use App\DataTables\ProfessorMagazineArticlesDataTable;
 use App\DataTables\ProfessorNewsletterArticlesDataTable;
+use App\DataTables\ProfessorOutsideCoursesDataTable;
 use App\DataTables\ProfessorPresentationsDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
 use App\DataTables\ProfessorTechnicalReportsDataTable;
@@ -109,6 +111,22 @@ class ProfessorController extends Controller
         $user_id = Auth::user()->id;
 
         return $dataTable->render('pages/professors.technical-reports.my-profile-technical-reports', compact('professor', 'user_id'));
+    }
+
+    public function showExpertiseAreas(ProfessorExpertiseAreasDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.expertise-areas.my-profile-expertise-areas', compact('professor', 'user_id'));
+    }
+
+    public function showOutsideCourses(ProfessorOutsideCoursesDataTable $dataTable)
+    {
+        $professor = Auth::user()->professor;
+        $user_id = Auth::user()->id;
+
+        return $dataTable->render('pages/professors.outside-courses.my-profile-outside-courses', compact('professor', 'user_id'));
     }
 
     public function showGrants(ProfessorGrantsDataTable $dataTable)
