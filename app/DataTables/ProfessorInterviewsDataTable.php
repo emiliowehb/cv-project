@@ -35,7 +35,7 @@ class ProfessorInterviewsDataTable extends DataTable
                 return $professorInterview->notes;
             })
             ->editColumn('start_date', function (ProfessorInterview $professorInterview) {
-                return $professorInterview->end_date ? Carbon::parse($professorInterview->start_date)->format('d/m/Y') . ' - ' . Carbon::parse($professorInterview->end_date)->format('d/m/Y') : Carbon::parse($professorInterview->start_date)->format('d/m/Y');
+                return Carbon::parse($professorInterview->start_date)->format('d/m/Y');
             })
             ->addColumn('action', function (ProfessorInterview $interview) {
                 return view('pages/professors.interviews.columns._actions', compact('interview'));
@@ -79,7 +79,7 @@ class ProfessorInterviewsDataTable extends DataTable
             Column::make('type.name')->title('Type'),
             Column::make('source')->title('Source'),
             Column::make('notes')->title('Notes'),
-            Column::make('start_date')->title('Date')->addClass('text-start'),
+            Column::make('start_date')->title('Interview date')->addClass('text-start'),
             Column::computed('action')
                 ->addClass('text-end text-nowrap')
                 ->exportable(false)

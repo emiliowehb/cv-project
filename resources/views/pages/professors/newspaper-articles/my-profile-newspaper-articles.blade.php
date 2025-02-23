@@ -1,17 +1,17 @@
 <x-default-layout>
 
     @section('title')
-    Interviews
+    Newspapers
     @endsection
 
     @section('breadcrumbs')
-    {{ Breadcrumbs::render('dashboard.professors.my-profile.interviews', $professor) }}
+    {{ Breadcrumbs::render('dashboard.professors.my-profile.newspaper-articles', $professor) }}
     @endsection
 
     <!--begin::Content-->
     <div class="d-flex flex-column flex-lg-row">
         <!--begin::Main Content-->
-        <div class="flex-lg-row-fluid ms-lg-10">
+        <div class="flex-lg-row-fluid">
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card header-->
@@ -29,17 +29,17 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <!--begin::Add interview-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_interview">
+                            <!--begin::Add article-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_article">
                                 {!! getIcon('plus', 'fs-2', '', 'i') !!}
-                                {{ __('messages.add_interview') }}
+                                {{ __('messages.add_article') }}
                             </button>
-                            <!--end::Add interview-->
+                            <!--end::Add article-->
                         </div>
                         <!--end::Toolbar-->
 
                         <!--begin::Modal-->
-                        <livewire:professor.add-interview-modal></livewire:professor.add-interview-modal>
+                        <livewire:professor.add-newspaper-article-modal></livewire:professor.add-newspaper-article-modal>
                         <!--end::Modal-->
                     </div>
                     <!--end::Card toolbar-->
@@ -66,17 +66,17 @@
     <script>
         document.addEventListener('livewire:init', function() {
             Livewire.on('success', function() {
-                $('#kt_modal_add_interview').modal('hide');
-                window.LaravelDataTables['professor-interview-table'].ajax.reload();
+                $('#kt_modal_add_article').modal('hide');
+                window.LaravelDataTables['professor-newspaper-articles-table'].ajax.reload();
             });
 
-            Livewire.on('update_interview', function() {
-                $('#kt_modal_add_interview').modal('show');
+            Livewire.on('update_article', function() {
+                $('#kt_modal_add_article').modal('show');
             });
         });
 
-        $('#kt_modal_add_interview').on('hidden.bs.modal', function() {
-            Livewire.dispatch('add_interview');
+        $('#kt_modal_add_article').on('hidden.bs.modal', function() {
+            Livewire.dispatch('add_article');
         });
     </script>
     @endpush

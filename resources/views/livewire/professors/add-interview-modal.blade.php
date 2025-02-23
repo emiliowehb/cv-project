@@ -6,7 +6,7 @@
             <!--begin::Modal header-->
             <div class="modal-header" id="kt_modal_add_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">{{ $edit_mode ? 'Edit Interview' : 'Add Interview' }}</h2>
+                <h2 class="fw-bold">{{ $edit_mode ? __('messages.edit_interview') : __('messages.add_interview') }}</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" aria-label="Close">
@@ -55,18 +55,11 @@
                                     @error('notes') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label class="col-form-label required">{{ __('messages.start_date') }}</label>
                                     <input type="date" class="form-control bg-transparent" wire:model="start_date" />
                                     @error('start_date') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="col-form-label">{{ __('messages.end_date') }}</label>
-                                    <input type="date" class="form-control bg-transparent" wire:model="end_date" />
-                                    @error('end_date') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -75,11 +68,11 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
-                            wire:loading.attr="disabled">Discard</button>
+                            wire:loading.attr="disabled">{{ __('messages.discard') }}</button>
                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                            <span class="indicator-label" wire:loading.remove>Submit</span>
+                            <span class="indicator-label" wire:loading.remove>{{ __('messages.submit') }}</span>
                             <span class="indicator-progress" wire:loading wire:target="submit">
-                                Please wait...
+                                {{ __('messages.please_wait') }}
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
                         </button>

@@ -186,4 +186,11 @@ return [
     'outside_courses' => 'الدورات الخارجية',
     'add_course' => 'إضافة دورة',
     'edit_course' => 'تعديل الدورة',
+    'add_interview' => 'إضافة مقابلة',
+    'edit_interview' => 'تعديل المقابلة',
+    'add_newspaper_article' => 'إضافة مقال صحفي',
+    'interview_name' => 'اسم المقابلة',
+    'interview_type' => 'نوع المقابلة',
+    'source' => 'المصدر',
+    'start_date' => 'تاريخ البدء',
 ];

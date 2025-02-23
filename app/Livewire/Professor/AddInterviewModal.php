@@ -37,6 +37,7 @@ class AddInterviewModal extends Component
         $this->professor_id = Auth::user()->professor->id;
         $this->type_id = InterviewType::first()->id;
         $this->start_date = date('Y-m-d');
+        $this->end_date = $this->start_date; 
     }
 
     protected $messages = [
@@ -73,7 +74,7 @@ class AddInterviewModal extends Component
                     'source' => $this->source,
                     'notes' => $this->notes,
                     'start_date' => $this->start_date,
-                    'end_date' => $this->end_date,
+                    'end_date' => $this->start_date,
                 ]);
             } else {
                 // Create a new professor interview
@@ -84,7 +85,7 @@ class AddInterviewModal extends Component
                     'source' => $this->source,
                     'notes' => $this->notes,
                     'start_date' => $this->start_date,
-                    'end_date' => $this->end_date,
+                    'end_date' => $this->start_date,
                 ]);
             }
         });
@@ -116,7 +117,7 @@ class AddInterviewModal extends Component
         $this->source = $interview->source;
         $this->notes = $interview->notes;
         $this->start_date = $interview->start_date;
-        $this->end_date = $interview->end_date;
+        $this->end_date = $interview->start_date;
     }
 
     public function hydrate()

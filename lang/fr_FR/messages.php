@@ -182,4 +182,10 @@ return [
     'update' => 'Mettre à jour',
     'outside_courses' => 'Cours externes',
     'session' => 'Session',
+    'add_interview' => 'Ajouter une interview',
+    'edit_interview' => 'Modifier l\'interview',
+    'add_newspaper_article' => 'Ajouter un article de journal',
+    'interview_name' => 'Nom de l\'interview',
+    'interview_type' => 'Type d\'interview',
+    'source' => 'Source',
 ];

@@ -176,6 +176,12 @@ Breadcrumbs::for('dashboard.professors.my-profile.cases', function (BreadcrumbTr
     $trail->push('Cases', route('professors.my-profile.cases'));
 });
 
+// Home > Dashboard > Profile > Newspapers
+Breadcrumbs::for('dashboard.professors.my-profile.newspaper-articles', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Newspapers', route('professors.my-profile.newspaper-articles'));
+});
+
 // Home > Dashboard > Profile > Newsletters
 Breadcrumbs::for('dashboard.professors.my-profile.newsletter-articles', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

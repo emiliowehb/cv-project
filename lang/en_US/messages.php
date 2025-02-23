@@ -186,4 +186,10 @@ return [
     'edit_expertise_area' => 'Edit Expertise Area',
     'update' => 'Update',
     'outside_courses' => 'Outside Courses',
+    'add_interview' => 'Add Interview',
+    'edit_interview' => 'Edit Interview',
+    'add_newspaper_article' => 'Add Newspaper Article',
+    'interview_name' => 'Interview Name',
+    'interview_type' => 'Interview Type',
+    'source' => 'Source',
 ];
