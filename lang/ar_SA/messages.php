@@ -193,4 +193,5 @@ return [
     'interview_type' => 'نوع المقابلة',
     'source' => 'المصدر',
     'start_date' => 'تاريخ البدء',
+    'cv_builder' => 'بناء السيرة الذاتية',
 ];

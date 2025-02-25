@@ -192,4 +192,5 @@ return [
     'interview_name' => 'Interview Name',
     'interview_type' => 'Interview Type',
     'source' => 'Source',
+    'cv_builder' => 'CV Builder',
 ];

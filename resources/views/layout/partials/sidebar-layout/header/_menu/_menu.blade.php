@@ -32,6 +32,22 @@
 		</div>
 		@endif
 		<!--end:Menu item-->
+				<!--begin:Menu item-->
+				@if(auth()->user()->professor)
+		<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
+			<!--begin:Menu link-->
+			<a href="{{ route('professors.cv-builder') }}" class="menu-link">
+				<span class="menu-title">CV Builder</span>
+			</a>
+			<!--end:Menu link-->
+			<!--begin:Menu sub-->
+			<!-- <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0"> -->
+			{{-- @include(config('settings.KT_THEME_LAYOUT_DIR').'/partials/sidebar-layout/header/_menu/__pages') --}}
+			<!-- </div> -->
+			<!--end:Menu sub-->
+		</div>
+		@endif
+		<!--end:Menu item-->
 	</div>
 	<!--end::Menu-->
 </div>

@@ -188,4 +188,5 @@ return [
     'interview_name' => 'Nom de l\'interview',
     'interview_type' => 'Type d\'interview',
     'source' => 'Source',
+    'cv_builder' => 'Générateur de CV',
 ];

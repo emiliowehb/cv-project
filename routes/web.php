@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile/technical-reports', [ProfessorController::class, 'showTechnicalReports'])->name('professors.my-profile.technical-reports');
         Route::get('/my-profile/expertise-areas', [ProfessorController::class, 'showExpertiseAreas'])->name('professors.my-profile.expertise-areas');
         Route::get('/my-profile/outside-courses', [ProfessorController::class, 'showOutsideCourses'])->name('professors.my-profile.outside-courses');
+        Route::get('/cv-builder', [ProfessorController::class, 'showCVBuilder'])->name('professors.cv-builder');
     });
 
 });

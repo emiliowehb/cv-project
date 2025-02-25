@@ -13,6 +13,8 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			<!--end:Menu item-->
+
 			@if(auth()->user()->professor)
 			<!--begin:Menu item-->
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('professors.my-profile.*') ? 'here show' : '' }}">
@@ -360,6 +362,19 @@
 					<!--end:Menu item-->
 				</div>
 				<!--end:Menu sub-->
+			</div>
+			<!--end:Menu item-->
+			@endif
+
+			@if(auth()->user()->professor)
+			<!--begin:Menu item-->
+			<div data-kt-menu-trigger="click" class="menu-item menu {{ request()->routeIs('professors.cv-builder') ? 'here show' : '' }}">
+				<!--begin:Menu link-->
+				<a class="menu-link" href="{{route('professors.cv-builder')}}">
+					<span class="menu-icon">{!! getIcon('glass', 'fs-2') !!}</span>
+					<span class="menu-title">{{__('messages.cv_builder')}}</span>
+				</a>
+				<!--end:Menu link-->
 			</div>
 			<!--end:Menu item-->
 			@endif

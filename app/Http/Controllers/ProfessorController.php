@@ -73,6 +73,12 @@ class ProfessorController extends Controller
         return redirect()->route('dashboard');
     }
 
+    public function showCVBuilder()
+    {
+        $professor = Auth::user()->professor;
+        return view('pages/professors.cv-builder.index', compact('professor'));
+    }
+
     /**
      * Display the specified resource.
      */
