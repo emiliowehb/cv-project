@@ -28,6 +28,7 @@ class AddGrantModal extends Component
     public $end_date;
     public $grant_origin;
     public $notes;
+    public $is_external;
 
     protected $rules;
 
@@ -54,6 +55,7 @@ class AddGrantModal extends Component
         $this->role = GrantRoleEnum::values()[0];
         $this->start_date = Carbon::now()->format('d/m/Y');
         $this->end_date = Carbon::now()->endOfYear()->format('d/m/Y');
+        $this->is_external = 1;
     }
 
     protected $listeners = [
@@ -80,8 +82,10 @@ class AddGrantModal extends Component
         DB::transaction(function () {
             if($this->grant_origin == 'internal') {
                 $this->funding_source_id = null;
+                $this->is_external = 0;
             } else {
                 $this->funding_source_id = $this->funding_source_id;
+                $this->is_external = 1;
             }
 
             if ($this->edit_mode) {
@@ -93,6 +97,7 @@ class AddGrantModal extends Component
                     'amount' => $this->amount,
                     'grant_type_id' => $this->grant_type_id,
                     'currency_id' => $this->currency_id,
+                    'is_external' => $this->is_external,
                     'funding_source_id' => $this->funding_source_id,
                     'start_date' => Carbon::createFromFormat('d/m/Y',$this->start_date)->format('Y-m-d'),
                     'end_date' => Carbon::createFromFormat('d/m/Y', $this->end_date)->format('Y-m-d'),
@@ -107,6 +112,7 @@ class AddGrantModal extends Component
                     'name' => $this->name,
                     'amount' => $this->amount,
                     'grant_type_id' => $this->grant_type_id,
+                    'is_external' => $this->is_external,
                     'currency_id' => $this->currency_id,
                     'funding_source_id' => $this->funding_source_id,
                     'start_date' => Carbon::createFromFormat('d/m/Y',$this->start_date)->format('Y-m-d'),
@@ -158,6 +164,7 @@ class AddGrantModal extends Component
         $this->currency_id = $grant->currency_id;
         $this->funding_source_id = $grant->funding_source_id;
         $this->role = $professorGrant->role;
+        $this->is_external = $grant->is_external;
         $this->start_date = Carbon::createFromFormat('Y-m-d',$grant->start_date)->format('d/m/Y');
         $this->end_date = Carbon::createFromFormat('Y-m-d', $grant->end_date)->format('d/m/Y');
         $this->notes = $grant->notes;

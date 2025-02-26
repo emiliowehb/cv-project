@@ -2,6 +2,25 @@
 // Main
 //
 
+.preview-container {
+	border: 3px solid #e5e5e5;
+}
+
+.card-no-radius {
+	border-radius: 0;
+}
+
+.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.table-bordered {
+	border: 2px solid #dee2e6;
+}
+.table-bordered th, .table-bordered td {
+	border: 2px solid #dee2e6;
+}
 
 // Desktop mode
 @include media-breakpoint-up(lg) {

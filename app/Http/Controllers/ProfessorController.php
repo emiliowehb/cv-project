@@ -15,6 +15,7 @@ use App\DataTables\ProfessorLanguagesDataTable;
 use App\DataTables\ProfessorTeachingInterestsDataTable;
 use App\Models\Address;
 use App\Models\Professor;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,25 @@ class ProfessorController extends Controller
     public function showCVBuilder()
     {
         $professor = Auth::user()->professor;
-        return view('pages/professors.cv-builder.index', compact('professor'));
+        $ranges = ['lifetime', '8_years', '3_years', '12_months'];
+        $formats = ['pdf', 'docx'];
+        return view('pages/professors.cv-builder.index', compact('professor', 'ranges', 'formats'));
+    }
+
+    public function submitBuild(Request $request)
+    {
+        // $professor = Auth::user()->professor;
+        // $pdf = Pdf::loadView('pages/professors.cv-builder.pdf-templates.cv-template', ['professor' => $professor]);
+        // return $pdf->download('cv-test.pdf');
+        return dd($request->all());
+        // $data = $request->validate([
+        //     'range' => 'required|string',
+        //     'format' => 'required|string',
+        // ]);
+
+        // // Handle the form submission logic here
+
+        // return redirect()->route('dashboard')->with('success', __('messages.cv_builder_success'));
     }
 
     /**
