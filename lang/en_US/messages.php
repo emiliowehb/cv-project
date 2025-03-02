@@ -185,7 +185,7 @@ return [
     'add_expertise_area' => 'Add Expertise Area',
     'edit_expertise_area' => 'Edit Expertise Area',
     'update' => 'Update',
-    'outside_courses' => 'Outside Courses',
+    'outside_courses' => 'Outside Courses Taught',
     'add_interview' => 'Add Interview',
     'edit_interview' => 'Edit Interview',
     'add_newspaper_article' => 'Add Newspaper Article',

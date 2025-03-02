@@ -18,7 +18,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="range" class="form-label">{{ __('messages.range') }}</label>
-                        <select id="range" name="range" class="form-select" onchange="filterDegrees(); filterEmployments(); filterActivities(); filterHonors(); filterAcademicActivities(); filterSupervisions(); filterCourses(); filterOutsideCourses(); filterGrants(); filterInternalGrants();">
+                        <select id="range" name="range" class="form-select" onchange="filterDegrees(); filterEmployments(); filterActivities(); filterHonors(); filterAcademicActivities(); filterSupervisions(); filterCourses(); filterOutsideCourses(); filterGrants(); filterInternalGrants(); filterBooks(); filterForthcomingBooks(); filterChaptersInBooks(); filterForthcomingChaptersInBooks(); filterPapersInJournals(); filterForthcomingPapersInJournals(); filterPapersInConferenceProceedings(); filterTechnicalReports(); filterWorkingPapers();">
                             @foreach($ranges as $range)
                             <option value="{{ $range }}">{{ __('messages.' . $range) }}</option>
                             @endforeach
@@ -385,7 +385,7 @@
                                 </div>
                             </div>
                             <!-- End Internal Research Grants Section -->
-
+                            <!-- Begin Publications Summary -->
                             <div class="mt-15" id="professor-publications-summary">
                                 <div class="d-flex align-items-center">
                                     <div class="form-check form-check-custom form-check-solid form-check-lg">
@@ -428,7 +428,199 @@
                                     </table>
                                 </div>
                             </div>
+                            <!-- End Publications Summary -->
 
+                            <!-- Begin Books Authored Section -->
+                            <div class="mt-15" id="professor-books">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-books" name="include_books" checked>
+                                        <label class="form-check-label fs-3" for="include-books">BOOKS AUTHORED</label>
+                                    </div>
+                                </div>
+                                <div id="books-content">
+                                    <ul>
+                                        @foreach($professor->books as $book)
+                                        @if(!in_array($book->publication_status_id, [2, 4]))
+                                        <li data-year="{{ $book->year }}">
+                                            <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Books Authored Section -->
+
+                            <!-- Begin Books (Forthcoming – in press or submitted) Section -->
+                            <div class="mt-15" id="professor-forthcoming-books">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-forthcoming-books" name="include_forthcoming_books" checked>
+                                        <label class="form-check-label fs-3" for="include-forthcoming-books">BOOKS (FORTHCOMING – IN PRESS OR SUBMITTED)</label>
+                                    </div>
+                                </div>
+                                <div id="forthcoming-books-content">
+                                    <ul>
+                                        @foreach($professor->books as $book)
+                                        @if(in_array($book->publication_status_id, [2, 4]))
+                                        <li data-year="{{ $book->year }}">
+                                            <strong>{{ $book->name }}</strong> - <span data-year="{{$book->year}}">{{ $book->year }}</span> {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Books (Forthcoming – in press or submitted) Section -->
+
+                            <!-- Begin Chapters in Books Section -->
+                            <div class="mt-15" id="professor-chapters-in-books">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-chapters-in-books" name="include_chapters_in_books" checked>
+                                        <label class="form-check-label fs-3" for="include-chapters-in-books">CHAPTERS IN BOOKS</label>
+                                    </div>
+                                </div>
+                                <div id="chapters-in-books-content">
+                                    <ul>
+                                        @foreach($professor->bookChapters as $chapter)
+                                        @if(!in_array($chapter->publication_status_id, [2, 4]))
+                                        <li data-year="{{ $chapter->published_year }}">
+                                            <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Chapters in Books Section -->
+
+                            <!-- Begin Chapters in Books (Forthcoming – in press or submitted) Section -->
+                            <div class="mt-15" id="professor-forthcoming-chapters-in-books">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-forthcoming-chapters-in-books" name="include_forthcoming_chapters_in_books" checked>
+                                        <label class="form-check-label fs-3" for="include-forthcoming-chapters-in-books">CHAPTERS IN BOOKS (FORTHCOMING – IN PRESS OR SUBMITTED)</label>
+                                    </div>
+                                </div>
+                                <div id="forthcoming-chapters-in-books-content">
+                                    <ul>
+                                        @foreach($professor->bookChapters as $chapter)
+                                        @if(in_array($chapter->publication_status_id, [2, 4]))
+                                        <li data-year="{{ $chapter->published_year }}">
+                                            <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Chapters in Books (Forthcoming – in press or submitted) Section -->
+
+                            <!-- Begin Papers in Journals Section -->
+                            <div class="mt-15" id="professor-papers-in-journals">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-papers-in-journals" name="include_papers_in_journals" checked>
+                                        <label class="form-check-label fs-3" for="include-papers-in-journals">PAPERS IN REFEREED JOURNALS</label>
+                                    </div>
+                                </div>
+                                <div id="papers-in-journals-content">
+                                    <ul>
+                                        @foreach($professor->journalArticles as $paper)
+                                        @if(!in_array($paper->publication_status_id, [2, 4]))
+                                        <li data-year="{{ $paper->year }}">
+                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Papers in Journals Section -->
+
+                            <!-- Begin Papers in Journals (Forthcoming – in press or submitted) Section -->
+                            <div class="mt-15" id="professor-forthcoming-papers-in-journals">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-forthcoming-papers-in-journals" name="include_forthcoming_papers_in_journals" checked>
+                                        <label class="form-check-label fs-3" for="include-forthcoming-papers-in-journals">PAPERS IN JOURNALS (FORTHCOMING – IN PRESS OR SUBMITTED)</label>
+                                    </div>
+                                </div>
+                                <div id="forthcoming-papers-in-journals-content">
+                                    <ul>
+                                        @foreach($professor->journalArticles as $paper)
+                                        @if(in_array($paper->publication_status_id, [2, 4]))
+                                        <li data-year="{{ $paper->year }}">
+                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Papers in Journals (Forthcoming – in press or submitted) Section -->
+
+                            <!-- Begin Papers in Conference Proceedings Section -->
+                            <div class="mt-15" id="professor-papers-in-conference-proceedings">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-papers-in-conference-proceedings" name="include_papers_in_conference_proceedings" checked>
+                                        <label class="form-check-label fs-3" for="include-papers-in-conference-proceedings">PAPERS IN CONFERENCE PROCEEDINGS</label>
+                                    </div>
+                                </div>
+                                <div id="papers-in-conference-proceedings-content">
+                                    <ul>
+                                        @foreach($professor->proceedings as $presentation)
+                                        <li data-year="{{ $presentation->year }}">
+                                            <strong>{{ $presentation->name }}</strong> - {{ $presentation->year }}, {{ $presentation->country->name }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Papers in Conference Proceedings Section -->
+
+                            <!-- Begin Major Invited Contributions and/or Technical Reports Section -->
+                            <div class="mt-15" id="professor-technical-reports">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-technical-reports" name="include_technical_reports" checked>
+                                        <label class="form-check-label fs-3" for="include-technical-reports">MAJOR INVITED CONTRIBUTIONS AND/OR TECHNICAL REPORTS</label>
+                                    </div>
+                                </div>
+                                <div id="technical-reports-content">
+                                    <ul>
+                                        @foreach($professor->technicalReports as $report)
+                                        <li data-year="{{ $report->year }}">
+                                            <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }}, {{ $report->publisher->name }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Major Invited Contributions and/or Technical Reports Section -->
+
+                            <!-- Begin Working Papers Section -->
+                            <div class="mt-15" id="professor-working-papers">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-working-papers" name="include_working_papers" checked>
+                                        <label class="form-check-label fs-3" for="include-working-papers">WORKING PAPERS</label>
+                                    </div>
+                                </div>
+                                <div id="working-papers-content">
+                                    <ul>
+                                        @foreach($professor->workingPapers as $paper)
+                                        <li data-year="{{ $paper->year }}">
+                                            <strong>{{ $paper->name }}</strong> - {{ $paper->year }}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Working Papers Section -->
                         </div>
                     </div>
                 </div>
@@ -545,6 +737,15 @@
                 publicationsSummary.classList.remove('disabled');
             } else {
                 publicationsSummary.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-working-papers').addEventListener('change', function() {
+            const workingPapersContent = document.getElementById('working-papers-content');
+            if (this.checked) {
+                workingPapersContent.classList.remove('disabled');
+            } else {
+                workingPapersContent.classList.add('disabled');
             }
         });
 
@@ -842,6 +1043,267 @@
                 }
 
                 row.style.display = showRow ? '' : 'none';
+            }
+        }
+
+        function filterBooks() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const booksContent = document.getElementById('books-content');
+            const items = booksContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterForthcomingBooks() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const forthcomingBooksContent = document.getElementById('forthcoming-books-content');
+            const items = forthcomingBooksContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterChaptersInBooks() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const chaptersInBooksContent = document.getElementById('chapters-in-books-content');
+            const items = chaptersInBooksContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterForthcomingChaptersInBooks() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const forthcomingChaptersInBooksContent = document.getElementById('forthcoming-chapters-in-books-content');
+            const items = forthcomingChaptersInBooksContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterPapersInJournals() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const papersInJournalsContent = document.getElementById('papers-in-journals-content');
+            const items = papersInJournalsContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterForthcomingPapersInJournals() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const forthcomingPapersInJournalsContent = document.getElementById('forthcoming-papers-in-journals-content');
+            const items = forthcomingPapersInJournalsContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterPapersInConferenceProceedings() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const papersInConferenceProceedingsContent = document.getElementById('papers-in-conference-proceedings-content');
+            const items = papersInConferenceProceedingsContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterTechnicalReports() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const technicalReportsContent = document.getElementById('technical-reports-content');
+            const items = technicalReportsContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterWorkingPapers() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const workingPapersContent = document.getElementById('working-papers-content');
+            const items = workingPapersContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
             }
         }
     </script>
