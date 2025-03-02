@@ -507,7 +507,6 @@ class ProfessorController extends Controller
                 return $currentYear - $employment->start_year <= $years[$range] || ($employment->end_year && $currentYear - $employment->end_year <= $years[$range]) || $employment->is_current;
             });
 
-
             $filteredActivities = $filteredActivities->filter(function ($activity) use ($currentYear, $years, $range) {
                 return $currentYear - $activity->start_year <= $years[$range] || ($activity->end_year && $currentYear - $activity->end_year <= $years[$range]);
             });
@@ -531,7 +530,6 @@ class ProfessorController extends Controller
             $filteredOutsideCourses = $filteredOutsideCourses->filter(function ($course) use ($currentYear, $years, $range) {
                 return $currentYear - $course->created_at->year <= $years[$range];
             });
-
 
             $filteredGrants = $filteredGrants->filter(function ($grant) use ($currentYear, $years, $range) {
                 return $currentYear - Carbon::parse($grant->start_date)->year <= $years[$range] || ($grant->end_date && $currentYear - Carbon::parse($grant->end_date)->year <= $years[$range]);
@@ -577,6 +575,47 @@ class ProfessorController extends Controller
                 return $currentYear - $paper->year <= $years[$range];
             });
         }
+
+        // Exclude entries based on request data
+        $exclude_degrees = $request->input('exclude_degree', []);
+        $exclude_employments = $request->input('exclude_employment', []);
+        $exclude_activities = $request->input('exclude_activity', []);
+        $exclude_honors = $request->input('exclude_honor', []);
+        $exclude_academic_activities = $request->input('exclude_academic_activity', []);
+        $exclude_supervisions = $request->input('exclude_supervision', []);
+        $exclude_courses = $request->input('exclude_course', []);
+        $exclude_outside_courses = $request->input('exclude_outside_course', []);
+        $exclude_grants = $request->input('exclude_grant', []);
+        $exclude_internal_grants = $request->input('exclude_internal_grant', []);
+        $exclude_books = $request->input('exclude_book', []);
+        $exclude_forthcoming_books = $request->input('exclude_forthcoming_book', []);
+        $exclude_chapters = $request->input('exclude_chapter', []);
+        $exclude_forthcoming_chapters = $request->input('exclude_forthcoming_chapter', []);
+        $exclude_papers = $request->input('exclude_paper', []);
+        $exclude_forthcoming_papers = $request->input('exclude_forthcoming_paper', []);
+        $exclude_presentations = $request->input('exclude_presentation', []);
+        $exclude_technical_reports = $request->input('exclude_technical_report', []);
+        $exclude_working_papers = $request->input('exclude_working_paper', []);
+
+        $filteredDegrees = $filteredDegrees->whereNotIn('id', $exclude_degrees);
+        $filteredEmployments = $filteredEmployments->whereNotIn('id', $exclude_employments);
+        $filteredActivities = $filteredActivities->whereNotIn('id', $exclude_activities);
+        $filteredHonors = $filteredHonors->whereNotIn('id', $exclude_honors);
+        $filteredAcademicActivities = $filteredAcademicActivities->whereNotIn('id', $exclude_academic_activities);
+        $filteredSupervisions = $filteredSupervisions->whereNotIn('id', $exclude_supervisions);
+        $filteredCourses = $filteredCourses->whereNotIn('id', $exclude_courses);
+        $filteredOutsideCourses = $filteredOutsideCourses->whereNotIn('id', $exclude_outside_courses);
+        $filteredGrants = $filteredGrants->whereNotIn('id', $exclude_grants);
+        $filteredInternalGrants = $filteredInternalGrants->whereNotIn('id', $exclude_internal_grants);
+        $filteredBooks = $filteredBooks->whereNotIn('id', $exclude_books);
+        $filteredForthcomingBooks = $filteredForthcomingBooks->whereNotIn('id', $exclude_forthcoming_books);
+        $filteredChaptersInBooks = $filteredChaptersInBooks->whereNotIn('id', $exclude_chapters);
+        $filteredForthcomingChaptersInBooks = $filteredForthcomingChaptersInBooks->whereNotIn('id', $exclude_forthcoming_chapters);
+        $filteredPapersInJournals = $filteredPapersInJournals->whereNotIn('id', $exclude_papers);
+        $filteredForthcomingPapersInJournals = $filteredForthcomingPapersInJournals->whereNotIn('id', $exclude_forthcoming_papers);
+        $filteredPapersInConferenceProceedings = $filteredPapersInConferenceProceedings->whereNotIn('id', $exclude_presentations);
+        $filteredTechnicalReports = $filteredTechnicalReports->whereNotIn('id', $exclude_technical_reports);
+        $filteredWorkingPapers = $filteredWorkingPapers->whereNotIn('id', $exclude_working_papers);
 
         $pdf = Pdf::loadView('pages/professors.cv-builder.pdf-templates.cv-template', [
             'professor' => $professor,

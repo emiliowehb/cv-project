@@ -65,15 +65,17 @@
                                                 <th>Institution</th>
                                                 <th>Discipline</th>
                                                 <th>Year</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="degrees-table-body">
                                             @foreach($professor->degrees as $degree)
-                                            <tr data-year="{{ $degree->year }}">
+                                            <tr data-year="{{ $degree->year }}" data-id="{{ $degree->id }}">
                                                 <td>{{ $degree->degree->name }}</td>
                                                 <td>{{ $degree->institution_name }}</td>
                                                 <td>{{ $degree->discipline->name }}</td>
                                                 <td>{{ $degree->year }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('degree', {{ $degree->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -98,15 +100,17 @@
                                                 <th>TO</th>
                                                 <th>EMPLOYER</th>
                                                 <th>POSITION</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="employments-table-body">
                                             @foreach($professor->employments->sortByDesc('start_year') as $employment)
-                                            <tr data-start-year="{{ $employment->start_year }}" data-end-year="{{ $employment->end_year }}">
+                                            <tr data-start-year="{{ $employment->start_year }}" data-end-year="{{ $employment->end_year }}" data-id="{{ $employment->id }}">
                                                 <td>{{ $employment->start_year }}</td>
                                                 <td>{{ $employment->is_current ? 'Current' : $employment->end_year }}</td>
                                                 <td>{{ $employment->employer }}</td>
                                                 <td>{{ $employment->position->name }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('employment', {{ $employment->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -131,15 +135,17 @@
                                                 <th>TO</th>
                                                 <th>EMPLOYER</th>
                                                 <th>POSITION</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="activities-table-body">
                                             @foreach($professor->activities->whereNotIn('activity_service_id', [1, 2])->sortByDesc('start_year') as $activity)
-                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}">
+                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-id="{{ $activity->id }}">
                                                 <td>{{ $activity->start_year }}</td>
                                                 <td>{{ $activity->is_current ? 'Current' : $activity->end_year }}</td>
                                                 <td>{{ $activity->name }}</td>
                                                 <td>{{ $activity->activityService->name }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('activity', {{ $activity->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -164,15 +170,17 @@
                                                 <th>TO</th>
                                                 <th>ORGANIZATION</th>
                                                 <th>TITLE</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="honors-table-body">
                                             @foreach($professor->honors->sortByDesc('start_year') as $honor)
-                                            <tr data-start-year="{{ $honor->start_year }}" data-end-year="{{ $honor->end_year }}">
+                                            <tr data-start-year="{{ $honor->start_year }}" data-end-year="{{ $honor->end_year }}" data-id="{{ $honor->id }}">
                                                 <td>{{ $honor->start_year }}</td>
                                                 <td>{{ $honor->is_ongoing ? 'Current' : $honor->end_year }}</td>
                                                 <td>{{ $honor->honorOrganization->name }}</td>
                                                 <td>{{ $honor->name }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('honor', {{ $honor->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -196,14 +204,16 @@
                                                 <th>FROM</th>
                                                 <th>TO</th>
                                                 <th>ACTIVITY</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="academic-activities-table-body">
                                             @foreach($professor->activities->whereIn('activity_service_id', [1, 2])->sortByDesc('start_year') as $activity)
-                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}">
+                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-id="{{ $activity->id }}">
                                                 <td>{{ $activity->start_year }}</td>
                                                 <td>{{ $activity->is_current ? 'Current' : $activity->end_year }}</td>
                                                 <td>{{ $activity->name }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('academic_activity', {{ $activity->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -227,14 +237,16 @@
                                                 <th>FROM</th>
                                                 <th>TO</th>
                                                 <th>DESCRIPTION</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="supervisions-table-body">
                                             @foreach($professor->graduateSupervisions->sortByDesc('start_year') as $supervision)
-                                            <tr data-start-year="{{ $supervision->start_year }}" data-end-year="{{ $supervision->end_year }}">
+                                            <tr data-start-year="{{ $supervision->start_year }}" data-end-year="{{ $supervision->end_year }}" data-id="{{ $supervision->id }}">
                                                 <td>{{ $supervision->start_year }} {{ ucfirst($supervision->start_month) }}</td>
                                                 <td>{{ $supervision->end_year ? $supervision->end_year . ' ' . ucfirst($supervision->end_month) : '-' }}</td>
                                                 <td>{{ $supervision->studentFullName() }} ({{ $supervision->student_program_name }}), {{ $supervision->student_program_area }}, {{ $supervision->supervisionRole->name }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('supervision', {{ $supervision->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -257,11 +269,12 @@
                                             <tr>
                                                 <th>COURSE TITLE</th>
                                                 <th>DESCRIPTION</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="courses-table-body">
                                             @foreach($professor->courses->sortByDesc('created_at') as $course)
-                                            <tr data-created-at="{{ $course->created_at }}">
+                                            <tr data-created-at="{{ $course->created_at }}" data-id="{{ $course->id }}">
                                                 <td>{{ $course->title }}</td>
                                                 <td>
                                                     <strong>Course Code:</strong> {{ $course->code }}<br>
@@ -270,6 +283,7 @@
                                                     <strong>Course Type:</strong> {{ $course->courseType->name }}<br>
                                                     <strong>Course Credit:</strong> {{ $course->courseCredit->name }}
                                                 </td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('course', {{ $course->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -292,11 +306,12 @@
                                             <tr>
                                                 <th>COURSE TITLE</th>
                                                 <th>DESCRIPTION</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="outside-courses-table-body">
                                             @foreach($professor->outsideCourses->sortByDesc('created_at') as $course)
-                                            <tr data-created-at="{{ $course->created_at }}">
+                                            <tr data-created-at="{{ $course->created_at }}" data-id="{{ $course->id }}">
                                                 <td>{{ $course->name }}</td>
                                                 <td>
                                                     <strong>Institution:</strong> {{ $course->institution }}<br>
@@ -304,6 +319,7 @@
                                                     <strong>Country:</strong> {{ $course->country->name }}<br>
                                                     <strong>Language:</strong> {{ $course->language->name }}
                                                 </td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('outside_course', {{ $course->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -329,16 +345,18 @@
                                                 <th>TITLE</th>
                                                 <th>PURPOSE *</th>
                                                 <th>AMOUNT</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="grants-table-body">
                                             @foreach($professor->grants->where('is_external', 1)->sortByDesc('start_date') as $grant)
-                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}">
+                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-id="{{ $grant->id }}">
                                                 <td>{{ $grant->start_date }} - {{ $grant->end_date ?? '-' }}</td>
                                                 <td>{{ $grant->fundingSource?->name }}</td>
                                                 <td>{{ $grant->name }}</td>
                                                 <td>{{ $grant->grantType->code }}</td>
                                                 <td>{{ $grant->amount }} {{ $grant->currency->code }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('grant', {{ $grant->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -366,16 +384,18 @@
                                                 <th>TITLE</th>
                                                 <th>PURPOSE *</th>
                                                 <th>AMOUNT</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="internal-grants-table-body">
                                             @foreach($professor->grants->where('is_external', 0)->sortByDesc('start_date') as $grant)
-                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}">
+                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-id="{{ $grant->id }}">
                                                 <td>{{ $grant->start_date }} - {{ $grant->end_date ?? '-' }}</td>
                                                 <td>{{ $grant->fundingSource?->name }}</td>
                                                 <td>{{ $grant->name }}</td>
                                                 <td>{{ $grant->grantType?->code }}</td>
                                                 <td>{{ $grant->amount }} {{ $grant->currency?->code }}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm" onclick="excludeEntry('internal_grant', {{ $grant->id }})">-</button></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -442,8 +462,9 @@
                                     <ul>
                                         @foreach($professor->books as $book)
                                         @if(!in_array($book->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $book->year }}">
+                                        <li data-year="{{ $book->year }}" data-id="{{ $book->id }}">
                                             <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('book', {{ $book->id }})">-</button>
                                         </li>
                                         @endif
                                         @endforeach
@@ -464,8 +485,9 @@
                                     <ul>
                                         @foreach($professor->books as $book)
                                         @if(in_array($book->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $book->year }}">
+                                        <li data-year="{{ $book->year }}" data-id="{{ $book->id }}">
                                             <strong>{{ $book->name }}</strong> - <span data-year="{{$book->year}}">{{ $book->year }}</span> {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_book', {{ $book->id }})">-</button>
                                         </li>
                                         @endif
                                         @endforeach
@@ -486,8 +508,9 @@
                                     <ul>
                                         @foreach($professor->bookChapters as $chapter)
                                         @if(!in_array($chapter->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $chapter->published_year }}">
+                                        <li data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
                                             <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('chapter', {{ $chapter->id }})">-</button>
                                         </li>
                                         @endif
                                         @endforeach
@@ -508,8 +531,9 @@
                                     <ul>
                                         @foreach($professor->bookChapters as $chapter)
                                         @if(in_array($chapter->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $chapter->published_year }}">
+                                        <li data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
                                             <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_chapter', {{ $chapter->id }})">-</button>
                                         </li>
                                         @endif
                                         @endforeach
@@ -530,8 +554,9 @@
                                     <ul>
                                         @foreach($professor->journalArticles as $paper)
                                         @if(!in_array($paper->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $paper->year }}">
+                                        <li data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
                                             <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endif
                                         @endforeach
@@ -552,8 +577,9 @@
                                     <ul>
                                         @foreach($professor->journalArticles as $paper)
                                         @if(in_array($paper->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $paper->year }}">
+                                        <li data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
                                             <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endif
                                         @endforeach
@@ -573,8 +599,9 @@
                                 <div id="papers-in-conference-proceedings-content">
                                     <ul>
                                         @foreach($professor->proceedings as $presentation)
-                                        <li data-year="{{ $presentation->year }}">
+                                        <li data-year="{{ $presentation->year }}" data-id="{{ $presentation->id }}">
                                             <strong>{{ $presentation->name }}</strong> - {{ $presentation->year }}, {{ $presentation->country->name }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('presentation', {{ $presentation->id }})">-</button>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -593,8 +620,9 @@
                                 <div id="technical-reports-content">
                                     <ul>
                                         @foreach($professor->technicalReports as $report)
-                                        <li data-year="{{ $report->year }}">
+                                        <li data-year="{{ $report->year }}" data-id="{{ $report->id }}">
                                             <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }}, {{ $report->publisher->name }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('technical_report', {{ $report->id }})">-</button>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -613,8 +641,9 @@
                                 <div id="working-papers-content">
                                     <ul>
                                         @foreach($professor->workingPapers as $paper)
-                                        <li data-year="{{ $paper->year }}">
+                                        <li data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
                                             <strong>{{ $paper->name }}</strong> - {{ $paper->year }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('working_paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -1304,6 +1333,18 @@
                 }
 
                 item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function excludeEntry(type, id) {
+            const entry = document.querySelector(`[data-id="${id}"]`);
+            if (entry) {
+                entry.style.display = 'none';
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = `exclude_${type}[]`;
+                input.value = id;
+                document.querySelector('form').appendChild(input);
             }
         }
     </script>

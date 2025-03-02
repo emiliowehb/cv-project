@@ -22,6 +22,13 @@
 	border: 2px solid #dee2e6;
 }
 
+.btn.btn-xs {
+    padding: 0.2rem 0.4rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1 !important;
+    border-radius: 0.2rem !important;
+}
+
 // Desktop mode
 @include media-breakpoint-up(lg) {
 	.app-main {	
