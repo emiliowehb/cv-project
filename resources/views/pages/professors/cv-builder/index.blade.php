@@ -18,7 +18,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="range" class="form-label">{{ __('messages.range') }}</label>
-                        <select id="range" name="range" class="form-select" onchange="filterDegrees(); filterEmployments(); filterActivities(); filterHonors(); filterAcademicActivities(); filterSupervisions(); filterCourses(); filterOutsideCourses(); filterGrants(); filterInternalGrants(); filterBooks(); filterForthcomingBooks(); filterChaptersInBooks(); filterForthcomingChaptersInBooks(); filterPapersInJournals(); filterForthcomingPapersInJournals(); filterPapersInConferenceProceedings(); filterTechnicalReports(); filterWorkingPapers();">
+                        <select id="range" name="range" class="form-select" onchange="filterAllSections();">
                             @foreach($ranges as $range)
                             <option value="{{ $range }}">{{ __('messages.' . $range) }}</option>
                             @endforeach
@@ -70,7 +70,7 @@
                                         </thead>
                                         <tbody id="degrees-table-body">
                                             @foreach($professor->degrees as $degree)
-                                            <tr data-year="{{ $degree->year }}" data-id="{{ $degree->id }}">
+                                            <tr data-year="{{ $degree->year }}" data-id="{{ $degree->id }}" data-type="degree">
                                                 <td>{{ $degree->degree->name }}</td>
                                                 <td>{{ $degree->institution_name }}</td>
                                                 <td>{{ $degree->discipline->name }}</td>
@@ -105,7 +105,7 @@
                                         </thead>
                                         <tbody id="employments-table-body">
                                             @foreach($professor->employments->sortByDesc('start_year') as $employment)
-                                            <tr data-start-year="{{ $employment->start_year }}" data-end-year="{{ $employment->end_year }}" data-id="{{ $employment->id }}">
+                                            <tr data-start-year="{{ $employment->start_year }}" data-end-year="{{ $employment->end_year }}" data-type="employment" data-id="{{ $employment->id }}">
                                                 <td>{{ $employment->start_year }}</td>
                                                 <td>{{ $employment->is_current ? 'Current' : $employment->end_year }}</td>
                                                 <td>{{ $employment->employer }}</td>
@@ -140,7 +140,7 @@
                                         </thead>
                                         <tbody id="activities-table-body">
                                             @foreach($professor->activities->whereNotIn('activity_service_id', [1, 2])->sortByDesc('start_year') as $activity)
-                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-id="{{ $activity->id }}">
+                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-type="employment" data-id="{{ $activity->id }}">
                                                 <td>{{ $activity->start_year }}</td>
                                                 <td>{{ $activity->is_current ? 'Current' : $activity->end_year }}</td>
                                                 <td>{{ $activity->name }}</td>
@@ -175,7 +175,7 @@
                                         </thead>
                                         <tbody id="honors-table-body">
                                             @foreach($professor->honors->sortByDesc('start_year') as $honor)
-                                            <tr data-start-year="{{ $honor->start_year }}" data-end-year="{{ $honor->end_year }}" data-id="{{ $honor->id }}">
+                                            <tr data-start-year="{{ $honor->start_year }}" data-end-year="{{ $honor->end_year }}" data-type="honor" data-id="{{ $honor->id }}">
                                                 <td>{{ $honor->start_year }}</td>
                                                 <td>{{ $honor->is_ongoing ? 'Current' : $honor->end_year }}</td>
                                                 <td>{{ $honor->honorOrganization->name }}</td>
@@ -209,7 +209,7 @@
                                         </thead>
                                         <tbody id="academic-activities-table-body">
                                             @foreach($professor->activities->whereIn('activity_service_id', [1, 2])->sortByDesc('start_year') as $activity)
-                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-id="{{ $activity->id }}">
+                                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-type="academic_activity" data-id="{{ $activity->id }}">
                                                 <td>{{ $activity->start_year }}</td>
                                                 <td>{{ $activity->is_current ? 'Current' : $activity->end_year }}</td>
                                                 <td>{{ $activity->name }}</td>
@@ -242,7 +242,7 @@
                                         </thead>
                                         <tbody id="supervisions-table-body">
                                             @foreach($professor->graduateSupervisions->sortByDesc('start_year') as $supervision)
-                                            <tr data-start-year="{{ $supervision->start_year }}" data-end-year="{{ $supervision->end_year }}" data-id="{{ $supervision->id }}">
+                                            <tr data-start-year="{{ $supervision->start_year }}" data-end-year="{{ $supervision->end_year }}" data-type="supervision" data-id="{{ $supervision->id }}">
                                                 <td>{{ $supervision->start_year }} {{ ucfirst($supervision->start_month) }}</td>
                                                 <td>{{ $supervision->end_year ? $supervision->end_year . ' ' . ucfirst($supervision->end_month) : '-' }}</td>
                                                 <td>{{ $supervision->studentFullName() }} ({{ $supervision->student_program_name }}), {{ $supervision->student_program_area }}, {{ $supervision->supervisionRole->name }}</td>
@@ -274,7 +274,7 @@
                                         </thead>
                                         <tbody id="courses-table-body">
                                             @foreach($professor->courses->sortByDesc('created_at') as $course)
-                                            <tr data-created-at="{{ $course->created_at }}" data-id="{{ $course->id }}">
+                                            <tr data-created-at="{{ $course->created_at }}" data-type="course" data-id="{{ $course->id }}">
                                                 <td>{{ $course->title }}</td>
                                                 <td>
                                                     <strong>Course Code:</strong> {{ $course->code }}<br>
@@ -311,7 +311,7 @@
                                         </thead>
                                         <tbody id="outside-courses-table-body">
                                             @foreach($professor->outsideCourses->sortByDesc('created_at') as $course)
-                                            <tr data-created-at="{{ $course->created_at }}" data-id="{{ $course->id }}">
+                                            <tr data-created-at="{{ $course->created_at }}" data-type="outside_course" data-id="{{ $course->id }}">
                                                 <td>{{ $course->name }}</td>
                                                 <td>
                                                     <strong>Institution:</strong> {{ $course->institution }}<br>
@@ -350,7 +350,7 @@
                                         </thead>
                                         <tbody id="grants-table-body">
                                             @foreach($professor->grants->where('is_external', 1)->sortByDesc('start_date') as $grant)
-                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-id="{{ $grant->id }}">
+                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-type="grant" data-id="{{ $grant->id }}">
                                                 <td>{{ $grant->start_date }} - {{ $grant->end_date ?? '-' }}</td>
                                                 <td>{{ $grant->fundingSource?->name }}</td>
                                                 <td>{{ $grant->name }}</td>
@@ -389,7 +389,7 @@
                                         </thead>
                                         <tbody id="internal-grants-table-body">
                                             @foreach($professor->grants->where('is_external', 0)->sortByDesc('start_date') as $grant)
-                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-id="{{ $grant->id }}">
+                                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-type="internal_grant" data-id="{{ $grant->id }}">
                                                 <td>{{ $grant->start_date }} - {{ $grant->end_date ?? '-' }}</td>
                                                 <td>{{ $grant->fundingSource?->name }}</td>
                                                 <td>{{ $grant->name }}</td>
@@ -462,7 +462,7 @@
                                     <ul>
                                         @foreach($professor->books as $book)
                                         @if(!in_array($book->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $book->year }}" data-id="{{ $book->id }}">
+                                        <li data-year="{{ $book->year }}" data-type="book" data-id="{{ $book->id }}">
                                             <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('book', {{ $book->id }})">-</button>
                                         </li>
@@ -485,7 +485,7 @@
                                     <ul>
                                         @foreach($professor->books as $book)
                                         @if(in_array($book->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $book->year }}" data-id="{{ $book->id }}">
+                                        <li data-year="{{ $book->year }}" data-type="forthcoming_book" data-id="{{ $book->id }}">
                                             <strong>{{ $book->name }}</strong> - <span data-year="{{$book->year}}">{{ $book->year }}</span> {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_book', {{ $book->id }})">-</button>
                                         </li>
@@ -508,7 +508,7 @@
                                     <ul>
                                         @foreach($professor->bookChapters as $chapter)
                                         @if(!in_array($chapter->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
+                                        <li data-year="{{ $chapter->published_year }}" data-type="chapter" data-id="{{ $chapter->id }}">
                                             <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('chapter', {{ $chapter->id }})">-</button>
                                         </li>
@@ -531,7 +531,7 @@
                                     <ul>
                                         @foreach($professor->bookChapters as $chapter)
                                         @if(in_array($chapter->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
+                                        <li data-year="{{ $chapter->published_year }}" data-type="forthocoming_chapter" data-id="{{ $chapter->id }}">
                                             <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_chapter', {{ $chapter->id }})">-</button>
                                         </li>
@@ -554,8 +554,8 @@
                                     <ul>
                                         @foreach($professor->journalArticles as $paper)
                                         @if(!in_array($paper->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
-                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                                        <li data-year="{{ $paper->year }}" data-type="paper" data-id="{{ $paper->id }}">
+                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endif
@@ -577,8 +577,8 @@
                                     <ul>
                                         @foreach($professor->journalArticles as $paper)
                                         @if(in_array($paper->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
-                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                                        <li data-year="{{ $paper->year }}" data-type="forthcoming_paper" data-id="{{ $paper->id }}">
+                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endif
@@ -599,7 +599,7 @@
                                 <div id="papers-in-conference-proceedings-content">
                                     <ul>
                                         @foreach($professor->proceedings as $presentation)
-                                        <li data-year="{{ $presentation->year }}" data-id="{{ $presentation->id }}">
+                                        <li data-year="{{ $presentation->year }}" data-type="presentation" data-id="{{ $presentation->id }}">
                                             <strong>{{ $presentation->name }}</strong> - {{ $presentation->year }}, {{ $presentation->country->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('presentation', {{ $presentation->id }})">-</button>
                                         </li>
@@ -620,7 +620,7 @@
                                 <div id="technical-reports-content">
                                     <ul>
                                         @foreach($professor->technicalReports as $report)
-                                        <li data-year="{{ $report->year }}" data-id="{{ $report->id }}">
+                                        <li data-year="{{ $report->year }}" data-type="technical_report" data-id="{{ $report->id }}">
                                             <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }}, {{ $report->publisher->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('technical_report', {{ $report->id }})">-</button>
                                         </li>
@@ -641,7 +641,7 @@
                                 <div id="working-papers-content">
                                     <ul>
                                         @foreach($professor->workingPapers as $paper)
-                                        <li data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
+                                        <li data-year="{{ $paper->year }}" data-type="working_paper" data-id="{{ $paper->id }}">
                                             <strong>{{ $paper->name }}</strong> - {{ $paper->year }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('working_paper', {{ $paper->id }})">-</button>
                                         </li>
@@ -650,6 +650,116 @@
                                 </div>
                             </div>
                             <!-- End Working Papers Section -->
+                             <!-- Start Other Publications Section -->
+                              <div class="mt-15" id="other-publications">
+                                 <label class="form-check-label fs-3" for="include-working-papers">OTHER PUBLICATIONS</label>
+                                    
+                              </div>
+                            <!-- End Other Publications Section -->
+                            <!-- Begin Articles in Magazines Section -->
+                            <div class="mt-15" id="professor-articles-in-magazines">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-articles-in-magazines" name="include_articles_in_magazines" checked>
+                                        <label class="form-check-label fs-3" for="include-articles-in-magazines">ARTICLES IN MAGAZINES</label>
+                                    </div>
+                                </div>
+                                <div id="articles-in-magazines-content">
+                                    <ul>
+                                        @foreach($professor->magazineArticles as $article)
+                                        <li data-year="{{ $article->year }}" data-type="magazine_article" data-id="{{ $article->id }}">
+                                            <strong>{{ $article->title }}</strong> - {{ $article->magazine_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('magazine_article', {{ $article->id }})">-</button>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Articles in Magazines Section -->
+
+                            <!-- Begin Articles in Newspapers Section -->
+                            <div class="mt-15" id="professor-articles-in-newspapers">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-articles-in-newspapers" name="include_articles_in_newspapers" checked>
+                                        <label class="form-check-label fs-3" for="include-articles-in-newspapers">ARTICLES IN NEWSPAPERS</label>
+                                    </div>
+                                </div>
+                                <div id="articles-in-newspapers-content">
+                                    <ul>
+                                        @foreach($professor->newspaperArticles as $article)
+                                        <li data-year="{{ $article->year }}" data-type="newspaper_article" data-id="{{ $article->id }}">
+                                            <strong>{{ $article->title }}</strong> - {{ $article->newspaper_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('newspaper_article', {{ $article->id }})">-</button>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Articles in Newspapers Section -->
+
+                            <!-- Begin Articles in Newsletters Section -->
+                            <div class="mt-15" id="professor-articles-in-newsletters">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-articles-in-newsletters" name="include_articles_in_newsletters" checked>
+                                        <label class="form-check-label fs-3" for="include-articles-in-newsletters">ARTICLES IN NEWSLETTERS</label>
+                                    </div>
+                                </div>
+                                <div id="articles-in-newsletters-content">
+                                    <ul>
+                                        @foreach($professor->newsletterArticles as $article)
+                                        <li data-year="{{ $article->year }}" data-type="newsletter_article" data-id="{{ $article->id }}">
+                                            <strong>{{ $article->title }}</strong> - {{ $article->newsletter_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('newsletter_article', {{ $article->id }})">-</button>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Articles in Newsletters Section -->
+
+                            <!-- Begin Letters to Editor Section -->
+                            <div class="mt-15" id="professor-letters-to-editor">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-letters-to-editor" name="include_letters_to_editor" checked>
+                                        <label class="form-check-label fs-3" for="include-letters-to-editor">LETTERS TO EDITOR</label>
+                                    </div>
+                                </div>
+                                <div id="letters-to-editor-content">
+                                    <ul>
+                                        @foreach($professor->letterToEditorArticles as $article)
+                                        <li data-year="{{ $article->year }}" data-type="letter_to_editor" data-id="{{ $article->id }}">
+                                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('letter_to_editor', {{ $article->id }})">-</button>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Letters to Editor Section -->
+
+                            <!-- Begin Book Reviews Section -->
+                            <div class="mt-15" id="professor-book-reviews">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check form-check-custom form-check-solid form-check-lg">
+                                        <input class="form-check-input" type="checkbox" id="include-book-reviews" name="include_book_reviews" checked>
+                                        <label class="form-check-label fs-3" for="include-book-reviews">BOOK REVIEWS</label>
+                                    </div>
+                                </div>
+                                <div id="book-reviews-content">
+                                    <ul>
+                                        @foreach($professor->bookReviews as $review)
+                                        <li data-year="{{ $review->year }}" data-type="book_review" data-id="{{ $review->id }}">
+                                            <strong>{{ $review->name }}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('book_review', {{ $review->id }})">-</button>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Book Reviews Section -->
                         </div>
                     </div>
                 </div>
@@ -777,6 +887,150 @@
                 workingPapersContent.classList.add('disabled');
             }
         });
+
+        document.getElementById('include-articles-in-magazines').addEventListener('change', function() {
+            const articlesInMagazinesContent = document.getElementById('articles-in-magazines-content');
+            if (this.checked) {
+                articlesInMagazinesContent.classList.remove('disabled');
+            } else {
+                articlesInMagazinesContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-books').addEventListener('change', function() {
+            const booksContent = document.getElementById('books-content');
+            if (this.checked) {
+                booksContent.classList.remove('disabled');
+            } else {
+                booksContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-forthcoming-books').addEventListener('change', function() {
+            const forthcomingBooksContent = document.getElementById('forthcoming-books-content');
+            if (this.checked) {
+                forthcomingBooksContent.classList.remove('disabled');
+            } else {
+                forthcomingBooksContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-chapters-in-books').addEventListener('change', function() {
+            const chaptersInBooksContent = document.getElementById('chapters-in-books-content');
+            if (this.checked) {
+                chaptersInBooksContent.classList.remove('disabled');
+            } else {
+                chaptersInBooksContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-forthcoming-chapters-in-books').addEventListener('change', function() {
+            const forthcomingChaptersInBooksContent = document.getElementById('forthcoming-chapters-in-books-content');
+            if (this.checked) {
+                forthcomingChaptersInBooksContent.classList.remove('disabled');
+            } else {
+                forthcomingChaptersInBooksContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-papers-in-journals').addEventListener('change', function() {
+            const papersInJournalsContent = document.getElementById('papers-in-journals-content');
+            if (this.checked) {
+                papersInJournalsContent.classList.remove('disabled');
+            } else {
+                papersInJournalsContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-forthcoming-papers-in-journals').addEventListener('change', function() {
+            const forthcomingPapersInJournalsContent = document.getElementById('forthcoming-papers-in-journals-content');
+            if (this.checked) {
+                forthcomingPapersInJournalsContent.classList.remove('disabled');
+            } else {
+                forthcomingPapersInJournalsContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-papers-in-conference-proceedings').addEventListener('change', function() {
+            const papersInConferenceProceedingsContent = document.getElementById('papers-in-conference-proceedings-content');
+            if (this.checked) {
+                papersInConferenceProceedingsContent.classList.remove('disabled');
+            } else {
+                papersInConferenceProceedingsContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-technical-reports').addEventListener('change', function() {
+            const technicalReportsContent = document.getElementById('technical-reports-content');
+            if (this.checked) {
+                technicalReportsContent.classList.remove('disabled');
+            } else {
+                technicalReportsContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-articles-in-newspapers').addEventListener('change', function() {
+            const articlesInNewspapersContent = document.getElementById('articles-in-newspapers-content');
+            if (this.checked) {
+                articlesInNewspapersContent.classList.remove('disabled');
+            } else {
+                articlesInNewspapersContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-articles-in-newsletters').addEventListener('change', function() {
+            const articlesInNewslettersContent = document.getElementById('articles-in-newsletters-content');
+            if (this.checked) {
+                articlesInNewslettersContent.classList.remove('disabled');
+            } else {
+                articlesInNewslettersContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-letters-to-editor').addEventListener('change', function() {
+            const lettersToEditorContent = document.getElementById('letters-to-editor-content');
+            if (this.checked) {
+                lettersToEditorContent.classList.remove('disabled');
+            } else {
+                lettersToEditorContent.classList.add('disabled');
+            }
+        });
+
+        document.getElementById('include-book-reviews').addEventListener('change', function() {
+            const bookReviewsContent = document.getElementById('book-reviews-content');
+            if (this.checked) {
+                bookReviewsContent.classList.remove('disabled');
+            } else {
+                bookReviewsContent.classList.add('disabled');
+            }
+        });
+
+        function filterAllSections() {
+            filterDegrees();
+            filterEmployments();
+            filterActivities();
+            filterHonors();
+            filterAcademicActivities();
+            filterSupervisions();
+            filterCourses();
+            filterOutsideCourses();
+            filterGrants();
+            filterInternalGrants();
+            filterBooks();
+            filterForthcomingBooks();
+            filterChaptersInBooks();
+            filterForthcomingChaptersInBooks();
+            filterPapersInJournals();
+            filterForthcomingPapersInJournals();
+            filterPapersInConferenceProceedings();
+            filterTechnicalReports();
+            filterWorkingPapers();
+            filterArticlesInMagazines();
+            filterArticlesInNewspapers();
+            filterArticlesInNewsletters();
+            filterLettersToEditor();
+            filterBookReviews();
+        }
 
         function filterDegrees() {
             const range = document.getElementById('range').value;
@@ -1336,8 +1590,153 @@
             }
         }
 
+        function filterArticlesInMagazines() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const articlesInMagazinesContent = document.getElementById('articles-in-magazines-content');
+            const items = articlesInMagazinesContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterArticlesInNewspapers() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const articlesInNewspapersContent = document.getElementById('articles-in-newspapers-content');
+            const items = articlesInNewspapersContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterArticlesInNewsletters() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const articlesInNewslettersContent = document.getElementById('articles-in-newsletters-content');
+            const items = articlesInNewslettersContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterLettersToEditor() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const lettersToEditorContent = document.getElementById('letters-to-editor-content');
+            const items = lettersToEditorContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
+        function filterBookReviews() {
+            const range = document.getElementById('range').value;
+            const currentYear = new Date().getFullYear();
+            const bookReviewsContent = document.getElementById('book-reviews-content');
+            const items = bookReviewsContent.getElementsByTagName('li');
+
+            for (let item of items) {
+                const year = parseInt(item.getAttribute('data-year'));
+                let showItem = false;
+
+                switch (range) {
+                    case 'lifetime':
+                        showItem = true;
+                        break;
+                    case '8_years':
+                        showItem = currentYear - year <= 8;
+                        break;
+                    case '3_years':
+                        showItem = currentYear - year <= 3;
+                        break;
+                    case '12_months':
+                        showItem = currentYear - year <= 1;
+                        break;
+                }
+
+                item.style.display = showItem ? '' : 'none';
+            }
+        }
+
         function excludeEntry(type, id) {
-            const entry = document.querySelector(`[data-id="${id}"]`);
+            const entry = document.querySelector(`[data-type="${type}"][data-id="${id}"]`);
             if (entry) {
                 entry.style.display = 'none';
                 const input = document.createElement('input');

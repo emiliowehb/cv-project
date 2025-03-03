@@ -136,7 +136,7 @@
                         </thead>
                         <tbody id="degrees-table-body">
                             @foreach($filteredDegrees as $degree)
-                            <tr data-year="{{ $degree->year }}">
+                            <tr data-type="degree" data-year="{{ $degree->year }}" data-id="{{ $degree->id }}">
                                 <td>{{ $degree->degree->name }}</td>
                                 <td>{{ $degree->institution_name }}</td>
                                 <td>{{ $degree->discipline->name }}</td>
@@ -168,7 +168,7 @@
                         </thead>
                         <tbody id="employments-table-body">
                             @foreach($filteredEmployments as $employment)
-                            <tr data-start-year="{{ $employment->start_year }}" data-end-year="{{ $employment->end_year }}">
+                            <tr data-type="employment" data-start-year="{{ $employment->start_year }}" data-end-year="{{ $employment->end_year }}" data-id="{{ $employment->id }}">
                                 <td>{{ $employment->start_year }}</td>
                                 <td>{{ $employment->is_current ? 'Current' : $employment->end_year }}</td>
                                 <td>{{ $employment->employer }}</td>
@@ -200,7 +200,7 @@
                         </thead>
                         <tbody id="activities-table-body">
                             @foreach($filteredActivities as $activity)
-                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}">
+                            <tr data-type="activity" data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-id="{{ $activity->id }}">
                                 <td>{{ $activity->start_year }}</td>
                                 <td>{{ $activity->is_current ? 'Current' : $activity->end_year }}</td>
                                 <td>{{ $activity->name }}</td>
@@ -232,7 +232,7 @@
                         </thead>
                         <tbody id="honors-table-body">
                             @foreach($filteredHonors as $honor)
-                            <tr data-start-year="{{ $honor->start_year }}" data-end-year="{{ $honor->end_year }}">
+                            <tr data-type="honor" data-start-year="{{ $honor->start_year }}" data-end-year="{{ $honor->end_year }}" data-id="{{ $honor->id }}">
                                 <td>{{ $honor->start_year }}</td>
                                 <td>{{ $honor->is_ongoing ? 'Current' : $honor->end_year }}</td>
                                 <td>{{ $honor->honorOrganization->name }}</td>
@@ -263,7 +263,7 @@
                         </thead>
                         <tbody id="academic-activities-table-body">
                             @foreach($filteredAcademicActivities as $activity)
-                            <tr data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}">
+                            <tr data-type="academic_activity" data-start-year="{{ $activity->start_year }}" data-end-year="{{ $activity->end_year }}" data-id="{{ $activity->id }}">
                                 <td>{{ $activity->start_year }}</td>
                                 <td>{{ $activity->is_current ? 'Current' : $activity->end_year }}</td>
                                 <td>{{ $activity->name }}</td>
@@ -293,7 +293,7 @@
                         </thead>
                         <tbody id="supervisions-table-body">
                             @foreach($filteredSupervisions as $supervision)
-                            <tr data-start-year="{{ $supervision->start_year }}" data-end-year="{{ $supervision->end_year }}">
+                            <tr data-type="supervision" data-start-year="{{ $supervision->start_year }}" data-end-year="{{ $supervision->end_year }}" data-id="{{ $supervision->id }}">
                                 <td>{{ $supervision->start_year }} {{ ucfirst($supervision->start_month) }}</td>
                                 <td>{{ $supervision->end_year ? $supervision->end_year . ' ' . ucfirst($supervision->end_month) : '-' }}</td>
                                 <td>{{ $supervision->studentFullName() }} ({{ $supervision->student_program_name }}), {{ $supervision->student_program_area }}, {{ $supervision->supervisionRole->name }}</td>
@@ -322,7 +322,7 @@
                         </thead>
                         <tbody id="courses-table-body">
                             @foreach($filteredCourses as $course)
-                            <tr data-created-at="{{ $course->created_at }}">
+                            <tr data-type="course" data-created-at="{{ $course->created_at }}" data-id="{{ $course->id }}">
                                 <td>{{ $course->title }}</td>
                                 <td>
                                     <strong>Course Code:</strong> {{ $course->code }}<br>
@@ -356,7 +356,7 @@
                         </thead>
                         <tbody id="outside-courses-table-body">
                             @foreach($filteredOutsideCourses as $course)
-                            <tr data-created-at="{{ $course->created_at }}">
+                            <tr data-type="outside_course" data-created-at="{{ $course->created_at }}" data-id="{{ $course->id }}">
                                 <td>{{ $course->name }}</td>
                                 <td>
                                     <strong>Institution:</strong> {{ $course->institution }}<br>
@@ -392,12 +392,12 @@
                         </thead>
                         <tbody id="grants-table-body">
                             @foreach($filteredGrants as $grant)
-                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}">
+                            <tr data-type="grant" data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-id="{{ $grant->id }}">
                                 <td>{{ $grant->start_date }} - {{ $grant->end_date ?? '-' }}</td>
                                 <td>{{ $grant->fundingSource?->name }}</td>
                                 <td>{{ $grant->name }}</td>
-                                <td>{{ $grant->grantType->name }}</td>
-                                <td>{{ $grant->amount }}</td>
+                                <td>{{ $grant->grantType->code }}</td>
+                                <td>{{ $grant->amount }} {{ $grant->currency->code }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -426,12 +426,12 @@
                         </thead>
                         <tbody id="internal-grants-table-body">
                             @foreach($filteredInternalGrants as $grant)
-                            <tr data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}">
+                            <tr data-type="internal_grant" data-start-date="{{ $grant->start_date }}" data-end-date="{{ $grant->end_date }}" data-id="{{ $grant->id }}">
                                 <td>{{ $grant->start_date }} - {{ $grant->end_date ?? '-' }}</td>
                                 <td>{{ $grant->fundingSource?->name }}</td>
                                 <td>{{ $grant->name }}</td>
-                                <td>{{ $grant->grantType->name }}</td>
-                                <td>{{ $grant->amount }}</td>
+                                <td>{{ $grant->grantType?->code }}</td>
+                                <td>{{ $grant->amount }} {{ $grant->currency?->code }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -495,7 +495,7 @@
                     <ul>
                         @foreach($filteredBooks as $book)
                         @if(!in_array($book->publication_status_id, [2, 4]))
-                        <li>
+                        <li data-type="book" data-year="{{ $book->year }}" data-id="{{ $book->id }}">
                             <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
                         </li>
                         @endif
@@ -516,8 +516,8 @@
                     <ul>
                         @foreach($filteredForthcomingBooks as $book)
                         @if(in_array($book->publication_status_id, [2, 4]))
-                        <li>
-                            <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                        <li data-type="forthcoming_book" data-year="{{ $book->year }}" data-id="{{ $book->id }}">
+                            <strong>{{ $book->name }}</strong> - <span data-year="{{$book->year}}">{{ $book->year }}</span> {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
                         </li>
                         @endif
                         @endforeach
@@ -537,7 +537,7 @@
                     <ul>
                         @foreach($filteredChaptersInBooks as $chapter)
                         @if(!in_array($chapter->publication_status_id, [2, 4]))
-                        <li>
+                        <li data-type="chapter" data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
                             <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
                         </li>
                         @endif
@@ -558,7 +558,7 @@
                     <ul>
                         @foreach($filteredForthcomingChaptersInBooks as $chapter)
                         @if(in_array($chapter->publication_status_id, [2, 4]))
-                        <li>
+                        <li data-type="forthcoming_chapter" data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
                             <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
                         </li>
                         @endif
@@ -579,8 +579,8 @@
                     <ul>
                         @foreach($filteredPapersInJournals as $paper)
                         @if(!in_array($paper->publication_status_id, [2, 4]))
-                        <li>
-                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                        <li data-type="paper" data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
+                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
                         </li>
                         @endif
                         @endforeach
@@ -600,8 +600,8 @@
                     <ul>
                         @foreach($filteredForthcomingPapersInJournals as $paper)
                         @if(in_array($paper->publication_status_id, [2, 4]))
-                        <li>
-                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}
+                        <li data-type="forthcoming_paper" data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
+                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
                         </li>
                         @endif
                         @endforeach
@@ -620,7 +620,7 @@
                 <div id="papers-in-conference-proceedings-content">
                     <ul>
                         @foreach($filteredPapersInConferenceProceedings as $presentation)
-                        <li>
+                        <li data-type="presentation" data-year="{{ $presentation->year }}" data-id="{{ $presentation->id }}">
                             <strong>{{ $presentation->name }}</strong> - {{ $presentation->year }}, {{ $presentation->country->name }}
                         </li>
                         @endforeach
@@ -639,7 +639,7 @@
                 <div id="technical-reports-content">
                     <ul>
                         @foreach($filteredTechnicalReports as $report)
-                        <li>
+                        <li data-type="technical_report" data-year="{{ $report->year }}" data-id="{{ $report->id }}">
                             <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }}, {{ $report->publisher->name }}
                         </li>
                         @endforeach
@@ -658,7 +658,7 @@
                 <div id="working-papers-content">
                     <ul>
                         @foreach($filteredWorkingPapers as $paper)
-                        <li>
+                        <li data-type="working_paper" data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
                             <strong>{{ $paper->name }}</strong> - {{ $paper->year }}
                         </li>
                         @endforeach
@@ -667,12 +667,106 @@
             </div>
             @endif
             <!-- End Working Papers Section -->
+
+            <!-- Begin Articles in Magazines Section -->
+            @if($include_articles_in_magazines)
+            <div class="mt-15" id="professor-articles-in-magazines">
+                <div class="d-flex align-items-center">
+                    <h3>ARTICLES IN MAGAZINES</h3>
+                </div>
+                <div id="articles-in-magazines-content">
+                    <ul>
+                        @foreach($filteredArticlesInMagazines as $article)
+                        <li data-type="magazine_article" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
+                            <strong>{{ $article->title }}</strong> - {{ $article->magazine_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+            <!-- End Articles in Magazines Section -->
+
+            <!-- Begin Articles in Newspapers Section -->
+            @if($include_articles_in_newspapers)
+            <div class="mt-15" id="professor-articles-in-newspapers">
+                <div class="d-flex align-items-center">
+                    <h3>ARTICLES IN NEWSPAPERS</h3>
+                </div>
+                <div id="articles-in-newspapers-content">
+                    <ul>
+                        @foreach($filteredArticlesInNewspapers as $article)
+                        <li data-type="newspaper_article" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
+                            <strong>{{ $article->title }}</strong> - {{ $article->newspaper_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+            <!-- End Articles in Newspapers Section -->
+
+            <!-- Begin Articles in Newsletters Section -->
+            @if($include_articles_in_newsletters)
+            <div class="mt-15" id="professor-articles-in-newsletters">
+                <div class="d-flex align-items-center">
+                    <h3>ARTICLES IN NEWSLETTERS</h3>
+                </div>
+                <div id="articles-in-newsletters-content">
+                    <ul>
+                        @foreach($filteredArticlesInNewsletters as $article)
+                        <li data-type="newsletter_article" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
+                            <strong>{{ $article->title }}</strong> - {{ $article->newsletter_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+            <!-- End Articles in Newsletters Section -->
+
+            <!-- Begin Letters to Editor Section -->
+            @if($include_letters_to_editor)
+            <div class="mt-15" id="professor-letters-to-editor">
+                <div class="d-flex align-items-center">
+                    <h3>LETTERS TO EDITOR</h3>
+                </div>
+                <div id="letters-to-editor-content">
+                    <ul>
+                        @foreach($filteredLettersToEditor as $article)
+                        <li data-type="letter_to_editor" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
+                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+            <!-- End Letters to Editor Section -->
+
+            <!-- Begin Book Reviews Section -->
+            @if($include_book_reviews)
+            <div class="mt-15" id="professor-book-reviews">
+                <div class="d-flex align-items-center">
+                    <h3>BOOK REVIEWS</h3>
+                </div>
+                <div id="book-reviews-content">
+                    <ul>
+                        @foreach($filteredBookReviews as $review)
+                        <li data-type="book_review" data-year="{{ $review->year }}" data-id="{{ $review->id }}">
+                            <strong>{{ $review->name }}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+            <!-- End Book Reviews Section -->
         </div>
         <div class="card-footer">
             <div class="signature mt-15">
                 <p>______________________________</p>
-                <p>Generated by Workspace: {{ $professor->workspace->name }}</p>
-                <h6 class="mt-2 fs-5">{{Carbon\Carbon::now()->format('d/m/Y')}}</h6>
+                <h6 class="mt-2 fs-5">Generated on: {{Carbon\Carbon::now()->format('d/m/Y')}}</h6>
             </div>
         </div>
     </div>

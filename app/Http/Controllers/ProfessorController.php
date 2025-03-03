@@ -468,6 +468,11 @@ class ProfessorController extends Controller
         $include_papers_in_conference_proceedings = $request->has('include_papers_in_conference_proceedings');
         $include_technical_reports = $request->has('include_technical_reports');
         $include_working_papers = $request->has('include_working_papers');
+        $include_articles_in_magazines = $request->has('include_articles_in_magazines');
+        $include_articles_in_newspapers = $request->has('include_articles_in_newspapers');
+        $include_articles_in_newsletters = $request->has('include_articles_in_newsletters');
+        $include_letters_to_editor = $request->has('include_letters_to_editor');
+        $include_book_reviews = $request->has('include_book_reviews');
 
         $range = $data['range'];
         $currentYear = Carbon::now()->year;
@@ -491,6 +496,11 @@ class ProfessorController extends Controller
         $filteredPapersInConferenceProceedings = $professor->proceedings;
         $filteredTechnicalReports = $professor->technicalReports;
         $filteredWorkingPapers = $professor->workingPapers;
+        $filteredArticlesInMagazines = $professor->magazineArticles;
+        $filteredArticlesInNewspapers = $professor->newspaperArticles;
+        $filteredArticlesInNewsletters = $professor->newsletterArticles;
+        $filteredLettersToEditor = $professor->letterToEditorArticles;
+        $filteredBookReviews = $professor->bookReviews;
 
         if ($range !== 'lifetime') {
             $years = [
@@ -574,6 +584,26 @@ class ProfessorController extends Controller
             $filteredWorkingPapers = $filteredWorkingPapers->filter(function ($paper) use ($currentYear, $years, $range) {
                 return $currentYear - $paper->year <= $years[$range];
             });
+
+            $filteredArticlesInMagazines = $filteredArticlesInMagazines->filter(function ($article) use ($currentYear, $years, $range) {
+                return $currentYear - $article->year <= $years[$range];
+            });
+
+            $filteredArticlesInNewspapers = $filteredArticlesInNewspapers->filter(function ($article) use ($currentYear, $years, $range) {
+                return $currentYear - $article->year <= $years[$range];
+            });
+
+            $filteredArticlesInNewsletters = $filteredArticlesInNewsletters->filter(function ($article) use ($currentYear, $years, $range) {
+                return $currentYear - $article->year <= $years[$range];
+            });
+
+            $filteredLettersToEditor = $filteredLettersToEditor->filter(function ($article) use ($currentYear, $years, $range) {
+                return $currentYear - $article->year <= $years[$range];
+            });
+
+            $filteredBookReviews = $filteredBookReviews->filter(function ($review) use ($currentYear, $years, $range) {
+                return $currentYear - $review->year <= $years[$range];
+            });
         }
 
         // Exclude entries based on request data
@@ -596,6 +626,11 @@ class ProfessorController extends Controller
         $exclude_presentations = $request->input('exclude_presentation', []);
         $exclude_technical_reports = $request->input('exclude_technical_report', []);
         $exclude_working_papers = $request->input('exclude_working_paper', []);
+        $exclude_articles_in_magazines = $request->input('exclude_magazine_article', []);
+        $exclude_articles_in_newspapers = $request->input('exclude_newspaper_article', []);
+        $exclude_articles_in_newsletters = $request->input('exclude_newsletter_article', []);
+        $exclude_letters_to_editor = $request->input('exclude_letter_to_editor', []);
+        $exclude_book_reviews = $request->input('exclude_book_review', []);
 
         $filteredDegrees = $filteredDegrees->whereNotIn('id', $exclude_degrees);
         $filteredEmployments = $filteredEmployments->whereNotIn('id', $exclude_employments);
@@ -616,6 +651,11 @@ class ProfessorController extends Controller
         $filteredPapersInConferenceProceedings = $filteredPapersInConferenceProceedings->whereNotIn('id', $exclude_presentations);
         $filteredTechnicalReports = $filteredTechnicalReports->whereNotIn('id', $exclude_technical_reports);
         $filteredWorkingPapers = $filteredWorkingPapers->whereNotIn('id', $exclude_working_papers);
+        $filteredArticlesInMagazines = $filteredArticlesInMagazines->whereNotIn('id', $exclude_articles_in_magazines);
+        $filteredArticlesInNewspapers = $filteredArticlesInNewspapers->whereNotIn('id', $exclude_articles_in_newspapers);
+        $filteredArticlesInNewsletters = $filteredArticlesInNewsletters->whereNotIn('id', $exclude_articles_in_newsletters);
+        $filteredLettersToEditor = $filteredLettersToEditor->whereNotIn('id', $exclude_letters_to_editor);
+        $filteredBookReviews = $filteredBookReviews->whereNotIn('id', $exclude_book_reviews);
 
         $pdf = Pdf::loadView('pages/professors.cv-builder.pdf-templates.cv-template', [
             'professor' => $professor,
@@ -639,6 +679,11 @@ class ProfessorController extends Controller
             'include_papers_in_conference_proceedings' => $include_papers_in_conference_proceedings,
             'include_technical_reports' => $include_technical_reports,
             'include_working_papers' => $include_working_papers,
+            'include_articles_in_magazines' => $include_articles_in_magazines,
+            'include_articles_in_newspapers' => $include_articles_in_newspapers,
+            'include_articles_in_newsletters' => $include_articles_in_newsletters,
+            'include_letters_to_editor' => $include_letters_to_editor,
+            'include_book_reviews' => $include_book_reviews,
             'filteredDegrees' => $filteredDegrees,
             'filteredEmployments' => $filteredEmployments,
             'filteredActivities' => $filteredActivities,
@@ -658,6 +703,11 @@ class ProfessorController extends Controller
             'filteredPapersInConferenceProceedings' => $filteredPapersInConferenceProceedings,
             'filteredTechnicalReports' => $filteredTechnicalReports,
             'filteredWorkingPapers' => $filteredWorkingPapers,
+            'filteredArticlesInMagazines' => $filteredArticlesInMagazines,
+            'filteredArticlesInNewspapers' => $filteredArticlesInNewspapers,
+            'filteredArticlesInNewsletters' => $filteredArticlesInNewsletters,
+            'filteredLettersToEditor' => $filteredLettersToEditor,
+            'filteredBookReviews' => $filteredBookReviews,
         ]);
 
         $rangeLabels = [

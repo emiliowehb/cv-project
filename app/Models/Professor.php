@@ -118,6 +118,31 @@ class Professor extends Model
         return $this->hasMany(ProfessorArticle::class);
     }
 
+    public function magazineArticles()
+    {
+        return $this->hasMany(ProfessorArticle::class)->where('article_type_id', 2);
+    }
+
+    public function newspaperArticles()
+    {
+        return $this->hasMany(ProfessorArticle::class)->where('article_type_id', 3);
+    }
+
+    public function newsletterArticles()
+    {
+        return $this->hasMany(ProfessorArticle::class)->where('article_type_id', 4);
+    }
+
+    public function letterToEditorArticles()
+    {
+        return $this->hasMany(ProfessorArticle::class)->where('article_type_id', 5);
+    }
+
+    public function bookReviews()
+    {
+        return $this->hasMany(ProfessorBookReview::class);
+    }
+
     public function formattedAddress()
     {
         $address = $this->address;
