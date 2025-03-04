@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('publisher_name');
             $table->integer('year');
             $table->string('nb_pages')->nullable();
-            $table->enum('status', ArticleStatusEnum::values())->default(ArticleStatusEnum::WAITING_FOR_VALIDATION);
+            $table->enum('admin_status', ArticleStatusEnum::values())->default(ArticleStatusEnum::WAITING_FOR_VALIDATION);
             $table->text('url')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();

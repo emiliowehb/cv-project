@@ -75,13 +75,102 @@
 			</div>
 			<!--end:Menu item-->
 			<!--begin:Menu item-->
-			<div data-kt-menu-trigger="click" class="menu-item menu {{ request()->routeIs('admin.faculty-list') ? 'here show' : '' }}">
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('admin.professor-submissions.*') ? 'here show' : '' }}">
 				<!--begin:Menu link-->
-				<a class="menu-link" >
-					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+				<span class="menu-link">
+					<span class="menu-icon">{!! getIcon('abstract-28', 'fs-2') !!}</span>
 					<span class="menu-title">Professor Submissions</span>
-				</a>
+					<span class="menu-arrow"></span>
+				</span>
 				<!--end:Menu link-->
+				<!--begin:Menu sub-->
+				<div class="menu-sub menu-sub-accordion">
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.book-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.book-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Books</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.book-chapter-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.book-chapter-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Book Chapters</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.journal-articles-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.journal-articles-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Journal Articles</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.magazine-articles-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.magazine-articles-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Magazine Articles</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.case-articles-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.case-articles-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Case Articles</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.newsletter-articles-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.newsletter-articles-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Newsletter Articles</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a class="menu-link {{ request()->routeIs('admin.professor-submissions.newspaper-articles-submissions') ? 'active' : '' }}" href="{{ route('admin.professor-submissions.newspaper-articles-submissions') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Newspaper Articles</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+				</div>
+				<!--end:Menu sub-->
 			</div>
 			<!--end:Menu item-->
 		</div>

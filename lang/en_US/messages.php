@@ -87,6 +87,7 @@ return [
     'please_wait' => 'Please wait...',
     'add_article' => 'Add An Article',
     'add_journal_article' => 'Add Journal Article',
+    'journal_articles' => 'Journal Articles',
     'article_type' => 'Article Type',
     'article_title' => 'Article Title',
     'publisher_name' => 'Publisher Name',

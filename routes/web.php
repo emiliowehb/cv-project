@@ -6,6 +6,7 @@ use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\ReviewableController;
 use App\Http\Controllers\WorkspaceInvitationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -74,6 +75,16 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->prefix('/admin')->group(func
 
     Route::name('workspace-management.')->group(function () {
         Route::resource('/workspace-management/invitations', WorkspaceInvitationController::class);
+    });
+    
+    Route::name('admin.professor-submissions.')->prefix('/professor-submissions')->group(function () {
+        Route::get('/books', [ReviewableController::class, 'showBookSubmissions'])->name('book-submissions');
+        Route::get('/book-chapters', [ReviewableController::class, 'showBookChaptersSubmissions'])->name('book-chapter-submissions');
+        Route::get('/journal-articles', [ReviewableController::class, 'showJournalArticlesSubmissions'])->name('journal-articles-submissions');
+        Route::get('/magazine-articles', [ReviewableController::class, 'showMagazineArticlesSubmissions'])->name('magazine-articles-submissions');
+        Route::get('/case-articles', [ReviewableController::class, 'showCaseArticlesSubmissions'])->name('case-articles-submissions');
+        Route::get('/newsletter-articles', [ReviewableController::class, 'showNewsletterArticlesSubmissions'])->name('newsletter-articles-submissions');
+        Route::get('/newspaper-articles', [ReviewableController::class, 'showNewspaperArticlesSubmissions'])->name('newspaper-articles-submissions');
     });
 
     Route::name('user-management.')->group(function () {
