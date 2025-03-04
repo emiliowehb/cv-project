@@ -25,13 +25,13 @@ Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Admin Dashboard', route('admin.dashboard'));
 });
 
-// Home > Dashboard > User Management
+// Home > Dashboard > Member Management
 Breadcrumbs::for('workspace-management.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Workspace Management', route('workspace-management.invitations.index'));
 });
 
-// Home > Dashboard > User Management > Users
+// Home > Dashboard > Member Management > Members
 Breadcrumbs::for('workspace-management.invitations.index', function (BreadcrumbTrail $trail) {
     $trail->parent('workspace-management.index');
     $trail->push('Workspace Invitations', route('workspace-management.invitations.index'));
@@ -40,13 +40,13 @@ Breadcrumbs::for('workspace-management.invitations.index', function (BreadcrumbT
 // Home > Dashboard > User Management
 Breadcrumbs::for('user-management.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('User Management', route('user-management.users.index'));
+    $trail->push('Member Management', route('user-management.users.index'));
 });
 
 // Home > Dashboard > User Management > Users
 Breadcrumbs::for('user-management.users.index', function (BreadcrumbTrail $trail) {
     $trail->parent('user-management.index');
-    $trail->push('Users', route('user-management.users.index'));
+    $trail->push('Members', route('user-management.users.index'));
 });
 
 // Home > Dashboard > Profile > Overview

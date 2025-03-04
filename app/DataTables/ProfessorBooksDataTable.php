@@ -33,8 +33,12 @@ class ProfessorBooksDataTable extends DataTable
                 return $book->nb_pages;
             })
             ->editColumn('admin_status', function (ProfessorBook $book) {
-                $status = ArticleStatusEnum::from($book->admin_status);
-                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                $reviewable = $book->reviewables()->orderBy('created_at', 'desc')->first();
+                if (!$reviewable) {
+                    return '<span class="badge badge-secondary">Not Reviewed</span>';
+                }
+                $status = ArticleStatusEnum::from($reviewable->status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $reviewable->reason . '"' : '';
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorBook $book) {

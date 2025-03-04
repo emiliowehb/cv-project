@@ -16,7 +16,11 @@
 		<!--end::Mobile logo-->
 		<!--begin::Header wrapper-->
 		<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
+			@if(!auth()->user()->role == 'owner')
 			@include(config('settings.KT_THEME_LAYOUT_DIR').'/partials/sidebar-layout/header/_menu/_menu')
+			@else
+			@include(config('settings.KT_THEME_LAYOUT_DIR').'/partials/sidebar-layout/header/_menu/_menu-admin')
+			@endif
 			@include(config('settings.KT_THEME_LAYOUT_DIR').'/partials/sidebar-layout/header/_navbar')
 		</div>
 		<!--end::Header wrapper-->

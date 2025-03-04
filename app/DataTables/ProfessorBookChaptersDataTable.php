@@ -35,9 +35,13 @@ class ProfessorBookChaptersDataTable extends DataTable
             ->editColumn('nb_pages', function (ProfessorBookChapter $chapter) {
                 return $chapter->nb_pages;
             })
-            ->editColumn('admin_status', function (ProfessorBookChapter $chapter) {
-                $status = ArticleStatusEnum::from($chapter->admin_status);
-                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+            ->editColumn('admin_status', function (ProfessorBookChapter $book) {
+                $reviewable = $book->reviewables()->orderBy('created_at', 'desc')->first();
+                if (!$reviewable) {
+                    return '<span class="badge badge-secondary">Not Reviewed</span>';
+                }
+                $status = ArticleStatusEnum::from($reviewable->status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $reviewable->reason . '"' : '';
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorBookChapter $chapter) {

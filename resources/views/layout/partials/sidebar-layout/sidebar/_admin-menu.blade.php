@@ -7,10 +7,10 @@
 			<!--begin:Menu item-->
 			<div data-kt-menu-trigger="click" class="menu-item menu {{ request()->routeIs('admin.dashboard') ? 'here show' : '' }}">
 				<!--begin:Menu link-->
-				<span class="menu-link">
+				<a class="menu-link" href="{{ route('admin.dashboard') }}">
 					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
 					<span class="menu-title">Dashboard</span>
-				</span>
+				</a>
 				<!--end:Menu link-->
 			</div>
 			<!--end:Menu item-->
@@ -41,7 +41,7 @@
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
-							<span class="menu-title">Members</span>
+							<span class="menu-title">Faculty Members</span>
 						</a>
 						<!--end:Menu link-->
 					</div>
@@ -49,7 +49,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link {{ request()->routeIs('user-management.users.*') ? 'active' : '' }}" href="{{ route('workspace-management.invitations.index') }}">
+						<a class="menu-link {{ request()->routeIs('workspace-management.invitations.index') ? 'active' : '' }}" href="{{ route('workspace-management.invitations.index') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -61,7 +61,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link {{ request()->routeIs('user-management.roles.*') ? 'active' : '' }}" href="{{ route('user-management.roles.index') }}">
+						<a class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -77,10 +77,10 @@
 			<!--begin:Menu item-->
 			<div data-kt-menu-trigger="click" class="menu-item menu {{ request()->routeIs('admin.faculty-list') ? 'here show' : '' }}">
 				<!--begin:Menu link-->
-				<span class="menu-link">
+				<a class="menu-link" >
 					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-					<span class="menu-title">Faculty Members</span>
-				</span>
+					<span class="menu-title">Professor Submissions</span>
+				</a>
 				<!--end:Menu link-->
 			</div>
 			<!--end:Menu item-->

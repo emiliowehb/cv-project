@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Professor;
 
+use App\Enums\ArticleStatusEnum;
 use App\Enums\MonthEnum;
 use App\Models\BookType;
 use App\Models\Publisher;
@@ -11,6 +12,7 @@ use App\Models\PublicationStatus;
 use App\Models\ProfessorBook;
 use App\Models\PublicationPrimaryField;
 use App\Models\PublicationSecondaryField;
+use App\Models\Reviewable;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -107,7 +109,7 @@ class AddBookModal extends Component
                     'secondary_field_id' => $this->secondary_field_id,
                 ]);
             } else {
-                ProfessorBook::create([
+                $book = ProfessorBook::create([
                     'professor_id' => $this->professor_id,
                     'name' => $this->name,
                     'year' => $this->year,
@@ -123,6 +125,18 @@ class AddBookModal extends Component
                     'secondary_field_id' => $this->secondary_field_id,
                 ]);
             }
+
+            $review = new Reviewable([
+                'reviewable_type' => ProfessorBook::class,
+                'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
+                'type_id' => null, 
+                'reviewable_id' => $book ? $book->id : $this->book_to_edit,
+                'reason' => null,
+            ]);
+
+            $review->save();
+
+
         });
 
         $this->hydrate();

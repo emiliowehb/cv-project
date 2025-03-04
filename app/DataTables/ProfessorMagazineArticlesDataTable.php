@@ -37,8 +37,12 @@ class ProfessorMagazineArticlesDataTable extends DataTable
                 return $article->notes;
             })
             ->editColumn('status', function (ProfessorArticle $article) {
-                $status = ArticleStatusEnum::from($article->status);
-                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                $reviewable = $article->reviewables()->orderBy('created_at', 'desc')->first();
+                if (!$reviewable) {
+                    return '<span class="badge badge-secondary">Not Reviewed</span>';
+                }
+                $status = ArticleStatusEnum::from($reviewable->status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $reviewable->reason . '"' : '';
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorArticle $article) {

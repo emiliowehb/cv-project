@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Enums\ArticleStatusEnum;
 use App\Models\ProfessorArticle;
 use App\Models\ProfessorJournalArticle;
+use App\Models\Reviewable;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -46,8 +47,12 @@ class ProfessorJournalArticlesDataTable extends DataTable
                 return $article->secondaryField->name;
             })
             ->editColumn('admin_status', function (ProfessorJournalArticle $article) {
-                $status = ArticleStatusEnum::from($article->admin_status);
-                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $status->rejectionReason() . '"' : '';
+                $reviewable = $article->reviewables()->orderBy('created_at', 'desc')->first();
+                if (!$reviewable) {
+                    return '<span class="badge badge-secondary">Not Reviewed</span>';
+                }
+                $status = ArticleStatusEnum::from($reviewable->status);
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $reviewable->reason . '"' : '';
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorJournalArticle $article) {
@@ -60,7 +65,7 @@ class ProfessorJournalArticlesDataTable extends DataTable
     {
         return $model->newQuery()
                      ->where('professor_id', Auth::user()->professor->id)
-                     ->with(['type', 'primaryField', 'secondaryField']);
+                     ->with(['type', 'primaryField', 'secondaryField', 'reviewables']);
     }
 
     public function html(): HtmlBuilder

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Professor;
 
+use App\Enums\ArticleStatusEnum;
 use App\Enums\MonthEnum;
 use App\Models\BookType;
 use App\Models\Publisher;
@@ -9,6 +10,7 @@ use App\Models\ResearchArea;
 use App\Models\WorkClassification;
 use App\Models\IntellectualContribution;
 use App\Models\ProfessorBookChapter;
+use App\Models\Reviewable;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -102,7 +104,7 @@ class AddBookChapterModal extends Component
                     'notes' => $this->notes,
                 ]);
             } else {
-                ProfessorBookChapter::create([
+                $chapter = ProfessorBookChapter::create([
                     'professor_id' => $this->professor_id,
                     'book_name' => $this->book_name,
                     'chapter_title' => $this->chapter_title,
@@ -118,6 +120,16 @@ class AddBookChapterModal extends Component
                     'notes' => $this->notes,
                 ]);
             }
+
+            $review = new Reviewable([
+                'reviewable_type' => ProfessorBookChapter::class,
+                'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
+                'type_id' => null, 
+                'reviewable_id' => $chapter ? $chapter->id : $this->chapter_to_edit,
+                'reason' => null,
+            ]);
+
+            $review->save();
         });
 
         $this->hydrate();

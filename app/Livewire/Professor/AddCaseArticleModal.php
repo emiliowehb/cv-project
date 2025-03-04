@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Professor;
 
+use App\Enums\ArticleStatusEnum;
 use App\Models\ArticleType;
 use App\Models\ProfessorArticle;
+use App\Models\Reviewable;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -72,7 +74,7 @@ class AddCaseArticleModal extends Component
                     'notes' => $this->notes,
                 ]);
             } else {
-                ProfessorArticle::create([
+                $case = ProfessorArticle::create([
                     'professor_id' => $this->professor_id,
                     'title' => $this->title,
                     'article_type_id' => $this->article_type_id,
@@ -83,6 +85,16 @@ class AddCaseArticleModal extends Component
                     'notes' => $this->notes,
                 ]);
             }
+
+            $review = new Reviewable([
+                'reviewable_type' => ProfessorArticle::class,
+                'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
+                'type_id' => $this->article_type_id, 
+                'reviewable_id' => $case ? $case->id : $this->article_to_edit,
+                'reason' => null,
+            ]);
+
+            $review->save();
         });
 
         $this->hydrate();

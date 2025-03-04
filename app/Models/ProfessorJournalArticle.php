@@ -21,6 +21,11 @@ class ProfessorJournalArticle extends Model
         return $this->belongsTo(PublicationStatus::class, 'publication_status_id');
     }
 
+    public function reviewables()
+    {
+        return $this->morphMany(Reviewable::class, 'reviewable');
+    }
+
     public function primaryField()
     {
         return $this->belongsTo(PublicationPrimaryField::class, 'primary_field_id');

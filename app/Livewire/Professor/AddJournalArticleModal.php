@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Professor;
 
+use App\Enums\ArticleStatusEnum;
 use App\Enums\MonthEnum;
 use App\Models\JournalArticleType;
 use App\Models\PublicationStatus;
 use App\Models\ProfessorJournalArticle;
 use App\Models\PublicationPrimaryField;
 use App\Models\PublicationSecondaryField;
+use App\Models\Reviewable;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +99,7 @@ class AddJournalArticleModal extends Component
                     'secondary_field_id' => $this->secondary_field_id,
                 ]);
             } else {
-                ProfessorJournalArticle::create([
+                $article = ProfessorJournalArticle::create([
                     'professor_id' => $this->professor_id,
                     'journal_article_type_id' => $this->journal_article_type_id,
                     'publication_status_id' => $this->publication_status_id,
@@ -112,6 +114,16 @@ class AddJournalArticleModal extends Component
                     'secondary_field_id' => $this->secondary_field_id,
                 ]);
             }
+
+            $review = new Reviewable([
+                'reviewable_type' => ProfessorJournalArticle::class,
+                'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
+                'type_id' => null, 
+                'reviewable_id' => $article ? $article->id : $this->article_to_edit,
+                'reason' => null,
+            ]);
+
+            $review->save();
         });
 
         $this->hydrate();

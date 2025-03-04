@@ -1,7 +1,7 @@
 <x-default-admin-layout>
 
     @section('title')
-        Users
+        Faculty Members
     @endsection
 
     @section('breadcrumbs')
