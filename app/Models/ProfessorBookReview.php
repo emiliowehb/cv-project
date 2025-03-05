@@ -21,6 +21,6 @@ class ProfessorBookReview extends Model
 
     public function intellectualContribution()
     {
-        return $this->hasOne(IntellectualContribution::class, 'id');
+        return $this->hasOne(IntellectualContribution::class, 'id','intellectual_contribution_id');
     }
 }

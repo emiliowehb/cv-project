@@ -496,7 +496,7 @@
                         @foreach($filteredBooks as $book)
                         @if(!in_array($book->publication_status_id, [2, 4]))
                         <li data-type="book" data-year="{{ $book->year }}" data-id="{{ $book->id }}">
-                            <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                            <strong>{{ $book->name }}</strong> — {{$book->type->name}}, {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}, {{ $book->researchArea?->name }} — <strong>Publication Status:</strong> {{$book->publicationStatus->name}}
                         </li>
                         @endif
                         @endforeach
@@ -517,7 +517,7 @@
                         @foreach($filteredForthcomingBooks as $book)
                         @if(in_array($book->publication_status_id, [2, 4]))
                         <li data-type="forthcoming_book" data-year="{{ $book->year }}" data-id="{{ $book->id }}">
-                            <strong>{{ $book->name }}</strong> - <span data-year="{{$book->year}}">{{ $book->year }}</span> {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                            <strong>{{ $book->name }}</strong> — {{$book->type->name}}, {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}, {{ $book->researchArea?->name }} — <strong>Publication Status:</strong> {{$book->publicationStatus->name}}
                         </li>
                         @endif
                         @endforeach
@@ -538,7 +538,7 @@
                         @foreach($filteredChaptersInBooks as $chapter)
                         @if(!in_array($chapter->publication_status_id, [2, 4]))
                         <li data-type="chapter" data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
-                            <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus->name }}
                         </li>
                         @endif
                         @endforeach
@@ -559,7 +559,7 @@
                         @foreach($filteredForthcomingChaptersInBooks as $chapter)
                         @if(in_array($chapter->publication_status_id, [2, 4]))
                         <li data-type="forthcoming_chapter" data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
-                            <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus->name }}
                         </li>
                         @endif
                         @endforeach
@@ -580,7 +580,7 @@
                         @foreach($filteredPapersInJournals as $paper)
                         @if(!in_array($paper->publication_status_id, [2, 4]))
                         <li data-type="paper" data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
-                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
+                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, {{$paper->issue}} {{ $paper->volume }}, Pages: {{$paper->pages}} — <strong>Publication Status:</strong> {{$paper->status->name}}
                         </li>
                         @endif
                         @endforeach
@@ -601,7 +601,7 @@
                         @foreach($filteredForthcomingPapersInJournals as $paper)
                         @if(in_array($paper->publication_status_id, [2, 4]))
                         <li data-type="forthcoming_paper" data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
-                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
+                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, {{$paper->issue}} {{ $paper->volume }}, Pages: {{$paper->pages}} — <strong>Publication Status:</strong> {{$paper->status->name}}
                         </li>
                         @endif
                         @endforeach
@@ -621,7 +621,7 @@
                     <ul>
                         @foreach($filteredPapersInConferenceProceedings as $presentation)
                         <li data-type="presentation" data-year="{{ $presentation->year }}" data-id="{{ $presentation->id }}">
-                            <strong>{{ $presentation->name }}</strong> - {{ $presentation->year }}, {{ $presentation->country->name }}
+                            <strong>{{$presentation->event_name}}:</strong> {{ $presentation->name }} - {{ $presentation->year }} {{ ucfirst($presentation->month) }}, {{ $presentation->country->name }}, Days: {{ $presentation->days}}
                         </li>
                         @endforeach
                     </ul>
@@ -640,7 +640,7 @@
                     <ul>
                         @foreach($filteredTechnicalReports as $report)
                         <li data-type="technical_report" data-year="{{ $report->year }}" data-id="{{ $report->id }}">
-                            <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }}, {{ $report->publisher->name }}
+                            {{ $report->workClassification->name }} <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }} {{ ucfirst($report->month) }}, {{ $report->publisher->name }}, {{ $report->researchArea->name }}, {{ $report->volume }}, {{ $report->pages }} pages, {{ $report->intellectualContribution->name }} — <strong>Publication Status: </strong> {{$report->publicationStatus->name}}
                         </li>
                         @endforeach
                     </ul>
@@ -659,7 +659,7 @@
                     <ul>
                         @foreach($filteredWorkingPapers as $paper)
                         <li data-type="working_paper" data-year="{{ $paper->year }}" data-id="{{ $paper->id }}">
-                            <strong>{{ $paper->name }}</strong> - {{ $paper->year }}
+                            <strong>{{ $paper->name }}, {{$paper->identifying_number}} </strong> - {{ $paper->year }}, {{ $paper->department->name }}, {{ $paper->intellectualContribution->name }}
                         </li>
                         @endforeach
                     </ul>
@@ -678,7 +678,7 @@
                     <ul>
                         @foreach($filteredArticlesInMagazines as $article)
                         <li data-type="magazine_article" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
-                            <strong>{{ $article->title }}</strong> - {{ $article->magazine_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month)}}
                         </li>
                         @endforeach
                     </ul>
@@ -697,7 +697,7 @@
                     <ul>
                         @foreach($filteredArticlesInNewspapers as $article)
                         <li data-type="newspaper_article" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
-                            <strong>{{ $article->title }}</strong> - {{ $article->newspaper_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month)}}
                         </li>
                         @endforeach
                     </ul>
@@ -716,7 +716,7 @@
                     <ul>
                         @foreach($filteredArticlesInNewsletters as $article)
                         <li data-type="newsletter_article" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
-                            <strong>{{ $article->title }}</strong> - {{ $article->newsletter_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month)}}
                         </li>
                         @endforeach
                     </ul>
@@ -735,7 +735,7 @@
                     <ul>
                         @foreach($filteredLettersToEditor as $article)
                         <li data-type="letter_to_editor" data-year="{{ $article->year }}" data-id="{{ $article->id }}">
-                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month)}}
                         </li>
                         @endforeach
                     </ul>
@@ -754,7 +754,7 @@
                     <ul>
                         @foreach($filteredBookReviews as $review)
                         <li data-type="book_review" data-year="{{ $review->year }}" data-id="{{ $review->id }}">
-                            <strong>{{ $review->name }}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}
+                            <strong>{{ $review->name }} - {{$review->reviewedMedium->name}}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}, {{ $review->reviewed_work_authors }}, {{ $review->intellectualContribution?->name }}
                         </li>
                         @endforeach
                     </ul>

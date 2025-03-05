@@ -65,7 +65,7 @@
                                                 <th>Institution</th>
                                                 <th>Discipline</th>
                                                 <th>Year</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="degrees-table-body">
@@ -100,7 +100,7 @@
                                                 <th>TO</th>
                                                 <th>EMPLOYER</th>
                                                 <th>POSITION</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="employments-table-body">
@@ -135,7 +135,7 @@
                                                 <th>TO</th>
                                                 <th>EMPLOYER</th>
                                                 <th>POSITION</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="activities-table-body">
@@ -170,7 +170,7 @@
                                                 <th>TO</th>
                                                 <th>ORGANIZATION</th>
                                                 <th>TITLE</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="honors-table-body">
@@ -204,7 +204,7 @@
                                                 <th>FROM</th>
                                                 <th>TO</th>
                                                 <th>ACTIVITY</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="academic-activities-table-body">
@@ -237,7 +237,7 @@
                                                 <th>FROM</th>
                                                 <th>TO</th>
                                                 <th>DESCRIPTION</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="supervisions-table-body">
@@ -269,7 +269,7 @@
                                             <tr>
                                                 <th>COURSE TITLE</th>
                                                 <th>DESCRIPTION</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="courses-table-body">
@@ -306,7 +306,7 @@
                                             <tr>
                                                 <th>COURSE TITLE</th>
                                                 <th>DESCRIPTION</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="outside-courses-table-body">
@@ -345,7 +345,7 @@
                                                 <th>TITLE</th>
                                                 <th>PURPOSE *</th>
                                                 <th>AMOUNT</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="grants-table-body">
@@ -384,7 +384,7 @@
                                                 <th>TITLE</th>
                                                 <th>PURPOSE *</th>
                                                 <th>AMOUNT</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody id="internal-grants-table-body">
@@ -460,10 +460,10 @@
                                 </div>
                                 <div id="books-content">
                                     <ul>
-                                        @foreach($professor->books as $book)
+                                        @foreach($professor->books->filter(fn($book) => $book->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $book)
                                         @if(!in_array($book->publication_status_id, [2, 4]))
                                         <li data-year="{{ $book->year }}" data-type="book" data-id="{{ $book->id }}">
-                                            <strong>{{ $book->name }}</strong> - {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                                            <strong>{{ $book->name }}</strong> — {{$book->type->name}}, {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}, {{ $book->researchArea?->name }} — <strong>Publication Status:</strong> {{$book->publicationStatus->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('book', {{ $book->id }})">-</button>
                                         </li>
                                         @endif
@@ -483,10 +483,10 @@
                                 </div>
                                 <div id="forthcoming-books-content">
                                     <ul>
-                                        @foreach($professor->books as $book)
+                                        @foreach($professor->books->filter(fn($book) => $book->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $book)
                                         @if(in_array($book->publication_status_id, [2, 4]))
                                         <li data-year="{{ $book->year }}" data-type="forthcoming_book" data-id="{{ $book->id }}">
-                                            <strong>{{ $book->name }}</strong> - <span data-year="{{$book->year}}">{{ $book->year }}</span> {{ ucfirst($book->month) }}, {{ $book->publisher->name }}
+                                            <strong>{{ $book->name }}</strong> — {{$book->type->name}}, {{ $book->year }} {{ ucfirst($book->month) }}, {{ $book->publisher->name }}, {{ $book->researchArea?->name }} — <strong>Publication Status:</strong> {{$book->publicationStatus->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_book', {{ $book->id }})">-</button>
                                         </li>
                                         @endif
@@ -506,10 +506,10 @@
                                 </div>
                                 <div id="chapters-in-books-content">
                                     <ul>
-                                        @foreach($professor->bookChapters as $chapter)
+                                        @foreach($professor->bookChapters->filter(fn($chapter) => $chapter->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $chapter)
                                         @if(!in_array($chapter->publication_status_id, [2, 4]))
                                         <li data-year="{{ $chapter->published_year }}" data-type="chapter" data-id="{{ $chapter->id }}">
-                                            <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('chapter', {{ $chapter->id }})">-</button>
                                         </li>
                                         @endif
@@ -529,10 +529,10 @@
                                 </div>
                                 <div id="forthcoming-chapters-in-books-content">
                                     <ul>
-                                        @foreach($professor->bookChapters as $chapter)
+                                        @foreach($professor->bookChapters->filter(fn($chapter) => $chapter->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $chapter)
                                         @if(in_array($chapter->publication_status_id, [2, 4]))
-                                        <li data-year="{{ $chapter->published_year }}" data-type="forthocoming_chapter" data-id="{{ $chapter->id }}">
-                                            <strong>{{ $chapter->chapter_title }}</strong> - {{ $chapter->book_name }}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }}
+                                        <li data-year="{{ $chapter->published_year }}" data-type="forthcoming_chapter" data-id="{{ $chapter->id }}">
+                                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_chapter', {{ $chapter->id }})">-</button>
                                         </li>
                                         @endif
@@ -552,10 +552,10 @@
                                 </div>
                                 <div id="papers-in-journals-content">
                                     <ul>
-                                        @foreach($professor->journalArticles as $paper)
+                                        @foreach($professor->journalArticles->filter(fn($paper) => $paper->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $paper)
                                         @if(!in_array($paper->publication_status_id, [2, 4]))
                                         <li data-year="{{ $paper->year }}" data-type="paper" data-id="{{ $paper->id }}">
-                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
+                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, {{$paper->issue}} {{ $paper->volume }}, Pages: {{$paper->pages}} — <strong>Publication Status:</strong> {{$paper->status->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endif
@@ -575,10 +575,10 @@
                                 </div>
                                 <div id="forthcoming-papers-in-journals-content">
                                     <ul>
-                                        @foreach($professor->journalArticles as $paper)
+                                        @foreach($professor->journalArticles->filter(fn($paper) => $paper->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $paper)
                                         @if(in_array($paper->publication_status_id, [2, 4]))
                                         <li data-year="{{ $paper->year }}" data-type="forthcoming_paper" data-id="{{ $paper->id }}">
-                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, <strong>Publication Status:</strong> {{$paper->status->name}}
+                                            <strong>{{ $paper->title }}</strong> - {{ $paper->type->name }}, {{ $paper->year }} {{ ucfirst($paper->month) }}, {{$paper->issue}} {{ $paper->volume }}, Pages: {{$paper->pages}} — <strong>Publication Status:</strong> {{$paper->status->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('forthcoming_paper', {{ $paper->id }})">-</button>
                                         </li>
                                         @endif
@@ -600,7 +600,7 @@
                                     <ul>
                                         @foreach($professor->proceedings as $presentation)
                                         <li data-year="{{ $presentation->year }}" data-type="presentation" data-id="{{ $presentation->id }}">
-                                            <strong>{{ $presentation->name }}</strong> - {{ $presentation->year }}, {{ $presentation->country->name }}
+                                            <strong>{{$presentation->event_name}}:</strong> {{ $presentation->name }} - {{ $presentation->year }} {{ ucfirst($presentation->month) }}, {{ $presentation->country->name }}, Days: {{ $presentation->days}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('presentation', {{ $presentation->id }})">-</button>
                                         </li>
                                         @endforeach
@@ -621,7 +621,7 @@
                                     <ul>
                                         @foreach($professor->technicalReports as $report)
                                         <li data-year="{{ $report->year }}" data-type="technical_report" data-id="{{ $report->id }}">
-                                            <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }}, {{ $report->publisher->name }}
+                                            {{ $report->workClassification->name }} <strong>{{ $report->identifying_number }}</strong> - {{ $report->year }} {{ ucfirst($report->month) }}, {{ $report->publisher->name }}, {{ $report->researchArea->name }}, {{ $report->volume }}, {{ $report->pages }} pages, {{ $report->intellectualContribution->name }} — <strong>Publication Status: </strong> {{$report->publicationStatus->name}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('technical_report', {{ $report->id }})">-</button>
                                         </li>
                                         @endforeach
@@ -642,19 +642,18 @@
                                     <ul>
                                         @foreach($professor->workingPapers as $paper)
                                         <li data-year="{{ $paper->year }}" data-type="working_paper" data-id="{{ $paper->id }}">
-                                            <strong>{{ $paper->name }}</strong> - {{ $paper->year }}
-                                            <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('working_paper', {{ $paper->id }})">-</button>
+                                            <strong>{{ $paper->name }}, {{$paper->identifying_number}} </strong> - {{ $paper->year }}, {{ $paper->department->name }}, {{ $paper->intellectualContribution->name }}
                                         </li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </div>
                             <!-- End Working Papers Section -->
-                             <!-- Start Other Publications Section -->
-                              <div class="mt-15" id="other-publications">
-                                 <label class="form-check-label fs-3" for="include-working-papers">OTHER PUBLICATIONS</label>
-                                    
-                              </div>
+                            <!-- Start Other Publications Section -->
+                            <div class="mt-15" id="other-publications">
+                                <label class="form-check-label fs-3" for="include-working-papers">OTHER PUBLICATIONS</label>
+
+                            </div>
                             <!-- End Other Publications Section -->
                             <!-- Begin Articles in Magazines Section -->
                             <div class="mt-15" id="professor-articles-in-magazines">
@@ -666,9 +665,9 @@
                                 </div>
                                 <div id="articles-in-magazines-content">
                                     <ul>
-                                        @foreach($professor->magazineArticles as $article)
+                                        @foreach($professor->magazineArticles->filter(fn($article) => $article->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $article)
                                         <li data-year="{{ $article->year }}" data-type="magazine_article" data-id="{{ $article->id }}">
-                                            <strong>{{ $article->title }}</strong> - {{ $article->magazine_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month)}}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('magazine_article', {{ $article->id }})">-</button>
                                         </li>
                                         @endforeach
@@ -687,9 +686,9 @@
                                 </div>
                                 <div id="articles-in-newspapers-content">
                                     <ul>
-                                        @foreach($professor->newspaperArticles as $article)
+                                        @foreach($professor->newspaperArticles->filter(fn($article) => $article->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $article)
                                         <li data-year="{{ $article->year }}" data-type="newspaper_article" data-id="{{ $article->id }}">
-                                            <strong>{{ $article->title }}</strong> - {{ $article->newspaper_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('newspaper_article', {{ $article->id }})">-</button>
                                         </li>
                                         @endforeach
@@ -708,9 +707,9 @@
                                 </div>
                                 <div id="articles-in-newsletters-content">
                                     <ul>
-                                        @foreach($professor->newsletterArticles as $article)
+                                        @foreach($professor->newsletterArticles->filter(fn($article) => $article->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $article)
                                         <li data-year="{{ $article->year }}" data-type="newsletter_article" data-id="{{ $article->id }}">
-                                            <strong>{{ $article->title }}</strong> - {{ $article->newsletter_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
+                                            <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('newsletter_article', {{ $article->id }})">-</button>
                                         </li>
                                         @endforeach
@@ -729,7 +728,7 @@
                                 </div>
                                 <div id="letters-to-editor-content">
                                     <ul>
-                                        @foreach($professor->letterToEditorArticles as $article)
+                                        @foreach($professor->letterToEditorArticles->filter(fn($article) => $article->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $article)
                                         <li data-year="{{ $article->year }}" data-type="letter_to_editor" data-id="{{ $article->id }}">
                                             <strong>{{ $article->title }}</strong> - {{ $article->publisher_name }}, {{ $article->year }} {{ ucfirst($article->month) }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('letter_to_editor', {{ $article->id }})">-</button>
@@ -752,7 +751,7 @@
                                     <ul>
                                         @foreach($professor->bookReviews as $review)
                                         <li data-year="{{ $review->year }}" data-type="book_review" data-id="{{ $review->id }}">
-                                            <strong>{{ $review->name }}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}
+                                            <strong>{{ $review->name }} - {{$review->reviewedMedium->name}}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}, {{ $review->reviewed_work_authors }}, {{ $review->intellectualContribution?->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('book_review', {{ $review->id }})">-</button>
                                         </li>
                                         @endforeach

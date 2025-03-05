@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         'fr_FR': '{{ image('flags/france.svg') }}',
         'ar_SA': '{{ image('flags/saudi-arabia.svg') }}'
     };
+    $('[data-bs-toggle="tooltip"]').tooltip();
 
     document.getElementById('current-locale').innerText = localeText[chosenLocale];
     document.getElementById('current-locale-flag').src = localeFlag[chosenLocale];

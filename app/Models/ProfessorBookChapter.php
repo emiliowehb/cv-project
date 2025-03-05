@@ -22,4 +22,9 @@ class ProfessorBookChapter extends Model
     {
         return $this->morphMany(Reviewable::class, 'reviewable');
     }
+
+    public function publicationStatus()
+    {
+        return $this->belongsTo(PublicationStatus::class);
+    }
 }

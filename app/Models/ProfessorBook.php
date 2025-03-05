@@ -24,4 +24,14 @@ class ProfessorBook extends Model
     {
         return $this->morphMany(Reviewable::class, 'reviewable');
     }
+
+    public function researchArea()
+    {
+        return $this->belongsTo(ResearchArea::class, 'research_area_id');
+    }
+
+    public function publicationStatus()
+    {
+        return $this->belongsTo(PublicationStatus::class);
+    }
 }

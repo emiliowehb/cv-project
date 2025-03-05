@@ -47,7 +47,18 @@ class ProfessorBookChaptersDataTable extends DataTable
             ->addColumn('action', function (ProfessorBookChapter $chapter) {
                 return view('pages/professors.book-chapters.columns._actions', compact('chapter'));
             })
-            ->setRowId('id');
+            ->setRowId('id')
+            ->setRowClass(function (ProfessorBookChapter $chapter) {
+                $reviewable = $chapter->reviewables()->orderBy('created_at', 'desc')->first();
+                if ($reviewable && $reviewable->status === ArticleStatusEnum::REJECTED->value) {
+                    return 'table-danger';
+                } else if($reviewable && $reviewable->status === ArticleStatusEnum::VALIDATED->value) {
+                    return 'table-success';
+                } else if($reviewable && $reviewable->status === ArticleStatusEnum::WAITING_FOR_VALIDATION->value) {
+                    return 'table-warning';
+                }
+                return 'table-warning';
+            });
     }
 
     public function query(ProfessorBookChapter $model): QueryBuilder

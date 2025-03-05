@@ -18,7 +18,7 @@ class ProfessorBooksDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->rawColumns(['action', 'admin_status'])
             ->editColumn('book_type_id', function (ProfessorBook $book) {
-                return $book->type->name;
+                return $book->type?->name;
             })
             ->editColumn('name', function (ProfessorBook $book) {
                 return $book->name;
@@ -38,13 +38,24 @@ class ProfessorBooksDataTable extends DataTable
                     return '<span class="badge badge-secondary">Not Reviewed</span>';
                 }
                 $status = ArticleStatusEnum::from($reviewable->status);
-                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $reviewable->reason . '"' : '';
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="Admin rejection reason: ' . $reviewable->reason . '"' : '';
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorBook $book) {
                 return view('pages/professors.books.columns._actions', compact('book'));
             })
-            ->setRowId('id');
+            ->setRowId('id')
+            ->setRowClass(function (ProfessorBook $book) {
+                $reviewable = $book->reviewables()->orderBy('created_at', 'desc')->first();
+                if ($reviewable && $reviewable->status === ArticleStatusEnum::REJECTED->value) {
+                    return 'table-danger';
+                } else if($reviewable && $reviewable->status === ArticleStatusEnum::VALIDATED->value) {
+                    return 'table-success';
+                } else if($reviewable && $reviewable->status === ArticleStatusEnum::WAITING_FOR_VALIDATION->value) {
+                    return 'table-warning';
+                }
+                return 'table-warning';
+            });
     }
 
     public function query(ProfessorBook $model): QueryBuilder

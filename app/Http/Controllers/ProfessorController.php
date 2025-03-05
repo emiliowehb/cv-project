@@ -717,7 +717,7 @@ class ProfessorController extends Controller
             '12_months' => '12Mo',
         ];
 
-        $pdfName = 'CV_' . $rangeLabels[$range] . '_'. ucfirst($professor->first_name) . ucfirst($professor->last_name) . '_' . Carbon::now()->format('d_m_Y')  . '.pdf';
+        $pdfName = 'CV_' . $rangeLabels[$range] . '_'. ucfirst($professor->first_name) . ucfirst($professor->last_name) . '_' . Carbon::now()->format('Y_m_d')  . '.pdf';
         return $pdf->download($pdfName);
     }
 }

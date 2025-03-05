@@ -42,13 +42,24 @@ class ProfessorCasesDataTable extends DataTable
                     return '<span class="badge badge-secondary">Not Reviewed</span>';
                 }
                 $status = ArticleStatusEnum::from($reviewable->status);
-                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="' . $reviewable->reason . '"' : '';
+                $tooltip = $status === ArticleStatusEnum::REJECTED ? 'data-bs-toggle="tooltip" data-bs-placement="top" title="Admin rejection reason: ' . $reviewable->reason . '"' : '';
                 return '<span class="badge ' . $status->badgeClass() . '" ' . $tooltip . '>' . $status->label() . '</span>';
             })
             ->addColumn('action', function (ProfessorArticle $article) {
                 return view('pages/professors.case-articles.columns._actions', compact('article'));
             })
-            ->setRowId('id');
+            ->setRowId('id')
+            ->setRowClass(function (ProfessorArticle $article) {
+                $reviewable = $article->reviewables()->orderBy('created_at', 'desc')->first();
+                if ($reviewable && $reviewable->status === ArticleStatusEnum::REJECTED->value) {
+                    return 'table-danger';
+                } else if($reviewable && $reviewable->status === ArticleStatusEnum::VALIDATED->value) {
+                    return 'table-success';
+                } else if($reviewable && $reviewable->status === ArticleStatusEnum::WAITING_FOR_VALIDATION->value) {
+                    return 'table-warning';
+                }
+                return 'table-warning';
+            });
     }
 
     public function query(ProfessorArticle $model): QueryBuilder
