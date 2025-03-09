@@ -52,6 +52,7 @@ class ProfessorBookChaptersSeeder extends Seeder
                 'reviewable_type' => 'App\Models\ProfessorBookChapter',
                 'status' => ArticleStatusEnum::VALIDATED,
                 'type_id' => null,
+                'professor_id' => 3,
                 'reviewable_id' => $chapterId,
                 'reason' => null,
             ]);

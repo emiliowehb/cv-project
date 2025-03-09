@@ -34,4 +34,21 @@ class ProfessorBook extends Model
     {
         return $this->belongsTo(PublicationStatus::class);
     }
+
+    public function getReviewableDetails()
+    {
+        $details = "<strong>Type:</strong> " . ($this->type->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Title:</strong> " . ($this->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Year:</strong> " . ($this->year ?? 'N/A') . "<br>";
+        $details .= "<strong>Month:</strong> " . ($this->month ?? 'N/A') . "<br>";
+        $details .= "<strong>Volume:</strong> " . ($this->volume ?? 'N/A') . "<br>";
+        $details .= "<strong>Number of Pages:</strong> " . ($this->nb_pages ?? 'N/A') . "<br>";
+        $details .= "<strong>Publisher:</strong> " . ($this->publisher->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Research Area:</strong> " . ($this->researchArea->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Primary Field:</strong> " . ($this->primaryField->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Secondary Field:</strong> " . ($this->secondaryField->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Status:</strong> " . ($this->publicationStatus->name ?? 'N/A') . "<br>";
+
+        return $details;
+    }
 }

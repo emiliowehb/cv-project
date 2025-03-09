@@ -18,4 +18,17 @@ class ProfessorArticle extends Model
     {
         return $this->morphMany(Reviewable::class, 'reviewable');
     }
+
+    public function getReviewableDetails()
+    {
+        $details = "<strong>Type:</strong> " . ($this->type->name ?? 'N/A') . "<br>";
+        $details .= "<strong>Title:</strong> " . ($this->title ?? 'N/A') . "<br>";
+        $details .= "<strong>Publisher Name:</strong> " . ($this->publisher_name ?? 'N/A') . "<br>";
+        $details .= "<strong>Year:</strong> " . ($this->year ?? 'N/A') . "<br>";
+        $details .= "<strong>Number of Pages:</strong> " . ($this->nb_pages ?? 'N/A') . "<br>";
+        $details .= "<strong>URL:</strong> " . ($this->url ?? 'N/A') . "<br>";
+        $details .= "<strong>Notes:</strong> " . ($this->notes ?? 'N/A') . "<br>";
+
+        return $details;
+    }
 }

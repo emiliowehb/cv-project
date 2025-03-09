@@ -1,38 +1,69 @@
 <x-default-admin-layout>
 
     @section('title')
-        Workspace Admin Dashboard
+    Workspace Admin Dashboard
     @endsection
 
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('admin.dashboard') }}
+    {{ Breadcrumbs::render('admin.dashboard') }}
     @endsection
 
-    <!--begin::Row-->
-    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-        <!--begin::Col-->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-md-5 mb-xl-10">
+    <!--begin::Content-->
+    <h3 class="mt-15">Latest professor submissions</h3>
+    <div class="d-flex flex-column flex-lg-row">
+        <!--begin::Main Content-->
+        <div class="flex-lg-row-fluid">
+            <!--begin::Card-->
             <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Workspace Information</h3>
-                    <p class="card-text">Welcome <strong>{{Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, here is the information about your workspace.</p>
-                    <div class="row">
-                        <div class="col-3 fw-bold">Workspace name</div>
-                        <div class="col-3">{{Auth::user()->workspace->name}}</div>
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <!--begin::Search-->
+                        <div class="d-flex align-items-center position-relative my-1">
+                        </div>
+                        <!--end::Search-->
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-3 fw-bold">Workspace members:</div>
-                        <div class="col-3"><i>Render member names here...</i></div>
-                    </div>
-                <div class="row mt-7">
-                    <div class="col-12">
-                        <a href="#" class="btn btn-primary btn-sm">Access Workspace Settings</a>
+                    <!--begin::Card title-->
+                    <div class="card-toolbar">
+                        <livewire:professor-submissions.reviewable-decision-modal></livewire:professor-submissions.reviewable-decision-modal>
+                        <livewire:professor-submissions.view-reviewable-details-modal></livewire:professor-submissions.view-reviewable-details-modal>
                     </div>
                 </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body py-4">
+                    <!--begin::Table-->
+                    <div class="table-responsive">
+                        {{ $dataTable->table() }}
+                    </div>
+                    <!--end::Table-->
                 </div>
+                <!--end::Card body-->
             </div>
+            <!--end::Card-->
         </div>
-        <!--end::Col-->
+        <!--end::Main Content-->
     </div>
-    <!--end::Row-->
+    <!--end::Content-->
+
+    @push('scripts')
+    {{ $dataTable->scripts() }}
+    <script>
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('success', function() {
+                $('#kt_modal_reviewable_decision').modal('hide');
+                window.LaravelDataTables['all-reviewables-table'].ajax.reload();
+            });
+
+            Livewire.on('denyReviewable', function() {
+                $('#kt_modal_reviewable_decision').modal('show');
+            });
+
+            Livewire.on('viewReviewableDetails', function(reviewableId) {
+                $('#kt_modal_view_reviewable_details').modal('show');
+            });
+        });
+    </script>
+    @endpush
 </x-default-admin-layout>

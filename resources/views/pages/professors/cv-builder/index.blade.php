@@ -509,7 +509,7 @@
                                         @foreach($professor->bookChapters->filter(fn($chapter) => $chapter->reviewables()->orderBy('created_at', 'desc')->first()?->status === 'validated') as $chapter)
                                         @if(!in_array($chapter->publication_status_id, [2, 4]))
                                         <li data-year="{{ $chapter->published_year }}" data-type="chapter" data-id="{{ $chapter->id }}">
-                                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus->name }}
+                                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus?->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('chapter', {{ $chapter->id }})">-</button>
                                         </li>
                                         @endif
@@ -751,7 +751,7 @@
                                     <ul>
                                         @foreach($professor->bookReviews as $review)
                                         <li data-year="{{ $review->year }}" data-type="book_review" data-id="{{ $review->id }}">
-                                            <strong>{{ $review->name }} - {{$review->reviewedMedium->name}}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}, {{ $review->reviewed_work_authors }}, {{ $review->intellectualContribution?->name }}
+                                            <strong>{{ $review->name }} - {{$review->reviewedMedium?->name}}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}, {{ $review->reviewed_work_authors }}, {{ $review->intellectualContribution?->name }}
                                             <button type="button" class="btn btn-danger btn-xs" onclick="excludeEntry('book_review', {{ $review->id }})">-</button>
                                         </li>
                                         @endforeach

@@ -48,6 +48,7 @@ class ProfessorJournalArticlesSeeder extends Seeder
                 'reviewable_type' => 'App\Models\ProfessorJournalArticle',
                 'status' => ArticleStatusEnum::VALIDATED,
                 'type_id' => null,
+                'professor_id' => 3,
                 'reviewable_id' => $articleId,
                 'reason' => null,
             ]);

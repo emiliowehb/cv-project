@@ -125,6 +125,7 @@ class AddBookChapterModal extends Component
                 'reviewable_type' => ProfessorBookChapter::class,
                 'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
                 'type_id' => null, 
+                'professor_id' => $this->professor_id,
                 'reviewable_id' => $chapter ? $chapter->id : $this->chapter_to_edit,
                 'reason' => null,
             ]);

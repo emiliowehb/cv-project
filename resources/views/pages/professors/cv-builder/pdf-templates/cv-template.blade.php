@@ -538,7 +538,7 @@
                         @foreach($filteredChaptersInBooks as $chapter)
                         @if(!in_array($chapter->publication_status_id, [2, 4]))
                         <li data-type="chapter" data-year="{{ $chapter->published_year }}" data-id="{{ $chapter->id }}">
-                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus->name }}
+                            <strong>Book Title: {{ $chapter->book_name }}, Author: {{$chapter->author_name}}</strong> - {{ $chapter->chapter_title }}, {{$chapter->volume}}, {{ $chapter->published_year }} {{ ucfirst($chapter->published_month) }}, {{ $chapter->publisher->name }} — <strong>Publication Status:</strong> {{ $chapter->publicationStatus?->name }}
                         </li>
                         @endif
                         @endforeach
@@ -754,7 +754,7 @@
                     <ul>
                         @foreach($filteredBookReviews as $review)
                         <li data-type="book_review" data-year="{{ $review->year }}" data-id="{{ $review->id }}">
-                            <strong>{{ $review->name }} - {{$review->reviewedMedium->name}}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}, {{ $review->reviewed_work_authors }}, {{ $review->intellectualContribution?->name }}
+                            <strong>{{ $review->name }} - {{$review->reviewedMedium?->name}}</strong> - {{ $review->periodical_title }}, {{ $review->year }} {{ ucfirst($review->month) }}, {{ $review->reviewed_work_authors }}, {{ $review->intellectualContribution?->name }}
                         </li>
                         @endforeach
                     </ul>

@@ -90,6 +90,7 @@ class AddNewspaperArticleModal extends Component
                 'reviewable_type' => ProfessorArticle::class,
                 'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
                 'type_id' => $this->article_type_id, 
+                'professor_id' => $this->professor_id,
                 'reviewable_id' => $article ? $article->id : $this->article_to_edit,
                 'reason' => null,
             ]);

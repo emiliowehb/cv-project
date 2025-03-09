@@ -130,6 +130,7 @@ class AddBookModal extends Component
                 'reviewable_type' => ProfessorBook::class,
                 'status' => ArticleStatusEnum::WAITING_FOR_VALIDATION,
                 'type_id' => null, 
+                'professor_id' => $this->professor_id,
                 'reviewable_id' => $book ? $book->id : $this->book_to_edit,
                 'reason' => null,
             ]);

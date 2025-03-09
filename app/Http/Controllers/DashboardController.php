@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AllReviewablesDataTable;
+
 class DashboardController extends Controller
 {
     public function index()
@@ -12,10 +14,9 @@ class DashboardController extends Controller
         return view('pages/dashboards.index');
     }
 
-    public function adminIndex()
+    public function adminIndex(AllReviewablesDataTable $dataTable)
     {
-        addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock']);
 
-        return view('pages/dashboards.adminIndex');
+        return $dataTable->render('pages/dashboards.adminIndex');
     }
 }
