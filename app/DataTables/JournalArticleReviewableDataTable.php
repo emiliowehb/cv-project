@@ -31,8 +31,8 @@ class JournalArticleReviewableDataTable extends DataTable
             ->editColumn('month', function (Reviewable $reviewable) {
                 return ucfirst($reviewable->reviewable->month);
             })
-            ->editColumn('professor_name', function (Reviewable $reviewable) {
-                return $reviewable->first_name . ' ' . $reviewable->last_name;
+            ->editColumn('first_name', function (Reviewable $reviewable) {
+                return $reviewable->first_name . ' ' . $reviewable->middle_name . ' ' . $reviewable->last_name;
             })
             ->editColumn('status', function (Reviewable $reviewable) {
                 $status = ArticleStatusEnum::from($reviewable->status);
@@ -83,10 +83,10 @@ class JournalArticleReviewableDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('first_name')->title('Submitted By'),
             Column::make('title')->title('Title'),
             Column::make('year')->title('Year'),
             Column::make('month')->title('Month'),
-            Column::make('professor_name')->title('Submitted By'),
             Column::make('status'),
             Column::make('created_at')->title('Submitted On')->addClass('text-nowrap'),
             Column::computed('actions')

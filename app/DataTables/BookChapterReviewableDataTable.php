@@ -22,6 +22,9 @@ class BookChapterReviewableDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->rawColumns(['actions', 'status'])
+            ->editColumn('first_name', function (Reviewable $reviewable) {
+                return $reviewable->first_name . ' ' . $reviewable->middle_name . ' ' . $reviewable->last_name;
+            })
             ->editColumn('book_name', function (Reviewable $reviewable) {
                 return $reviewable->reviewable->book_name;
             })
@@ -30,9 +33,6 @@ class BookChapterReviewableDataTable extends DataTable
             })
             ->editColumn('published_month', function (Reviewable $reviewable) {
                 return ucfirst($reviewable->reviewable->published_month);
-            })
-            ->editColumn('professor_name', function (Reviewable $reviewable) {
-                return $reviewable->first_name . ' ' . $reviewable->last_name;
             })
             ->editColumn('status', function (Reviewable $reviewable) {
                 $status = ArticleStatusEnum::from($reviewable->status);
@@ -83,10 +83,10 @@ class BookChapterReviewableDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('first_name')->title('Submitted By'),
             Column::make('book_name')->title('Book Name'),
             Column::make('published_year')->title('Year'),
             Column::make('published_month')->title('Month'),
-            Column::make('professor_name')->title('Submitted By'),
             Column::make('status'),
             Column::make('created_at')->title('Submitted On')->addClass('text-nowrap'),
             Column::computed('actions')

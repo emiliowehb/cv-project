@@ -23,6 +23,9 @@ class AllReviewablesDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->rawColumns(['actions', 'status'])
+            ->editColumn('first_name', function (Reviewable $reviewable) {
+                return $reviewable->first_name . ' ' . $reviewable->middle_name . ' ' . $reviewable->last_name;
+            })
             ->editColumn('reviewable_type', function (Reviewable $reviewable) {
                 return substr($reviewable->reviewable_type, 11);
             })
@@ -75,6 +78,7 @@ class AllReviewablesDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('first_name')->title('Submitted By'),
             Column::make('reviewable_type')->title('Type'),
             Column::make('status'),
             Column::make('created_at')->title('Submitted On')->addClass('text-nowrap'),

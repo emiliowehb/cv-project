@@ -17,7 +17,7 @@ enum ArticleStatusEnum: string
         return match ($this) {
             ArticleStatusEnum::WAITING_FOR_VALIDATION => 'Waiting for validation',
             ArticleStatusEnum::VALIDATED => 'Validated',
-            ArticleStatusEnum::REJECTED => 'Rejected',
+            ArticleStatusEnum::REJECTED => 'Changes Requested',
         };
     }
 

@@ -31,8 +31,8 @@ class CaseArticleReviewableDataTable extends DataTable
             ->editColumn('publisher_name', function (Reviewable $reviewable) {
                 return $reviewable->reviewable->publisher_name;
             })
-            ->editColumn('professor_name', function (Reviewable $reviewable) {
-                return $reviewable->first_name . ' ' . $reviewable->last_name;
+            ->editColumn('first_name', function (Reviewable $reviewable) {
+                return $reviewable->first_name . ' ' . $reviewable->middle_name . ' ' . $reviewable->last_name;
             })
             ->editColumn('reviewable_status', function (Reviewable $reviewable) {
                 $status = ArticleStatusEnum::from($reviewable->status);
@@ -84,10 +84,10 @@ class CaseArticleReviewableDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('first_name')->title('Submitted By'),
             Column::make('title')->title('Title'),
             Column::make('year')->title('Year'),
             Column::make('publisher_name')->title('Publisher'),
-            Column::make('professor_name')->title('Submitted By'),
             Column::make('reviewable_status')->title('Status'),
             Column::make('created_at')->title('Submitted On')->addClass('text-nowrap'),
             Column::computed('actions')
