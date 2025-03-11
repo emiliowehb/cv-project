@@ -33,6 +33,7 @@
                     </div>
                 </div>
                 @endif
+                <x-author-repeater class="Books" />
                 <!--begin::Modal-->
                 <livewire:facultymember.add-personal-info-modal></livewire:facultymember.add-personal-info-modal>
                 <!--end::Modal-->

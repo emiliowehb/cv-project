@@ -28,7 +28,14 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: Some validation here
+        
+        $author = new Author;
+        $author->name = $request->first_name . ' ' . $request->last_name;
+        $author->save();
+
+        // Response 201 Created
+        return response()->json($author, 201);
     }
 
     /**

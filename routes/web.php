@@ -4,6 +4,7 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ReviewableController;
@@ -67,6 +68,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cv-builder', [ProfessorController::class, 'showCVBuilder'])->name('professors.cv-builder');
         Route::post('/cv-builder', [ProfessorController::class, 'submitBuild'])->name('professors.cv-builder.submit');
     });
+
+    // Authors resource routes
+    Route::resource('/authors', AuthorController::class);
 
 });
 
