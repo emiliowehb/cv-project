@@ -1737,12 +1737,26 @@
         function excludeEntry(type, id) {
             const entry = document.querySelector(`[data-type="${type}"][data-id="${id}"]`);
             if (entry) {
-                entry.style.display = 'none';
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = `exclude_${type}[]`;
-                input.value = id;
-                document.querySelector('form').appendChild(input);
+            const button = entry.querySelector('button');
+            const input = document.querySelector(`input[name="exclude_${type}[]"][value="${id}"]`);
+
+            if (entry.style.textDecoration === 'line-through') {
+                entry.style.textDecoration = 'none';
+                button.textContent = '-';
+                if (input) {
+                input.remove();
+                }
+            } else {
+                entry.style.textDecoration = 'line-through';
+                button.textContent = '+';
+                if (!input) {
+                const newInput = document.createElement('input');
+                newInput.type = 'hidden';
+                newInput.name = `exclude_${type}[]`;
+                newInput.value = id;
+                document.querySelector('form').appendChild(newInput);
+                }
+            }
             }
         }
     </script>
