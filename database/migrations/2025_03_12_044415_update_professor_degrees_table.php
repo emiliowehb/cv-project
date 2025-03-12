@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('professor_degrees', function (Blueprint $table) {
-            $table->text('institution_name')->after('degree_id');
+            // Remove default value from institution_name
+            $table->string('institution_name')->nullable()->change();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('professor_degrees', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

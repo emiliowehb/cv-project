@@ -35,6 +35,10 @@ use App\DataTables\ProfessorPresentationsDataTable;
 use App\DataTables\ProfessorResearchInterestsDataTable;
 use App\DataTables\ProfessorTechnicalReportsDataTable;
 use App\DataTables\ProfessorWorkingPapersDataTable;
+use App\Models\Country;
+use App\Models\ExpertiseArea;
+use App\Models\Language;
+use App\Models\ResearchArea;
 
 class ProfessorController extends Controller
 {
@@ -72,6 +76,98 @@ class ProfessorController extends Controller
         $expertiseAreas = $this->createExpertiseAreasData($data, $professor);
 
         return redirect()->route('dashboard');
+    }
+
+    public function showDirectory()
+    {
+        // Get all professors
+        $professors = Professor::with('address.country', 'employments.position')->paginate(12);
+
+        // Get all countries
+        $countries = Country::all();
+
+        // Get all languages
+        $languages = Language::all();
+
+        // Get all research areas
+        $researchAreas = ResearchArea::all();
+
+        // Get all expertise areas
+        $expertiseAreas = ExpertiseArea::all();
+
+        return view('pages/professors.directory.index', compact('professors', 'countries', 'languages', 'researchAreas', 'expertiseAreas'));
+    }
+
+    public function searchDirectory(Request $request)
+    {
+        $query = Professor::query();
+    
+        // Filter by search
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('first_name', 'LIKE', "%{$search}%")
+                  ->orWhere('last_name', 'LIKE', "%{$search}%")
+                  ->orWhere('email', 'LIKE', "%{$search}%");
+            });
+        }
+    
+        // Filter by research areas
+        if ($request->filled('research_areas')) {
+            $query->whereHas('researchInterests', function ($q) use ($request) {
+                $q->whereIn('research_area_id', [$request->input('research_areas')]);
+            });
+        }
+    
+        // Filter by expertise areas
+        if ($request->filled('expertise_areas')) {
+            $query->whereHas('expertiseAreas', function ($q) use ($request) {
+                $q->whereIn('expertise_area_id', [$request->input('expertise_areas')]);
+            });
+        }
+    
+        // // Filter by country
+        if ($request->filled('country')) {
+            $query->whereHas('address', function ($q) use ($request) {
+                $q->where('country_id', $request->input('country'));
+            });
+        }
+    
+        // Filter by languages
+        if ($request->filled('languages')) {
+            $query->whereHas('languages', function ($q) use ($request) {
+                $q->whereIn('language_id', [$request->input('languages')]);
+            });
+        }
+    
+        // Pagination pour Load More
+        $perPage = 12;
+        $professors = $query->paginate($perPage);
+    
+        return response()->json([
+            'html' => view('pages.professors.directory.partials.list', compact('professors'))->render(),
+            'hasMore' => $professors->hasMorePages(),
+        ]);
+    }
+
+    public function showDirectoryProfile(Professor $professor)
+    {
+        // Get professor's address
+        $professor->load('address.country');
+
+        // Get professor's employments
+        $professor->load('employments.position');
+
+        // Get professor's degrees
+        $professor->load('degrees.degree', 'degrees.discipline', 'degrees.department');
+
+        // Get professor's activities
+        $professor->load('activities.activityService');
+
+        // Get professor's courses
+        $professor->load('courses');
+
+        return view('pages/professors.directory.profile', compact('professor'));
     }
 
     public function showCVBuilder()

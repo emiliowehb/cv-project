@@ -49,6 +49,20 @@ Breadcrumbs::for('user-management.users.index', function (BreadcrumbTrail $trail
     $trail->push('Members', route('user-management.users.index'));
 });
 
+// Home > Dashboard > Professors Directory > Overview
+Breadcrumbs::for('dashboard.professors.directory', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Overview', route('professors.directory'));
+});
+
+// Home > Dashboard > Professors Directory > Profile
+Breadcrumbs::for('dashboard.professors.directory.profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Professors Directory', route('professors.directory'));
+    $trail->push('Profile', route('professors.directory'));
+});
+
+
 // Home > Dashboard > Profile > Overview
 Breadcrumbs::for('dashboard.professors.my-profile.overview', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

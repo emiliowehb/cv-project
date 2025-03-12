@@ -36,6 +36,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('/professors')->group(function () {
+        Route::get('/directory', [ProfessorController::class, 'showDirectory'])->name('professors.directory');
+        Route::post('/directory', [ProfessorController::class, 'searchDirectory'])->name('professors.directory.search');
+        Route::get('/directory/{professor}', [ProfessorController::class, 'showDirectoryProfile'])->name('professors.directory.profile');
         Route::post('/complete-registration', [ProfessorController::class, 'store'])->name('professors.create');
         Route::get('/my-profile', [ProfessorController::class, 'showOverview'])->name('professors.my-profile.overview');
         Route::get('/my-profile/educations', [ProfessorController::class, 'showEducations'])->name('professors.my-profile.educations');
