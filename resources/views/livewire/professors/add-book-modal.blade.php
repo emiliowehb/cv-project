@@ -121,6 +121,7 @@
                             </div>
                         </div>
                         <!--end::Scroll-->
+                        <x-author-repeater class="App\Models\ProfessorBook" title="Manage Authors for Books" />
                         <!--begin::Actions-->
                         <div class="text-center pt-15">
                             <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"

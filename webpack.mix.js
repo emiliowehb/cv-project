@@ -64,6 +64,9 @@ mix.sass(`${dir}/sass/style.scss`, `public/assets/css/style.bundle.css`, {sassOp
 // Build media
 mix.copyDirectory(`${dir}/media`, `public/assets/media`);
 
+// Copy JS from resources/js
+mix.copyDirectory('resources/js', 'public/js');
+
 let plugins = [
     new ReplaceInFileWebpackPlugin([
         {

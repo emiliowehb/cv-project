@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('professor_degrees', function (Blueprint $table) {
-            $table->text('institution_name')->after('degree_id')->default('default name');
+            $table->text('institution_name')->after('degree_id');
         });
     }
 

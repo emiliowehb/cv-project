@@ -6,6 +6,7 @@
 
     @section('breadcrumbs')
     {{ Breadcrumbs::render('dashboard') }}
+    <a href="{{route('professors.directory')}}" class="btn btn-primary">Directory</a>
     @endsection
 
     <!--begin::Row-->
@@ -33,6 +34,7 @@
                     </div>
                 </div>
                 @endif
+                <x-author-repeater class="App\Models\ProfessorBook" title="Manage Authors for Books" />
                 <!--begin::Modal-->
                 <livewire:facultymember.add-personal-info-modal></livewire:facultymember.add-personal-info-modal>
                 <!--end::Modal-->

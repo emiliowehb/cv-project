@@ -15,6 +15,6 @@ class Reviewable extends Model
 
     public function parent()
     {
-        return $this->morphTo(__FUNCTION__, 'model', 'reviewable_id');
+        return $this->morphTo(__FUNCTION__, 'reviewable_type', 'reviewable_id');
     }
 }

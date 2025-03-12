@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('reviewable_id');
             $table->text('reason')->nullable();
             $table->timestamps();
-            $table->index(['model', 'reviewable_id']);
+            $table->index(['reviewable_type', 'reviewable_id']);
         });
     }
 

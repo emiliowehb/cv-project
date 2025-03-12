@@ -10,9 +10,27 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search');
+        $page = $request->input('page', 1);
+        $perPage = 20; // Nombre d'auteurs par page
+
+        $query = Author::query();
+
+        // Appliquer la recherche si nécessaire
+        if (!empty($search)) {
+            $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        // Récupérer les auteurs avec pagination
+        $authors = $query->orderBy('name')
+                        ->paginate($perPage, ['*'], 'page', $page);
+
+        return response()->json([
+            'authors' => $authors->items(),
+            'more' => $authors->hasMorePages()
+        ]);
     }
 
     /**
@@ -28,7 +46,14 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: Some validation here
+        
+        $author = new Author;
+        $author->name = $request->first_name . ' ' . $request->last_name;
+        $author->save();
+
+        // Response 201 Created
+        return response()->json($author, 201);
     }
 
     /**

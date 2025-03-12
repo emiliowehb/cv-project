@@ -21,7 +21,7 @@ class Professor extends Model
 
     public function address()
     {
-        return $this->hasOne(Address::class, 'id','address_id');
+        return $this->hasOne(Address::class, 'id','address_id')->with('country');
     }
 
     public function languages() {

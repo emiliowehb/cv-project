@@ -4,6 +4,7 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ReviewableController;
@@ -35,6 +36,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('/professors')->group(function () {
+        Route::get('/directory', [ProfessorController::class, 'showDirectory'])->name('professors.directory');
+        Route::post('/directory', [ProfessorController::class, 'searchDirectory'])->name('professors.directory.search');
+        Route::get('/directory/{professor}', [ProfessorController::class, 'showDirectoryProfile'])->name('professors.directory.profile');
         Route::post('/complete-registration', [ProfessorController::class, 'store'])->name('professors.create');
         Route::get('/my-profile', [ProfessorController::class, 'showOverview'])->name('professors.my-profile.overview');
         Route::get('/my-profile/educations', [ProfessorController::class, 'showEducations'])->name('professors.my-profile.educations');
@@ -67,6 +71,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cv-builder', [ProfessorController::class, 'showCVBuilder'])->name('professors.cv-builder');
         Route::post('/cv-builder', [ProfessorController::class, 'submitBuild'])->name('professors.cv-builder.submit');
     });
+
+    // Authors resource routes
+    Route::resource('/authors', AuthorController::class);
 
 });
 
