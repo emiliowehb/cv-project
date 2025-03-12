@@ -14,8 +14,8 @@
     <div class="card h-100 p-6 shadow-sm">
         <div class="d-flex">
             <div class="symbol symbol-100px symbol-circle">
-                @if($professor->profile_photo_url)
-                    <img src="{{ asset('storage/' . $professor->profile_photo_path) }}" alt="image"/>
+                @if($professor->user->profile_photo_url)
+                    <img src="{{ asset('storage/' . $professor->user->profile_photo_path) }}" alt="image"/>
                 @else
                     <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $professor->first_name . ' ' . $professor->last_name) }}">
                         {{ substr($professor->first_name . ' ' . $professor->last_name, 0, 1) }}
@@ -37,7 +37,7 @@
                 @endif
                 <p class="d-flex align-items-center text-gray-700 mb-1">
                     {{--  TODO: flag <img src="https://flagcdn.com/w40/fr.png" class="me-2" width="20"> --}}
-                    {{ $professor?->address?->country }}
+                    {{ $professor?->address?->country?->name }}
                 </p>
             </div>
         </div>

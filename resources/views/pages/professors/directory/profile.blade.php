@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="separator"></div>
-                    <div id="kt_user_view_details" class="collapse show" style="">
+                    <div id="kt_user_view_details" class="collapse show">
                         <div class="pb-5 fs-6">
                             <div class="fw-bold mt-5">Email</div>
                             <div class="text-gray-600">

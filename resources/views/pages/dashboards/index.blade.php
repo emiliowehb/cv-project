@@ -34,7 +34,6 @@
                     </div>
                 </div>
                 @endif
-                <x-author-repeater class="App\Models\ProfessorBook" title="Manage Authors for Books" />
                 <!--begin::Modal-->
                 <livewire:facultymember.add-personal-info-modal></livewire:facultymember.add-personal-info-modal>
                 <!--end::Modal-->

@@ -175,6 +175,7 @@ class ProfessorController extends Controller
         $professor = Auth::user()->professor;
         $ranges = ['lifetime', '8_years', '3_years', '12_months'];
         $formats = ['pdf', 'docx'];
+
         return view('pages/professors.cv-builder.index', compact('professor', 'ranges', 'formats'));
     }
 
