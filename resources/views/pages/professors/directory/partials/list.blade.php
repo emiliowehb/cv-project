@@ -37,7 +37,7 @@
                 @endif
                 <p class="d-flex align-items-center text-gray-700 mb-1">
                     {{--  TODO: flag <img src="https://flagcdn.com/w40/fr.png" class="me-2" width="20"> --}}
-                    {{ $professor?->address?->country?->name }}
+                    {{ $professor?->address?->country }}
                 </p>
             </div>
         </div>

@@ -85,6 +85,8 @@ class AddBookModal extends Component
         $primaryFields = PublicationPrimaryField::all();
         $secondaryFields = PublicationSecondaryField::all();
         $months = MonthEnum::hash();
+        
+        addVendor('formrepeater');
         return view('livewire.professors.add-book-modal', compact('bookTypes', 'publishers', 'workClassifications', 'researchAreas', 'publicationStatuses', 'primaryFields', 'secondaryFields', 'months'));
     }
 

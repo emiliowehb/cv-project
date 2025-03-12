@@ -99,6 +99,8 @@
                                 </select>
                                 @error('research_area_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorBook" title="Manage Authors for Books" />
+
                             <div class="col-6">
                                 <label class="col-form-label required">{{ __('messages.intellectual_contribution') }}</label>
                                 <select class="form-select" wire:model="intellectual_contribution_id" data-placeholder="{{ __('messages.intellectual_contribution') }}" data-dropdown-parent="#kt_modal_add_book_chapter">

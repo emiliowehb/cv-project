@@ -50,7 +50,7 @@
                                 {{ $professor?->address?->address_line_2 }}<br>
                                 @endif
                                 {{ $professor?->address?->postal_code }} {{ $professor?->address?->city }}@if($professor?->address?->state), {{ $professor?->address?->state }}@endif<br>
-                                {{ $professor?->address?->country?->name }}
+                                {{ $professor?->address?->country }}
                             </div>
                             @endif
                             <div class="fw-bold mt-5">Gender</div>
