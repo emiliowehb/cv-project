@@ -13,8 +13,8 @@
                 <div class="card-body">
                     <div class="d-flex flex-center flex-column py-5">
                         <div class="symbol symbol-100px symbol-circle mb-7">
-                            @if($professor->profile_photo_url)
-                                <img src="{{ asset('storage/' . $professor->profile_photo_path) }}" alt="image"/>
+                            @if($professor->user->profile_photo_url)
+                                <img src="{{ asset('storage/' . $professor->user->profile_photo_path) }}" alt="image"/>
                             @else
                                 <div class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', $professor->first_name . ' ' . $professor->last_name) }}">
                                     {{ substr($professor->first_name . ' ' . $professor->last_name, 0, 1) }}
@@ -50,7 +50,7 @@
                                 {{ $professor?->address?->address_line_2 }}<br>
                                 @endif
                                 {{ $professor?->address?->postal_code }} {{ $professor?->address?->city }}@if($professor?->address?->state), {{ $professor?->address?->state }}@endif<br>
-                                {{ $professor?->address?->country }}
+                                {{ $professor?->address?->country->name }}
                             </div>
                             @endif
                             <div class="fw-bold mt-5">Gender</div>

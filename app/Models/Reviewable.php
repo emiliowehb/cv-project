@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reviewable extends Model
 {
-    protected $fillable = ['reviewable_type', 'status', 'type_id', 'reviewable_id', 'reason'];
+    protected $fillable = ['reviewable_type', 'status', 'type_id', 'professor_id', 'reviewable_id', 'reason'];
 
     public function reviewable()
     {

@@ -151,13 +151,16 @@ class Professor extends Model
         }
 
         $formattedAddress = $address->address_line_1;
+
         if ($address->address_line_2) {
             $formattedAddress .= ', ' . $address->address_line_2;
         }
+        
         $formattedAddress .= ', ' . $address->city;
         $formattedAddress .= ', ' . $address->state;
         $formattedAddress .= ' ' . $address->postal_code;
-        $formattedAddress .= ', ' . Country::findOrFail($address->country)->name;
+
+        $formattedAddress .= ', ' . Country::find($address->country_id)->name;
 
         return $formattedAddress;
     }

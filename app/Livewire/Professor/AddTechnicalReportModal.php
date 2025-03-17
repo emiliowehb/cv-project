@@ -74,6 +74,7 @@ class AddTechnicalReportModal extends Component
         $publicationStatuses = PublicationStatus::all();
         $intellectualContributions = IntellectualContribution::all();
         $months = MonthEnum::hash();
+        addVendor('formrepeater');
 
         return view('livewire.professors.add-technical-report-modal', compact('publishers', 'workClassifications', 'researchAreas', 'months', 'publicationStatuses', 'intellectualContributions'));
     }

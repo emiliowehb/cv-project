@@ -66,6 +66,7 @@
                                 </select>
                                 @error('intellectual_contribution_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorPresentation" title="Manage Authors for Presentations" />
                             <div class="col-12">
                                 <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2 col-form-label">
                                     <span>{{__('messages.published_in_proceedings')}}</span>

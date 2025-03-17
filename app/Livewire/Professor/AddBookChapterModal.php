@@ -79,6 +79,8 @@ class AddBookChapterModal extends Component
         $researchAreas = ResearchArea::all();
         $intellectualContributions = IntellectualContribution::all();
         $months = MonthEnum::hash();
+        addVendor('formrepeater');
+
         return view('livewire.professors.add-book-chapter-modal', compact('bookTypes', 'publishers', 'workClassifications', 'researchAreas', 'intellectualContributions', 'months'));
     }
 

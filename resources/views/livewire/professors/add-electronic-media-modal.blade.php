@@ -53,6 +53,8 @@
                                 <input type="text" class="form-control bg-transparent" wire:model="publisher" placeholder="{{ __('messages.publisher') }}" />
                                 @error('publisher') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorElectronicMedia" title="Manage Authors for Electronic Media" />
+
                             <div class="col-12">
                                 <label class="col-form-label">{{ __('messages.notes') }}</label>
                                 <textarea class="form-control bg-transparent" wire:model="notes" placeholder="{{ __('messages.notes') }}"></textarea>

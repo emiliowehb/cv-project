@@ -65,6 +65,7 @@
                                 </select>
                                 @error('intellectual_contribution_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorWorkingPaper" title="Manage Authors for Working Papers" />
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->

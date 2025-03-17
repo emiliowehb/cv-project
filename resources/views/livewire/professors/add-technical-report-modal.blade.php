@@ -93,6 +93,7 @@
                                 </select>
                                 @error('intellectual_contribution_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorTechnicalReport" title="Manage Authors for Technical Reports" />
                         </div>
                     </div>
                     <div class="text-center pt-15">

@@ -43,6 +43,8 @@ class AddElectronicMediaModal extends Component
     public function render()
     {
         $types = ElectronicMediaType::all();
+        addVendor('formrepeater');
+
         return view('livewire.professors.add-electronic-media-modal', compact('types'));
     }
 

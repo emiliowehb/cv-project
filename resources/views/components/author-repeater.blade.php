@@ -2,11 +2,10 @@
     $hasAuthors = !empty($selectedAuthors) && count($selectedAuthors) > 0;
 @endphp
 
-<div class="card">
     <div class="card-header">
         <h3 class="card-title">{{ $title }}</h3>
     </div>
-    <div class="card-body">
+    <div class="mt-2 card-body">
         <div id="authorRepeater">
             <div class="form-group">
                 <div data-repeater-list="authors" class="sortable">
@@ -60,6 +59,5 @@
             </div>
         </div>
     </div>
-</div>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" defer></script>
 <script src="{{ asset('js/author-repeater.js') }}"></script>

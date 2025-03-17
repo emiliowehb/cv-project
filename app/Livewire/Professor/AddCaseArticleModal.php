@@ -54,6 +54,8 @@ class AddCaseArticleModal extends Component
     public function render()
     {
         $articleTypes = ArticleType::all();
+        addVendor('formrepeater');
+
         return view('livewire.professors.add-case-article-modal', compact('articleTypes'));
     }
 

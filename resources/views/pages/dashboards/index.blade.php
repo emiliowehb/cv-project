@@ -6,7 +6,6 @@
 
     @section('breadcrumbs')
     {{ Breadcrumbs::render('dashboard') }}
-    <a href="{{route('professors.directory')}}" class="btn btn-primary">Directory</a>
     @endsection
 
     <!--begin::Row-->

@@ -84,6 +84,7 @@
                                 </select>
                                 @error('secondary_field_id') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorJournalArticle" title="Manage Authors for Journal Articles" />
                             <div class="col-12">
                                 <label class="col-form-label">{{ __('messages.notes') }}</label>
                                 <textarea class="form-control bg-transparent" wire:model="notes" placeholder="{{ __('messages.notes') }}"></textarea>

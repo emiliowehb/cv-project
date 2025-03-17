@@ -54,6 +54,8 @@ class AddNewsletterArticleModal extends Component
     public function render()
     {
         $articleTypes = ArticleType::all();
+        addVendor('formrepeater');
+
         return view('livewire.professors.add-newsletter-article-modal', compact('articleTypes'));
     }
 

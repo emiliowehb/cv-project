@@ -52,6 +52,8 @@
                                 <input type="text" class="form-control bg-transparent" wire:model="url" placeholder="URL" />
                                 @error('url') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <x-author-repeater class="App\Models\ProfessorArticle" title="Manage Authors for Newsletter Articles" />
+
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="col-form-label">{{ __('messages.notes') }}</label>

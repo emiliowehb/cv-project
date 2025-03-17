@@ -23,9 +23,11 @@
                 @endif
             </div>
             <div class="flex-grow-1 ms-5 mt-2">
+                @if(!(Auth::user()->id == $professor->id))
                 <button class="btn btn-secondary btn-sm float-end">
                     <i class="fas fa-plus"></i>
                 </button>
+                @endif
                 <h5 class="fs-4 text-gray-900 text-hover-primary fw-bold mb-1">
                     <a href="{{ route('professors.directory.profile', $professor) }}" class="text-gray-900 text-hover-primary">
                     {{ $professor->first_name }} {{ $professor->last_name }}
