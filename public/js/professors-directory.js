@@ -39,10 +39,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fetchPublications(search = '') {
+        let publicationStatus = $('#filter-publication-status').val();
+        let publicationType = $('#filter-publication-type').val();
+
         $.ajax({
             url: '/professors/publications-directory',
             method: 'GET',
-            data: { search },
+            data: { 
+                search,
+                publication_status: publicationStatus,
+                publication_type: publicationType
+            },
             success: function (response) {
                 $('#publications-list').html(response.html);
                 animatePublications();
@@ -126,6 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
     $('.professors-directory-filters').on('select2:clear', function () {
         page = 1;
         fetchProfessors(true);
+    });
+
+    $('.publications-directory-filters').on('select2:select select2:clear', function () {
+        fetchPublications($('#search-bar').val().trim());
     });
 
     $('#load-more').on('click', function () {

@@ -21,7 +21,7 @@
             <!--begin:Menu link-->
 
             <a href="{{ route('professors.directory') }}" class="menu-link">
-            <span class="menu-title">Professors Directory</span>
+            <span class="menu-title">Search Directory</span>
         </a>
             <!--end:Menu link-->
             <!--begin:Menu sub-->

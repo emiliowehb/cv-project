@@ -52,7 +52,7 @@ Breadcrumbs::for('user-management.users.index', function (BreadcrumbTrail $trail
 // Home > Dashboard > Professors Directory > Overview
 Breadcrumbs::for('dashboard.professors.directory', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Overview', route('professors.directory'));
+    $trail->push('Directory', route('professors.directory'));
 });
 
 // Home > Dashboard > Professors Directory > Profile

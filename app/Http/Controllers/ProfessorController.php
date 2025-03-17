@@ -277,7 +277,7 @@ class ProfessorController extends Controller
         $professor = Auth::user()->professor;
         $user_id = Auth::user()->id;
 
-        return $dataTable->render('pages/professors.newsletter-articles.my-profile-newsletter-articles', compact('professor', 'user_id'));
+        return $dataTable->render('pages.professors.newsletter-articles.my-profile-newsletter-articles', compact('professor', 'user_id'));
     }
 
     public function showNewspaperArticles(ProfessorNewspaperArticlesDataTable $dataTable)
@@ -325,7 +325,7 @@ class ProfessorController extends Controller
         $professor = Auth::user()->professor;
         $user_id = Auth::user()->id;
 
-        return $dataTable->render('pages/professors.courses.my-profile-courses', compact('professor', 'user_id'));
+        return $dataTable->render('pages.pro.fessors.courses.my-profile-courses', compact('professor', 'user_id'));
     }
 
     public function showPresentations(ProfessorPresentationsDataTable $dataTable)
@@ -821,18 +821,20 @@ class ProfessorController extends Controller
     public function getPublications(Request $request)
     {
         $search = $request->input('search');
+        $publicationStatus = $request->input('publication_status');
+        $publicationType = $request->input('publication_type');
 
         $journalArticles = \App\Models\ProfessorJournalArticle::with(['professor', 'type', 'status'])
-            ->when($search, function ($query, $search) {
-                $query->where('title', 'LIKE', "%{$search}%");
-            })->get();
+            ->when($search, fn($query) => $query->where('title', 'LIKE', "%{$search}%"))
+            ->when($publicationStatus, fn($query) => $query->where('publication_status_id', $publicationStatus))
+            ->when(!$publicationType || $publicationType == 'journal', fn($query) => $query->get());
 
         $articles = \App\Models\ProfessorArticle::with(['professor', 'type'])
-            ->when($search, function ($query, $search) {
-                $query->where('title', 'LIKE', "%{$search}%");
-            })->get();
+            ->when($search, fn($query) => $query->where('title', 'LIKE', "%{$search}%"))
+            ->when($publicationType && $publicationType != 'journal', fn($query) => $query->where('article_type_id', $publicationType))
+            ->when(!$publicationStatus, fn($query) => $query->get());
 
-        $publications = $journalArticles->concat($articles)->sortByDesc('year');
+        $publications = $publicationType == 'journal' ? $journalArticles : ($publicationType ? $articles : ($publicationStatus ? $journalArticles : $journalArticles->concat($articles)))->sortByDesc('year');
 
         return response()->json([
             'html' => view('pages.professors.directory.partials.publications-list', compact('publications'))->render(),

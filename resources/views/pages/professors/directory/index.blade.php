@@ -1,6 +1,6 @@
 <x-default-layout>
     @section('title')
-    Professors Directory
+    Directory
     @endsection
 
     @section('breadcrumbs')
@@ -78,6 +78,29 @@
 
         <!-- Publications Tab Content -->
         <div id="publications-tab" class="tab-content d-none">
+            <!-- Filters -->
+            <div class="card p-4 mb-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <select id="filter-publication-status" class="form-select publications-directory-filters" data-allow-clear="true" data-placeholder="Publication Status" data-control="select2">
+                            <option></option>
+                            @foreach(\App\Models\PublicationStatus::all() as $status)
+                                <option value="{{ $status->id }}">{{ $status->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select id="filter-publication-type" class="form-select publications-directory-filters" data-allow-clear="true" data-placeholder="Publication Type" data-control="select2">
+                            <option></option>
+                            <option value="journal">Journal</option>
+                            @foreach(\App\Models\ArticleType::all() as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div id="publications-list" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <!-- Publications will be loaded via AJAX -->
             </div>
