@@ -817,4 +817,25 @@ class ProfessorController extends Controller
         $pdfName = 'CV_' . $rangeLabels[$range] . '_'. ucfirst($professor->first_name) . ucfirst($professor->last_name) . '_' . Carbon::now()->format('Y_m_d')  . '.pdf';
         return $pdf->download($pdfName);
     }
+
+    public function getPublications(Request $request)
+    {
+        $search = $request->input('search');
+
+        $journalArticles = \App\Models\ProfessorJournalArticle::with(['professor', 'type', 'status'])
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'LIKE', "%{$search}%");
+            })->get();
+
+        $articles = \App\Models\ProfessorArticle::with(['professor', 'type'])
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'LIKE', "%{$search}%");
+            })->get();
+
+        $publications = $journalArticles->concat($articles)->sortByDesc('year');
+
+        return response()->json([
+            'html' => view('pages.professors.directory.partials.publications-list', compact('publications'))->render(),
+        ]);
+    }
 }

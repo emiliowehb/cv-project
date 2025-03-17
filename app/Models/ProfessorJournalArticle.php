@@ -14,6 +14,11 @@ class ProfessorJournalArticle extends Model
     {
         return $this->belongsTo(JournalArticleType::class, 'journal_article_type_id');
     }
+
+    public function professor()
+    {
+        return $this->belongsTo(Professor::class);
+    }
     
 
     public function status()

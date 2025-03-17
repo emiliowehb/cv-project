@@ -14,6 +14,11 @@ class ProfessorArticle extends Model
         return $this->belongsTo(ArticleType::class, 'article_type_id');
     }
 
+    public function professor()
+    {
+        return $this->belongsTo(Professor::class);
+    }
+
     public function reviewables()
     {
         return $this->morphMany(Reviewable::class, 'reviewable');
