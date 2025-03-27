@@ -204,4 +204,13 @@ return [
     'docx' => 'DOCX',
     'cv_builder_success' => 'تم إرسال نموذج بناء السيرة الذاتية بنجاح.',
     'create' => 'إنشاء',
+    'reports_generator' => 'مولد التقارير',
+    'report_type' => 'نوع التقرير',
+    'Professors Report' => 'تقرير الأساتذة',
+    'Teaching Assistants Report' => 'تقرير مساعدي التدريس',
+    'Courses Report' => 'تقرير الدورات',
+    'Topics Report' => 'تقرير المواضيع',
+    'Program Report' => 'تقرير البرنامج',
+    'Subjects Report' => 'تقرير المواد',
+    'Publications Report' => 'تقرير المنشورات',
 ];

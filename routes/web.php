@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\ReportsGeneratorController;
 use App\Http\Controllers\ReviewableController;
 use App\Http\Controllers\WorkspaceInvitationController;
 use Illuminate\Http\Request;
@@ -83,6 +84,11 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->prefix('/admin')->group(func
 
     Route::name('workspace-management.')->group(function () {
         Route::resource('/workspace-management/invitations', WorkspaceInvitationController::class);
+    });
+
+    Route::name('reports-generator.')->prefix('/reports-generator')->group(function () {
+        Route::get('/', [ReportsGeneratorController::class, 'show'])->name('index');
+        Route::post('/generate', [ReportsGeneratorController::class, 'generateReport'])->name('submit');
     });
     
     Route::name('admin.professor-submissions.')->prefix('/professor-submissions')->group(function () {
