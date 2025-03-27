@@ -199,4 +199,13 @@ return [
     'docx' => 'DOCX',
     'cv_builder_success' => 'Formulaire du générateur de CV soumis avec succès.',
     'create' => 'Créer',
+    'reports_generator' => 'Générateur de Rapports',
+    'report_type' => 'Type de Rapport',
+    'Professors Report' => 'Rapport des Professeurs',
+    'Teaching Assistants Report' => 'Rapport des Assistants d\'Enseignement',
+    'Courses Report' => 'Rapport des Cours',
+    'Topics Report' => 'Rapport des Sujets',
+    'Program Report' => 'Rapport du Programme',
+    'Subjects Report' => 'Rapport des Matières',
+    'Publications Report' => 'Rapport des Publications',
 ];

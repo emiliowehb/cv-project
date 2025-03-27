@@ -75,6 +75,12 @@ Breadcrumbs::for('dashboard.professors.cv-builder', function (BreadcrumbTrail $t
     $trail->push(__('messages.cv_builder'), route('professors.cv-builder'));
 });
 
+// Home > Dashboard > Reports Generator
+Breadcrumbs::for('dashboard.reports-generator', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push(__('messages.reports_generator'), route('reports-generator.index'));
+});
+
 // Home > Dashboard > Profile > Educations
 Breadcrumbs::for('dashboard.professors.my-profile.educations', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

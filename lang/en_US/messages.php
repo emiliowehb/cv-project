@@ -212,4 +212,13 @@ return [
     'docx' => 'DOCX',
     'cv_builder_success' => 'CV Builder form submitted successfully.',
     'create' => 'Create',
+    'reports_generator' => 'Reports Generator',
+    'report_type' => 'Report Type',
+    'Professors Report' => 'Professors Report',
+    'Teaching Assistants Report' => 'Teaching Assistants Report',
+    'Courses Report' => 'Courses Report',
+    'Topics Report' => 'Topics Report',
+    'Program Report' => 'Program Report',
+    'Subjects Report' => 'Subjects Report',
+    'Publications Report' => 'Publications Report',
 ];

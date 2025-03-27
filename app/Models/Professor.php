@@ -48,6 +48,10 @@ class Professor extends Model
     public function expertiseAreas() {
         return $this->hasMany(ProfessorExpertiseArea::class);
     }
+    
+    public function expertiseAreasList() {
+        return $this->belongsToMany(ExpertiseArea::class, 'professor_expertise_areas', 'professor_id', 'expertise_area_id');
+    }
 
     public function fullName() {
         return $this->first_name . ' ' . ($this->middle_name ? $this->middle_name . ' ' : '') . $this->last_name;
